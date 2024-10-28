@@ -5,5 +5,6 @@ public class Supper_car{
         System.out.print("hello");
         int m = 10;
         int n = 10;
+        float buy = 100;
     }
 }
