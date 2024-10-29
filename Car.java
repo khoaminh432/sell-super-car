@@ -1,6 +1,7 @@
 public class Car {
-    int pricesell;
-    int pricebuy;
-    float weight;
-    float length;
+    private int pricesell;
+    private int pricebuy;
+    private float weight;
+    private float length;
+    
 }
