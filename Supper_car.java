@@ -1,5 +1,5 @@
 
-public class Supper_car{
+public class Supper_car extends Car{
     private String CompanyCar;
     public static int QuantityCar = 0;
     public String getCompanyCar(){
