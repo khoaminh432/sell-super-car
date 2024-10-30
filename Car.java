@@ -2,10 +2,17 @@
 
 
 public class Car {
+    private int id_car;
     private int pricesell;
     private int pricebuy;
     private float weight;
     private float length;
+    public int getId_car() {
+        return id_car;
+    }
+    public void setId_car(int id_car) {
+        this.id_car = id_car;
+    }
     public int getPricesell(){
         return pricesell;
     }
