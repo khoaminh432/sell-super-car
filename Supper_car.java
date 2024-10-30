@@ -7,13 +7,13 @@ public class Supper_car extends Car{
         CompanyCar = "none";
         QuantityCar++;
     }
-    public Supper_car(int id_car,int pricebuy,int pricesell,float weight,float length,String Companycar){
-        super(id_car,pricebuy,pricesell,weight,length);
+    public Supper_car(int id_car,int pricebuy,int pricesell,float weight,float length,float height,float width,String Companycar){
+        super(id_car,pricebuy,pricesell,weight,length,height,width);
         this.CompanyCar = Companycar;
         QuantityCar++;
     }
     public Supper_car(Supper_car sc){
-        super(sc.getId_car(),sc.getPricebuy(),sc.getPricesell(),sc.getWeight(),sc.getLength());
+        super(sc.getId_car(),sc.getPricebuy(),sc.getPricesell(),sc.getWeight(),sc.getLength(),sc.getHeight(),sc.getWidth());
         CompanyCar = sc.CompanyCar;
         QuantityCar++;
     }

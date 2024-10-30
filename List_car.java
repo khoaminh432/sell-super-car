@@ -1,9 +1,11 @@
 
 import java.util.ArrayList;
 public class List_Car{
-    ArrayList<Supper_car> Lcar;
+    private ArrayList<Supper_car> Lcar;
+    
     public List_Car(){
         Lcar = new ArrayList<>();
+        
     }
     //thêm phần tử vào cuối mảng
     public void add(Supper_car sc){
