@@ -7,6 +7,10 @@ public class Supper_car extends Car{
         CompanyCar = "none";
         QuantityCar++;
     }
+    public Supper_car(int id_car,int pricebuy,int pricesell,float weight,float length,String Companycar){
+        super(id_car,pricebuy,pricesell,weight,length);
+        this.CompanyCar = Companycar;
+    }
     public String getCompanyCar(){
         return CompanyCar;
     }

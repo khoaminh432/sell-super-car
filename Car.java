@@ -7,6 +7,28 @@ public class Car {
     private int pricebuy;
     private float weight;
     private float length;
+
+    public Car() {
+        id_car = 0;
+        pricebuy = 0;
+        pricesell = 0;
+        weight = 0;
+        length=  0;
+    }
+    public Car(int id_car,int pricebuy,int pricesell,float weight,float length){
+        this.id_car = id_car;
+        this.pricebuy = pricebuy;
+        this.pricesell = pricesell;
+        this.weight = weight;
+        this.length = length;
+    }
+    public Car(Car car){
+        id_car = car.id_car;
+        pricebuy = car.pricebuy;
+        pricesell = car.pricesell;
+        weight = car.weight;
+        length = car.length;
+    }
     public int getId_car() {
         return id_car;
     }
@@ -37,4 +59,10 @@ public class Car {
     public void setLength(float length) {
         this.length = length;
     }
+
+    @Override
+    public String toString() {
+        return id_car+"\n"+pricebuy+"\n"+pricesell+"\n"+weight+"\n"+length+"\n";
+    }
+    
 }
