@@ -21,28 +21,9 @@ public class List_Car{
     public Supper_car get(int index){
         return Lcar.get(index);
     }
-    //set1
-    public void setCompanyCar(int index,String companycar){
-        Lcar.set(index,Lcar.get(index)).setCompanyCar(companycar);
+    //set
+    public void set(int index,Supper_car sc){
+        Lcar.set(index,sc);
     }
-    //set2
-    public void setId_Car(int index,int id_Car){
-        Lcar.set(index,Lcar.get(index)).setId_car(id_Car);
-    }
-    //set3
-    public void setPricebuy(int index,int pricebuy){
-        Lcar.set(index,Lcar.get(index)).setPricebuy(pricebuy);
-    }
-    //set4
-    public void setpricesell(int index,int pricesell){
-        Lcar.set(index,Lcar.get(index)).setPricesell(pricesell);
-    }
-    //set5
-    public void setWeight(int index,float weight){
-        Lcar.set(index,Lcar.get(index)).setWeight(weight);
-    }
-    //set6
-    public void setlength(int index,float length){
-        Lcar.set(index,Lcar.get(index)).setLength(length);
-    }
+    
 }
