@@ -27,7 +27,7 @@ public class List_Car{
     public Supper_car get(int index){
         return Lcar.get(index);
     }
-    
+    //sửa 
     public void set(int index,Supper_car sc){
         Lcar.set(index,sc);
     }
