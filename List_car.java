@@ -31,5 +31,32 @@ public class List_Car{
     public void set(int index,Supper_car sc){
         Lcar.set(index,sc);
     }
+    public void setId_car(int index,int id_car){
+        Lcar.set(index,Lcar.get(index)).setId_car(id_car);
+    }
+    public void setLcar(ArrayList<Supper_car> lcar) {
+        Lcar = lcar;
+    }
+    public void setHeight(int  index,float height){
+        Lcar.set(index,Lcar.get(index)).setHeight(height);
+    }
+    public void setLength(int  index,float length){
+        Lcar.set(index,Lcar.get(index)).setHeight(length);
+    }
+    public void setWidth(int  index,float width){
+        Lcar.set(index,Lcar.get(index)).setHeight(width);
+    }
+    public void setWeight(int  index,float weight){
+        Lcar.set(index,Lcar.get(index)).setHeight(weight);
+    }
+    public void setPricebuy(int  index,int pricebuy){
+        Lcar.set(index,Lcar.get(index)).setHeight(pricebuy);
+    }
+    public void setPricesell(int  index,float pricesell){
+        Lcar.set(index,Lcar.get(index)).setHeight(pricesell);
+    }
+    public void setCompanyCar(int  index,float CompanyCar){
+        Lcar.set(index,Lcar.get(index)).setHeight(CompanyCar);
+    }
     
 }
