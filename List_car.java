@@ -1,18 +1,18 @@
 
 import java.util.ArrayList;
 public class List_Car{
-    private ArrayList<Supper_car> Lcar;
+    private ArrayList<Super_car> Lcar;
     
     public List_Car(){
         Lcar = new ArrayList<>();
         
     }
     //thêm phần tử vào cuối mảng
-    public void add(Supper_car sc){
+    public void add(Super_car sc){
         Lcar.add(sc);
     }
     //thêm phần tử tại vị trí
-    public void add(int index,Supper_car sc){
+    public void add(int index,Super_car sc){
         Lcar.add(index,sc);
     }
     // hàm xóa phàn tử tại vị trí index
@@ -20,21 +20,21 @@ public class List_Car{
         Lcar.remove(index);
     }
     public void output(){
-        for (Supper_car sc: Lcar)
+        for (Super_car sc: Lcar)
             System.out.println(sc);
     }
     
-    public Supper_car get(int index){
+    public Super_car get(int index){
         return Lcar.get(index);
     }
     //sửa 
-    public void set(int index,Supper_car sc){
+    public void set(int index,Super_car sc){
         Lcar.set(index,sc);
     }
     public void setId_car(int index,int id_car){
         Lcar.set(index,Lcar.get(index)).setId_car(id_car);
     }
-    public void setLcar(ArrayList<Supper_car> lcar) {
+    public void setLcar(ArrayList<Super_car> lcar) {
         Lcar = lcar;
     }
     public void setHeight(int  index,float height){
