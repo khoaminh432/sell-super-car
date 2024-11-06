@@ -58,5 +58,6 @@ public class List_Car{
     public void setCompanyCar(int  index,float CompanyCar){
         Lcar.set(index,Lcar.get(index)).setHeight(CompanyCar);
     }
+    // tìm kiếm
     
 }

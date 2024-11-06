@@ -9,6 +9,7 @@ public class Car {
     private float length;
     private float height;
     private float width;
+    public static int QuantityCar = 0;
     //khởi tạo
     public Car() {
         id_car = 0;
@@ -18,6 +19,7 @@ public class Car {
         length=  0;
         height=0;
         width = 0;
+        QuantityCar++;
     }
     public Car(int id_car,int pricebuy,int pricesell,float weight,float length,float height,float width){
         this.id_car = id_car;
@@ -27,6 +29,7 @@ public class Car {
         this.length = length;
         this.height = height;
         this.width = width;
+        QuantityCar++;
     }
     public Car(Car car){
         id_car = car.id_car;
@@ -36,6 +39,7 @@ public class Car {
         length = car.length;
         height = car.height;
         width = car.width;
+        QuantityCar++;
     }
     // hàm get
     public int getId_car() {
