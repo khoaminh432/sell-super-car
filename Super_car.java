@@ -1,28 +1,23 @@
 public class Super_car extends Car{
-    private String name;
-    private String CompanyCar;
     
+    private String CompanyCar;
+    public static int quantitysupper_car;
     public Super_car(){
         super();
         CompanyCar = "none";
-    
+        quantitysupper_car++;
     }
-    public Super_car(int id_car,int pricebuy,int pricesell,float weight,float length,float height,float width,String Companycar){
-        super(id_car,pricebuy,pricesell,weight,length,height,width);
+    public Super_car(int pricebuy,int pricesell,float weight,float length,float height,float width,String Companycar){
+        super(pricebuy,pricesell,weight,length,height,width);
         this.CompanyCar = Companycar;
-        
+        quantitysupper_car++;
     }
     public Super_car(Super_car sc){
-        super(sc.getId_car(),sc.getPricebuy(),sc.getPricesell(),sc.getWeight(),sc.getLength(),sc.getHeight(),sc.getWidth());
+        super(sc.getPricebuy(),sc.getPricesell(),sc.getWeight(),sc.getLength(),sc.getHeight(),sc.getWidth());
         CompanyCar = sc.CompanyCar;
-        
+        quantitysupper_car++;
     }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getName() {
-        return name;
-    }
+    
     public String getCompanyCar(){
         return CompanyCar;
     }

@@ -2,7 +2,7 @@
 
 
 public class Car {
-    private int id_car;
+    private int id_car=0;
     private int pricesell;
     private int pricebuy;
     private float weight;
@@ -10,9 +10,10 @@ public class Car {
     private float height;
     private float width;
     public static int QuantityCar = 0;
+    private String name;
     //khởi tạo
     public Car() {
-        id_car = 0;
+        id_car ++;
         pricebuy = 0;
         pricesell = 0;
         weight = 0;
@@ -21,8 +22,8 @@ public class Car {
         width = 0;
         QuantityCar++;
     }
-    public Car(int id_car,int pricebuy,int pricesell,float weight,float length,float height,float width){
-        this.id_car = id_car;
+    public Car(int pricebuy,int pricesell,float weight,float length,float height,float width){
+        id_car++;
         this.pricebuy = pricebuy;
         this.pricesell = pricesell;
         this.weight = weight;
@@ -32,7 +33,7 @@ public class Car {
         QuantityCar++;
     }
     public Car(Car car){
-        id_car = car.id_car;
+        id_car++;
         pricebuy = car.pricebuy;
         pricesell = car.pricesell;
         weight = car.weight;
@@ -45,6 +46,7 @@ public class Car {
     public int getId_car() {
         return id_car;
     }
+
     public void setId_car(int id_car) {
         this.id_car = id_car;
     }
@@ -66,7 +68,14 @@ public class Car {
     public float getWidth() {
         return width;
     }
+    
+    public String getName() {
+        return name;
+    }
     // hàm set
+    public void setName(String name) {
+        this.name = name;
+    }
     public void setWidth(float width) {
         this.width = width;
     }

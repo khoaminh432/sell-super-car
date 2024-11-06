@@ -11,10 +11,11 @@ public class Sport_car extends Super_car{
         top_speed=0;
         acceleration=0;
         drive_type="";
+        number_of_sportCar++;
     }
-    public Sport_car(int id_car,int pricebuy,int pricesell,float weight,float length,float height,float width,String Companycar,String engine, double top_speed,double acceleration,String drive_type)
+    public Sport_car(int pricebuy,int pricesell,float weight,float length,float height,float width,String Companycar,String engine, double top_speed,double acceleration,String drive_type)
     {
-        super(id_car,pricebuy,pricesell,weight,length,height,width,Companycar);
+        super(pricebuy,pricesell,weight,length,height,width,Companycar);
         this.engine = engine;
         this.top_speed = top_speed;
         this.acceleration = acceleration;
@@ -23,7 +24,7 @@ public class Sport_car extends Super_car{
     }
     public Sport_car(Sport_car sc)
     {
-        super(sc.getId_car(),sc.getPricebuy(),sc.getPricesell(),sc.getWeight(),sc.getLength(),sc.getHeight(),sc.getWidth(),sc.getCompanyCar());
+        super(sc.getPricebuy(),sc.getPricesell(),sc.getWeight(),sc.getLength(),sc.getHeight(),sc.getWidth(),sc.getCompanyCar());
         this.engine = sc.engine;
         this.top_speed = sc.top_speed;
         this.acceleration = sc.acceleration;

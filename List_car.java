@@ -59,5 +59,17 @@ public class List_Car{
         Lcar.set(index,Lcar.get(index)).setHeight(CompanyCar);
     }
     // tìm kiếm
-    
+    public Super_car Search_idcar(int id_car){
+        for(Super_car spc: Lcar)
+            if (spc.getId_car() == id_car)
+                return spc;
+        return null;
+    }
+    public Super_car Search_name(String name){
+        for(Super_car spc: Lcar)
+            if (spc.getName() == name)
+                return spc;
+        return null;
+    }
+
 }
