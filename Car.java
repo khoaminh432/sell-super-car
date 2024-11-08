@@ -3,50 +3,58 @@
 
 public class Car {
     private int id_car=0;
+    private String name;
     private int pricesell;
     private int pricebuy;
     private float weight;
     private float length;
     private float height;
     private float width;
+    private int quantityof_car;
     public static int QuantityCar = 0;
-    private String name;
+    
     //khởi tạo
     public Car() {
         id_car ++;
+        name = "";
         pricebuy = 0;
         pricesell = 0;
         weight = 0;
         length=  0;
         height=0;
         width = 0;
+        quantityof_car = 0;
         QuantityCar++;
     }
-    public Car(int pricebuy,int pricesell,float weight,float length,float height,float width){
+    public Car(String name,int pricebuy,int pricesell,float weight,float length,float height,float width,int quantityof_car){
         id_car++;
+        this.name = name;
         this.pricebuy = pricebuy;
         this.pricesell = pricesell;
         this.weight = weight;
         this.length = length;
         this.height = height;
         this.width = width;
+        this.quantityof_car = quantityof_car;
         QuantityCar++;
     }
     public Car(Car car){
         id_car++;
+        name = car.name;
         pricebuy = car.pricebuy;
         pricesell = car.pricesell;
         weight = car.weight;
         length = car.length;
         height = car.height;
         width = car.width;
+        quantityof_car = car.quantityof_car;
         QuantityCar++;
     }
     // hàm get
     public int getId_car() {
         return id_car;
     }
-
+    
     public void setId_car(int id_car) {
         this.id_car = id_car;
     }
@@ -72,6 +80,9 @@ public class Car {
     public String getName() {
         return name;
     }
+    public int getQuantityof_car() {
+        return quantityof_car;
+    }
     // hàm set
     public void setName(String name) {
         this.name = name;
@@ -94,11 +105,26 @@ public class Car {
     public void setLength(float length) {
         this.length = length;
     }
-
-    
+    public void setQuantityof_car(int quantityof_car) {
+        this.quantityof_car = quantityof_car;
+    }
     @Override
     public String toString() {
-        return id_car+"\n"+pricebuy+"\n"+pricesell+"\n"+weight+"\n"+length+"\n";
+        return id_car+"\n"+name+"\n"+pricebuy+"\n"+pricesell+"\n"+weight+"\n"+length+
+        "\n"+height+"\n"+width+"\n"+quantityof_car+"\n";
     }
-    
+    public void showDetails(){
+        System.out.println("ID car: "+id_car);
+        System.out.println("Name car:" +name);
+        System.out.println("Price buy: " + pricebuy);
+        System.out.println("Price sell: " + pricesell);
+        System.out.println("Weight: " + weight);
+        System.out.println("Length: "+ length);
+        System.out.println("height: " + height);
+        System.out.println("width" + width);
+        System.out.println("quantity car: " + quantityof_car);
+    }
+    public void showforcustomer(){
+        
+    }
 }

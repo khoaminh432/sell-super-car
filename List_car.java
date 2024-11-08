@@ -65,11 +65,13 @@ public class List_Car{
                 return spc;
         return null;
     }
+    
     public Super_car Search_name(String name){
         for(Super_car spc: Lcar)
             if (spc.getName() == name)
                 return spc;
         return null;
+        
     }
 
 }
