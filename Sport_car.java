@@ -1,4 +1,4 @@
-public class Sport_car extends Super_car{
+public class Sport_car extends Super_car implements Ishowfor{
     private String engine;
     private double top_speed;
     private double acceleration; //thời gian tăng tốc
@@ -68,6 +68,21 @@ public class Sport_car extends Super_car{
     {
         this.drive_type = drive_type;
     }
-    
+    @Override
+    public void showDetails() {
+        // TODO Auto-generated method stub
+        super.showDetails();
+        System.out.println("Engine:" +engine);
+        System.out.println("Top speed: "+top_speed);
+        System.out.println("Acceleration: "+acceleration);
+        System.out.println("Drive type: "+drive_type);
+        
+    }
+    @Override
+    public void showforCustomer(){
+        super.showforCustomer();
+        System.out.println("top speed"+top_speed);
+    }
+
 
 }

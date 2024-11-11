@@ -1,7 +1,7 @@
 
 
 
-public class Car {
+public class Car implements Ishowfor{
     private int id_car=0;
     private String name;
     private int pricesell;
@@ -113,6 +113,7 @@ public class Car {
         return id_car+"\n"+name+"\n"+pricebuy+"\n"+pricesell+"\n"+weight+"\n"+length+
         "\n"+height+"\n"+width+"\n"+quantityof_car+"\n";
     }
+    @Override
     public void showDetails(){
         System.out.println("ID car: "+id_car);
         System.out.println("Name car:" +name);
@@ -124,7 +125,8 @@ public class Car {
         System.out.println("width" + width);
         System.out.println("quantity car: " + quantityof_car);
     }
-    public void showforcustomer(){
+    @Override
+    public void showforCustomer(){
         System.out.println("ID car: "+id_car);
         System.out.println("Name car:" +name);
         System.out.println("Price sell: " + pricesell);
@@ -133,4 +135,7 @@ public class Car {
         System.out.println("height: " + height);
         System.out.println("width" + width);
     }
+
+
+    
 }

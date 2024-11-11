@@ -1,4 +1,4 @@
-public class Super_car extends Car{
+public class Super_car extends Car implements Ishowfor{
     
     private String CompanyCar;
     public static int quantitysupper_car;
@@ -28,12 +28,17 @@ public class Super_car extends Car{
         return super.toString()+CompanyCar+'\n';
     
     }
+    @Override
     public void showDetails(){
-        super.showDetails();
         System.out.println("Company Car:" +CompanyCar);
+        super.showDetails();
     }
-    public void showforcustomer(){
+    @Override
+    public void showforCustomer(){
         System.out.println("Company Car:"+CompanyCar);
-        super.showforcustomer();
+        super.showforCustomer();
     }
+
+    
+    
 }  

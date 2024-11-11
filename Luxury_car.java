@@ -1,4 +1,4 @@
-public class Luxury_car extends Super_car{
+public class Luxury_car extends Super_car implements Ishowfor{
     private String interior_material; // vat lieu noi that
     private String sound_system; // he thong am thanh
     private String climate_control; // he thong may lanh
@@ -65,6 +65,24 @@ public class Luxury_car extends Super_car{
     public void setSafetyFeatures(String safety_features)
     {
         this.safety_features = safety_features;
+    }
+    
+
+    @Override
+    public void showDetails() {
+        super.showDetails();
+        System.out.println("Interior material"+interior_material);
+        System.out.println("Sound system"+sound_system);
+        System.out.println("Climate control"+climate_control);
+        System.out.println("Safety features"+safety_features);
+    }
+    @Override
+    public void showforCustomer(){
+        super.showforCustomer();
+        System.out.println("Interior material"+interior_material);
+        System.out.println("Sound system"+sound_system);
+        System.out.println("Climate control"+climate_control);
+        System.out.println("Safety features"+safety_features);
     }
     
     
