@@ -1,3 +1,5 @@
+package department_car;
+
 public class Super_car extends Car implements Ishowfor{
     
     private String CompanyCar;

@@ -1,3 +1,4 @@
+package department_car;
 import java.util.*;
 public class List_luxury_car {
     private ArrayList<Luxury_car> car;

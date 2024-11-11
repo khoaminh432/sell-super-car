@@ -1,3 +1,4 @@
+package department_car;
 public class Luxury_car extends Super_car implements Ishowfor{
     private String interior_material; // vat lieu noi that
     private String sound_system; // he thong am thanh
