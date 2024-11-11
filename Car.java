@@ -125,6 +125,12 @@ public class Car {
         System.out.println("quantity car: " + quantityof_car);
     }
     public void showforcustomer(){
-        
+        System.out.println("ID car: "+id_car);
+        System.out.println("Name car:" +name);
+        System.out.println("Price sell: " + pricesell);
+        System.out.println("Weight: " + weight);
+        System.out.println("Length: "+ length);
+        System.out.println("height: " + height);
+        System.out.println("width" + width);
     }
 }

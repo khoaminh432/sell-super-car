@@ -13,9 +13,9 @@ public class Luxury_car extends Super_car{
         safety_features = "";
         number_of_LuxuryCar++;
     }
-    public Luxury_car(int pricebuy,int pricesell,float weight,float length,float height,float width,int quantityof_car,String Companycar,String interior_material,String sound_system, String climate_control,String safety_features)
+    public Luxury_car(String name,int pricebuy,int pricesell,float weight,float length,float height,float width,int quantityof_car,String Companycar,String interior_material,String sound_system, String climate_control,String safety_features)
     {
-        super(pricebuy,pricesell,weight,length,height,width,Companycar,quantityof_car);
+        super(name,pricebuy,pricesell,weight,length,height,width,Companycar,quantityof_car);
         this.interior_material = interior_material;
         this.sound_system = sound_system;
         this.climate_control =  climate_control;
@@ -24,7 +24,7 @@ public class Luxury_car extends Super_car{
     }
     public Luxury_car(Luxury_car lc)
     {
-        super(lc.getPricebuy(),lc.getPricesell(),lc.getWeight(),lc.getLength(),lc.getHeight(),lc.getWidth(),lc.getCompanyCar(),lc.getQuantityof_car());
+        super(lc.getName(),lc.getPricebuy(),lc.getPricesell(),lc.getWeight(),lc.getLength(),lc.getHeight(),lc.getWidth(),lc.getCompanyCar(),lc.getQuantityof_car());
         this.interior_material = lc.interior_material;
         this.sound_system = lc.sound_system;
         this.climate_control = lc.climate_control;
