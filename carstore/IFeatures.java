@@ -1,13 +1,17 @@
+/* author: lyhieunghia
+ * 
+ * 
+ */
+
 package carstore;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
-public interface IFeatures {
+public interface IFeatures<T> {
     public abstract void display();
-    public abstract void readFromFile()throws IOException,FileNotFoundException;
-    public abstract void writeToFile()throws IOException,FileNotFoundException;
+    public abstract void readFromFile();
+    public abstract void writeToFile();
     public abstract void add();
-    public abstract void delete();
+    public abstract void delete(T item);
     public abstract void update();
+    public abstract T search();
 }
