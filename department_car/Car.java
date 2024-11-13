@@ -1,5 +1,6 @@
 package department_car;
 
+import java.util.Scanner;
 public class Car implements Ishowfor{
     private int id_car=0;
     private String name;
@@ -134,7 +135,18 @@ public class Car implements Ishowfor{
         System.out.println("height: " + height);
         System.out.println("width" + width);
     }
-
+    public void input(){
+        Scanner sc = new Scanner(System.in);
+        name = sc.nextLine();
+        pricebuy = sc.nextInt();
+        pricesell = sc.nextInt();
+        weight = sc.nextFloat();
+        length = sc.nextFloat();
+        height = sc.nextFloat();
+        width = sc.nextFloat();
+        quantityof_car = sc.nextInt();
+        sc.close();
+    }
 
     
 }

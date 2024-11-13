@@ -1,5 +1,5 @@
 package department_car;
-
+import java.util.*;
 public class Super_car extends Car implements Ishowfor{
     
     private String CompanyCar;
@@ -39,7 +39,11 @@ public class Super_car extends Car implements Ishowfor{
         System.out.println("Company Car:"+CompanyCar);
         super.showforCustomer();
     }
-
+    public void input(){
+        Scanner sc = new  Scanner(System.in);
+        
+        sc.close();
+    }
     
     
 }  

@@ -96,7 +96,7 @@ public class List_Car implements Ishowfor{
                 sc.showDetails();
             else if(Sport_car.checkSportCar(sc))
                 sc.showDetails();
-            else showDetails();
+            else sc.showDetails();
         }
     }
 
@@ -108,7 +108,7 @@ public class List_Car implements Ishowfor{
                 sc.showforCustomer();
             else if(Sport_car.checkSportCar(sc))
                 sc.showforCustomer();
-            else showforCustomer();
+            else sc.showforCustomer();
             }
     }
     
