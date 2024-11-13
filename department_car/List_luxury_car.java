@@ -1,32 +1,50 @@
 package department_car;
-import java.util.*;
-public class List_luxury_car {
-    private ArrayList<Luxury_car> car;
+
+import java.util.ArrayList;
+
+public class List_luxury_car extends List_Car implements Ishowfor{
+
+    public List_luxury_car() {
+        super();
+    }
     
-    public List_luxury_car()
-    {
-       car = new ArrayList<Luxury_car>();
+    public static boolean checkLuxuryCar(Super_car sc){
+        return sc instanceof Luxury_car;
     }
-    //them
-    public void addCar(Luxury_car lc)
-    {
-        car.add(lc);
+    // tạo ds chỉ luxury car từ list super car
+    public void setList(ArrayList<Super_car> sc){
+        for(Super_car sCar:sc)
+            if(checkLuxuryCar(sCar))
+                super.getList().add(sCar);
     }
-    public void addCar(int index, Luxury_car lc)
-    {
-        car.add(index, lc);
+    public void setlist(Luxury_car lc){
+        super.add(lc);
     }
-    //xoa
-    public boolean removeCar(Luxury_car lc)
-    {
-        return car.remove(lc);
+    public void setInteriorMaterial(int index,String interior_material){
+        ((Luxury_car)super.getList().get(index)).setInteriorMaterial(interior_material);
     }
-    // xuat list
-    public void Output()
-    {
-        for(Luxury_car x : car)
-        {
-            System.out.println(x);
-        }
+    public void setClimateControl(int index,String climate_control){
+        ((Luxury_car)super.getList().get(index)).setClimateControl(climate_control);
+    }
+    public void setSoundSystem(int index,String sound_system){
+        ((Luxury_car)super.getList().get(index)).setSoundSystem(sound_system);
+    }
+    public void setSafetyFeatures(int index,String safety_features){
+        ((Luxury_car)super.getList().get(index)).setSafetyFeatures(safety_features);
+    }
+
+
+    @Override
+    public void showDetails() {
+        
+        for(Super_car sc:super.getList())
+            if(checkLuxuryCar(sc))
+                ((Luxury_car)sc).showDetails();
+    }
+    @Override
+    public void showforCustomer(){
+        for(Super_car sc:super.getList())
+            if(checkLuxuryCar(sc))
+                ((Luxury_car)sc).showforCustomer();
     }
 }

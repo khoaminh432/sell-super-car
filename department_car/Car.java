@@ -109,8 +109,8 @@ public class Car implements Ishowfor{
     }
     @Override
     public String toString() {
-        return id_car+"\n"+name+"\n"+pricebuy+"\n"+pricesell+"\n"+weight+"\n"+length+
-        "\n"+height+"\n"+width+"\n"+quantityof_car+"\n";
+        return id_car+"\t"+name+"\t"+pricebuy+"\t"+pricesell+"\t"+weight+"\t"+length+
+        "\t"+height+"\t"+width+"\t"+quantityof_car;
     }
     @Override
     public void showDetails(){

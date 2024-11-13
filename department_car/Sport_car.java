@@ -79,11 +79,18 @@ public class Sport_car extends Super_car implements Ishowfor{
         System.out.println("Drive type: "+drive_type);
         
     }
+    public static boolean checkSportCar(Super_car sc){
+        return sc instanceof Sport_car;
+    }
     @Override
     public void showforCustomer(){
         super.showforCustomer();
         System.out.println("top speed"+top_speed);
     }
-
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return super.toString()+'\t'+engine+'\t'+top_speed+'\t'+acceleration+'\t'+drive_type;
+    }
 
 }

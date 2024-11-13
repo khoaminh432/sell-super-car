@@ -4,13 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Customer extends Person{
-<<<<<<< HEAD
-    
-=======
-
     private List<String> purchaseHistory;
-
->>>>>>> a3b5d1265fc107adf74d171ea8de1fbcb32e5e14
     public Customer() {
     }
 

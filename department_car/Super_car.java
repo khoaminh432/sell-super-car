@@ -3,7 +3,7 @@ package department_car;
 public class Super_car extends Car implements Ishowfor{
     
     private String CompanyCar;
-    public static int quantitysupper_car;
+    public static int quantitysupper_car=0;
     public Super_car(){
         super();
         CompanyCar = "none";
@@ -27,8 +27,7 @@ public class Super_car extends Car implements Ishowfor{
         this.CompanyCar = CompanyCar;
     }
     public String toString(){
-        return super.toString()+CompanyCar+'\n';
-    
+        return super.toString()+'\t'+CompanyCar;
     }
     @Override
     public void showDetails(){

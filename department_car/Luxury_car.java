@@ -67,7 +67,9 @@ public class Luxury_car extends Super_car implements Ishowfor{
     {
         this.safety_features = safety_features;
     }
-    
+    public static boolean checkLuxuryCar(Super_car sCar){
+        return sCar instanceof Luxury_car;
+    }
 
     @Override
     public void showDetails() {
@@ -85,6 +87,13 @@ public class Luxury_car extends Super_car implements Ishowfor{
         System.out.println("Climate control"+climate_control);
         System.out.println("Safety features"+safety_features);
     }
+    
+    @Override
+    public String toString() {
+        return super.toString()+'\t'+interior_material+'\t'+sound_system+'\t'
+        +climate_control+'\t'+safety_features;
+    }
+    
     
     
 }
