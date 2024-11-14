@@ -8,10 +8,10 @@ public class Sport_car extends Super_car implements Ishowfor{
     public Sport_car()
     {
         super();
-        engine="";
+        engine="none";
         top_speed=0;
         acceleration=0;
-        drive_type="";
+        drive_type="none";
         number_of_sportCar++;
     }
     public Sport_car(String name,int pricebuy,int pricesell,float weight,float length,float height,float width,int quantityof_car,String Companycar,String engine, double top_speed,double acceleration,String drive_type)
@@ -85,7 +85,7 @@ public class Sport_car extends Super_car implements Ishowfor{
     @Override
     public void showforCustomer(){
         super.showforCustomer();
-        System.out.println("top speed"+top_speed);
+        System.out.println("top speed: "+top_speed);
     }
     @Override
     public String toString() {

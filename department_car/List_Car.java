@@ -1,5 +1,7 @@
 package department_car;
 
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 public class List_Car implements Ishowfor{
     private ArrayList<Super_car> Lcar;
@@ -110,6 +112,32 @@ public class List_Car implements Ishowfor{
                 sc.showforCustomer();
             else sc.showforCustomer();
             }
+    }
+    public void writefile(String filename){
+        try{
+            FileWriter fw = new FileWriter(filename);
+            for(Super_car sc: Lcar){
+                fw.write(sc.toString()+"\n");
+            }
+            fw.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    public void readfile(String filename){
+        try {
+            FileReader fw = new FileReader(filename);
+            int data = fw.read();
+            String name="";
+            while(data !=-1){
+                System.out.print((char)(data));
+                name += (char)data;
+                data = fw.read();
+            }
+            fw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     

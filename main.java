@@ -1,16 +1,24 @@
+import department_car.List_Car;
+import department_car.Luxury_car;
+import department_car.Sport_car;
 import department_car.Super_car;
-import java.io.*;
 public class main {
     public static void main(String[] args) {
         
-        try {
-            FileWriter fwriter = new FileWriter("list_car.txt");
-            Super_car sc = new Super_car("lambo",10000,12000,150f,3f,1.5f,1,"lamborgini",10);
-            fwriter.write(sc.toString()); 
-            fwriter.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
+        Super_car sc =new Super_car();
+        Super_car sc1 = new Super_car();
+        Luxury_car lc = new Luxury_car();
+        Sport_car spc = new Sport_car();
+
+        List_Car listca = new List_Car();
+        listca.add(sc);
+        listca.add(sc1);
+        listca.add(lc);
+        listca.add(spc);
+        listca.remove(listca.getindex(1));
+        listca.setCompanyCar(listca.getindex(2), "lamborgini");
+        listca.writefile("list_file.txt");
+        System.out.println(listca.getList().size());
+        listca.showDetails();
     }
 }

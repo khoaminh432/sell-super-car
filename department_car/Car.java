@@ -1,5 +1,4 @@
 package department_car;
-
 import java.util.Scanner;
 public class Car implements Ishowfor{
     private int id_car=0;
@@ -15,8 +14,8 @@ public class Car implements Ishowfor{
     
     //khởi tạo
     public Car() {
-        id_car ++;
-        name = "";
+        
+        name = "none";
         pricebuy = 0;
         pricesell = 0;
         weight = 0;
@@ -25,9 +24,10 @@ public class Car implements Ishowfor{
         width = 0;
         quantityof_car = 0;
         QuantityCar++;
+        id_car = QuantityCar;
     }
     public Car(String name,int pricebuy,int pricesell,float weight,float length,float height,float width,int quantityof_car){
-        id_car++;
+        
         this.name = name;
         this.pricebuy = pricebuy;
         this.pricesell = pricesell;
@@ -37,9 +37,10 @@ public class Car implements Ishowfor{
         this.width = width;
         this.quantityof_car = quantityof_car;
         QuantityCar++;
+        id_car = QuantityCar;
     }
     public Car(Car car){
-        id_car++;
+        
         name = car.name;
         pricebuy = car.pricebuy;
         pricesell = car.pricesell;
@@ -49,6 +50,7 @@ public class Car implements Ishowfor{
         width = car.width;
         quantityof_car = car.quantityof_car;
         QuantityCar++;
+        id_car = QuantityCar;
     }
     // hàm get
     public int getId_car() {
@@ -147,6 +149,4 @@ public class Car implements Ishowfor{
         quantityof_car = sc.nextInt();
         sc.close();
     }
-
-    
-}
+}   

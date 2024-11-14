@@ -1,19 +1,17 @@
 package department_car;
 import java.util.ArrayList;
-public class List_sport_car extends List_Car implements Ishowfor {
+public class List_sport_car extends List_Car {
 
     public List_sport_car() {
         super();
     }
 
-    public static boolean checkSportCar(Super_car sc) {
-        return sc instanceof Sport_car;
-    }
+    
     
     // tạo danh sách chỉ sport car từ danh sách super car
     public void setList(ArrayList<Super_car> sc) {
         for (Super_car sCar : sc) {
-            if (checkSportCar(sCar)) {
+            if (Sport_car.checkSportCar(sCar)) {
                 super.getList().add(sCar);
             }
         }
@@ -39,20 +37,5 @@ public class List_sport_car extends List_Car implements Ishowfor {
         ((Sport_car) super.getList().get(index)).setDriveType(drive_type);
     }
 
-    @Override
-    public void showDetails() {
-        for (Super_car sc : super.getList()) {
-            if (checkSportCar(sc)) {
-                ((Sport_car) sc).showDetails();
-            }
-        }
-    }
-    @Override
-    public void showforCustomer() {
-        for (Super_car sc : super.getList()) {
-            if (checkSportCar(sc)) {
-                ((Sport_car) sc).showforCustomer();
-            }
-        }
-    }
+   
 }

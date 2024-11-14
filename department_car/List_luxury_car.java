@@ -2,19 +2,17 @@ package department_car;
 
 import java.util.ArrayList;
 
-public class List_luxury_car extends List_Car implements Ishowfor{
+public class List_luxury_car extends List_Car {
 
     public List_luxury_car() {
         super();
     }
     
-    public static boolean checkLuxuryCar(Super_car sc){
-        return sc instanceof Luxury_car;
-    }
+    
     // tạo ds chỉ luxury car từ list super car
     public void setList(ArrayList<Super_car> sc){
         for(Super_car sCar:sc)
-            if(checkLuxuryCar(sCar))
+            if(Luxury_car.checkLuxuryCar(sCar))
                 super.getList().add(sCar);
     }
     public void setlist(Luxury_car lc){
@@ -34,17 +32,5 @@ public class List_luxury_car extends List_Car implements Ishowfor{
     }
 
 
-    @Override
-    public void showDetails() {
-        
-        for(Super_car sc:super.getList())
-            if(checkLuxuryCar(sc))
-                ((Luxury_car)sc).showDetails();
-    }
-    @Override
-    public void showforCustomer(){
-        for(Super_car sc:super.getList())
-            if(checkLuxuryCar(sc))
-                ((Luxury_car)sc).showforCustomer();
-    }
+    
 }

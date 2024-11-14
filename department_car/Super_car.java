@@ -6,7 +6,7 @@ public class Super_car extends Car implements Ishowfor{
     public static int quantitysupper_car=0;
     public Super_car(){
         super();
-        CompanyCar = "none";
+        CompanyCar = "no";
         quantitysupper_car++;
     }
     public Super_car(String name,int pricebuy,int pricesell,float weight,float length,float height,float width,String Companycar,int quantityof_car){
