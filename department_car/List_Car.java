@@ -12,7 +12,9 @@ public class List_Car implements Ishowfor{
     //thêm phần tử vào cuối mảng
     public void add(Super_car sc){
         Lcar.add(sc);
+        
     }
+    
     //thêm phần tử tại vị trí
     public void add(int index,Super_car sc){
         Lcar.add(index,sc);
@@ -113,7 +115,8 @@ public class List_Car implements Ishowfor{
             else sc.showforCustomer();
             }
     }
-    public void writefile(String filename){
+    
+    public void WriteFile(String filename){
         try{
             FileWriter fw = new FileWriter(filename);
             for(Super_car sc: Lcar){
@@ -124,20 +127,42 @@ public class List_Car implements Ishowfor{
             e.printStackTrace();
         }
     }
-    public void readfile(String filename){
+    public void AppendFile(String filename){
+        try{
+            FileWriter fw = new FileWriter(filename);
+            for(Super_car sc: Lcar){
+                fw.append(sc.toString()+"\n");
+            }
+            fw.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    public ArrayList<String> ReadFile(String filename){
+        ArrayList<String> arr = new ArrayList<>();
         try {
             FileReader fw = new FileReader(filename);
             int data = fw.read();
             String name="";
             while(data !=-1){
-                System.out.print((char)(data));
+                
                 name += (char)data;
+                if(data=='\n')
+                {
+                    arr.add(name);
+                    name = "";
+                }
                 data = fw.read();
             }
             fw.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        for(String car:arr)
+            System.out.print(car.split("\t").length+" ");
+            
+        
+        return arr;
     }
     
     

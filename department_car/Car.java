@@ -110,6 +110,22 @@ public class Car implements Ishowfor{
     public void setQuantityof_car(int quantityof_car) {
         this.quantityof_car = quantityof_car;
     }
+    public static boolean RealNumber(String str) {
+        try {
+            Float.parseFloat(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+    public static Object IntegerNumber(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
     @Override
     public String toString() {
         return id_car+"\t"+name+"\t"+pricebuy+"\t"+pricesell+"\t"+weight+"\t"+length+
