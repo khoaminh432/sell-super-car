@@ -1,0 +1,53 @@
+public class MainMenu
+{
+    public SellerMenu{
+        getTen();
+        getKieuXe();
+        getDiaChi();
+        getId_car();
+        getPricesell();
+        getWeight();
+        getLength();
+        getHeight();
+        getWidth();
+        getName();
+        ShowforSeller();
+        ShowforCustomer();
+    }
+    public BuyerMenu(){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("nhap so id bat dau ");
+        start=sc.nextint();
+        System.out.println("nhap so id ket thuc ");
+        start=sc.nextint();
+        for(i=start;i<end;i++;)
+        if(car.Id_car==i)
+         car.ShowforCustomer();
+    }
+    public AdminMenu(){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("nhap so id bat dau ");
+        start=sc.nextint();
+        System.out.println("nhap so id ket thuc ");
+        start=sc.nextint();
+        for(i=start;i<end;i++;)
+        {if(car.Id_car==i)
+         car.ShowforCustomer();};
+        System.out.println("nhap mot so ");
+        int nhap=sc.nextint();
+        switch(nhap){
+            case 1:
+            add(Super_car sc);
+            break;
+            case 2:
+            add(int index,Super_car sc);
+            break;
+            case 3:
+            remove(int index);
+            break;
+            case 4:
+            output();
+            break; 
+        } 
+    }
+}

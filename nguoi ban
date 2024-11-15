@@ -1,0 +1,45 @@
+public class Seller
+{
+ private String Ten; 
+ private String KieuXe;
+ private String DiaChi;     
+ public Seller()
+ {
+  Ten=""; 
+  KieuXe="";
+  diaChi="";
+ }
+ public Seller(String Ten;String KieuXe;String DiaChi;)
+ {
+    this.Ten=Ten;
+    this.KieuXe=KieuXe;
+    this.DiaChi=DiaChi;
+ }
+ public String getTen(){
+    return Ten ;
+ }
+ public void setTen(String Ten){
+    this.Ten=Ten;
+ }
+ public String getKieuXe(){
+    return KieuXe ;
+ }
+ public void setTen(String KieuXe){
+    this.KieuXe=KieuXe;
+ }
+ public String getDiaChi(){
+    return DiaChi ;
+ }
+ public void setDiaChi(String DiaChi){
+    this.DiaChi=DiaChi;
+ }
+ public void ShowforSeller(){
+    getTen();
+    getKieuXe();
+    getDiaChi();
+    System.out.println("Ten: "+ Ten);
+    System.out.println("Kieu Xe:" + KieuXe);
+    System.out.println("Dia Chui: " + DiaChi); 
+}
+
+}
