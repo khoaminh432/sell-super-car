@@ -3,9 +3,16 @@ package department_car;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import carstore.IdManager;
 public class List_Car implements Ishowfor{
     private ArrayList<Super_car> Lcar;
-    
+    private Scanner scanner = new Scanner(System.in);
+    private static final String SUPERCAR_FILE_NAME = "Data/superCar.txt";
+    private static final String ID_FILE_NAME = "Data/superCarID.txt";
+    private IdManager id_car = new IdManager(ID_FILE_NAME);
+
     public List_Car(){
         Lcar = new ArrayList<>();
     }
@@ -136,9 +143,9 @@ public class List_Car implements Ishowfor{
             }
     }
     
-    public void WriteFile(String filename){
+    public void WriteFile(String SUPERCAR_FILE_NAME){
         try{
-            FileWriter fw = new FileWriter(filename);
+            FileWriter fw = new FileWriter(SUPERCAR_FILE_NAME);
             for(Super_car sc: Lcar){
                 fw.write(sc.toString()+"\n");
             }
@@ -147,9 +154,9 @@ public class List_Car implements Ishowfor{
             e.printStackTrace();
         }
     }
-    public void AppendFile(String filename){
+    public void AppendFile(String SUPERCAR_FILE_NAME){
         try{
-            FileWriter fw = new FileWriter(filename);
+            FileWriter fw = new FileWriter(SUPERCAR_FILE_NAME);
             for(Super_car sc: Lcar){
                 fw.append(sc.toString()+"\n");
             }
@@ -158,10 +165,10 @@ public class List_Car implements Ishowfor{
             e.printStackTrace();
         }
     }
-    public ArrayList<String> ReadFile(String filename){
+    public ArrayList<String> ReadFile(String SUPERCAR_FILE_NAME){
         ArrayList<String> arr = new ArrayList<>();
         try {
-            FileReader fw = new FileReader(filename);
+            FileReader fw = new FileReader(SUPERCAR_FILE_NAME);
             int data = fw.read();
             String name="";
             while(data !=-1){
@@ -346,7 +353,7 @@ public class List_Car implements Ishowfor{
                     }
                     break;
                 case 6:
-                    writefile("data");
+                    WriteFile(SUPERCAR_FILE_NAME);
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
