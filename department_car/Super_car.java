@@ -19,13 +19,13 @@ public class Super_car extends Car implements Ishowfor{
         super.setId_car(Integer.parseInt(super_car.get(0)));
         
     }
-    public Super_car(String name,int pricebuy,int pricesell,float weight,float length,float height,float width,int quantityof_car,String Companycar){
-        super(name,pricebuy,pricesell,weight,length,height,width,quantityof_car);
+    public Super_car(int id_car,String name,int pricebuy,int pricesell,float weight,float length,float height,float width,int quantityof_car,String Companycar){
+        super(id_car,name,pricebuy,pricesell,weight,length,height,width,quantityof_car);
         this.CompanyCar = Companycar;
         quantitysupper_car++;
     }
     public Super_car(Super_car sc){
-        super(sc.getName(),sc.getPricebuy(),sc.getPricesell(),sc.getWeight(),sc.getLength(),sc.getHeight(),sc.getWidth(),sc.getQuantityof_car());
+        super(sc.getId_car(),sc.getName(),sc.getPricebuy(),sc.getPricesell(),sc.getWeight(),sc.getLength(),sc.getHeight(),sc.getWidth(),sc.getQuantityof_car());
         CompanyCar = sc.CompanyCar;
         quantitysupper_car++;
     }
