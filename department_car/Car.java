@@ -1,7 +1,8 @@
 package department_car;
+import carstore.IdManager;
 import java.util.Scanner;
 public class Car implements Ishowfor{
-    private int id_car=0;
+    private IdManager id_car;
     private String name;
     private int pricesell;
     private int pricebuy;
@@ -24,7 +25,7 @@ public class Car implements Ishowfor{
         width = 0;
         quantityof_car = 0;
         QuantityCar++;
-        id_car = QuantityCar;
+        
     }
     public Car(String name,int pricebuy,int pricesell,float weight,float length,float height,float width,int quantityof_car){
         
@@ -37,7 +38,7 @@ public class Car implements Ishowfor{
         this.width = width;
         this.quantityof_car = quantityof_car;
         QuantityCar++;
-        id_car = QuantityCar;
+        
     }
     public Car(Car car){
         
@@ -50,16 +51,11 @@ public class Car implements Ishowfor{
         width = car.width;
         quantityof_car = car.quantityof_car;
         QuantityCar++;
-        id_car = QuantityCar;
+        
     }
     // hàm get
-    public int getId_car() {
-        return id_car;
-    }
     
-    public void setId_car(int id_car) {
-        this.id_car = id_car;
-    }
+    
     public int getPricesell(){
         return pricesell;
     }

@@ -16,7 +16,7 @@ public class Super_car extends Car implements Ishowfor{
         super(super_car.get(1),Integer.parseInt(super_car.get(2)),Integer.parseInt(super_car.get(3)),
         Float.parseFloat(super_car.get(4)), Float.parseFloat(super_car.get(5)), Float.parseFloat(super_car.get(6)),
         Float.parseFloat(super_car.get(7)),Integer.parseInt(super_car.get(8)));
-        super.setId_car(Integer.parseInt(super_car.get(0)));
+        
         
     }
     public Super_car(String name,int pricebuy,int pricesell,float weight,float length,float height,float width,int quantityof_car,String Companycar){

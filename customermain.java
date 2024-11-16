@@ -4,7 +4,10 @@ public class customermain {
         System.out.println("===================Welcome customer====================");
         System.out.println("1. Display vehicle list.");
         System.out.println("2. Show your profile.");
-        System.out.println("3. exit.");
+        System.out.println("3. ");
+        System.out.println("0. exit.");
+        System.out.print("Your choose: ");
+
     }
     public static void main(String[] args) {
         

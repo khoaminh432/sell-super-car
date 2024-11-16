@@ -1,8 +1,10 @@
 package department_car;
 
+import carstore.IdManager;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 public class List_Car implements Ishowfor{
     private ArrayList<Super_car> Lcar;
     
@@ -22,7 +24,7 @@ public class List_Car implements Ishowfor{
     //thêm vào id còn trống
     public void add(){
         System.out.println("=================ADD=============");
-        int id = id_car.idGenerator();
+        int id = IdManager.idGenerator();
         String name = scanner.nextLine().trim();
         int pricesell = scanner.nextInt();
         int pricebuy = scanner.nextInt();
