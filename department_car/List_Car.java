@@ -205,8 +205,9 @@ public class List_Car implements Ishowfor{
         }
         return arr;
     }
-    public void menuForManager(){
-        scanner = new Scanner(System.in);
+
+    public void menuForManager(Scanner scanner){
+        ReadFile(SUPERCAR_FILE_NAME);
         int choice;
         do{
             System.out.println("====================MENU===============");
@@ -215,7 +216,7 @@ public class List_Car implements Ishowfor{
             System.out.println("3.Change the informations of car");
             System.out.println("4.Search car");
             System.out.println("5.Show the informations of cars");
-            System.out.println("6.Output to file");
+            System.out.println("6.Save");
             System.out.println("0.Exit");
             choice = scanner.nextInt();
         
@@ -402,7 +403,7 @@ public class List_Car implements Ishowfor{
         do{
             menu();
             choose = Car.chooseInteger(scanner.nextLine());
-            ReadFile("department_car/list_car.txt");
+            ReadFile(SUPERCAR_FILE_NAME);
             switch (choose) {
                 case 1:
                     showforCustomer();
