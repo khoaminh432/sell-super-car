@@ -23,7 +23,7 @@ public class CustomerManager implements IFeatures<Customer> {
     private static final String Customer_ID_FILE_NAME="Data/customerIdData.txt";
     
         //Constructor
-        public CustomerManager(){
+    public CustomerManager(){
         cList = new ArrayList<>();
         sc = new Scanner(System.in);
         idCustomer = new IdManager(Customer_ID_FILE_NAME);
@@ -34,16 +34,18 @@ public class CustomerManager implements IFeatures<Customer> {
      * return: nothing
      * Description: -show the list of the customers
      */
+    @Override
     public void display(){
         if(cList.isEmpty()){
             System.out.println("Nothing to display.");
             return;
         }
 
-        for(Customer customer:cList){
-            System.out.println("------------------------------------");
-            customer.showDetails();
-            System.out.println("------------------------------------");
+        System.out.println("Customer List:");
+        for (int i = 0; i < cList.size(); i++) {
+            System.out.println("----------------------------------");
+            System.out.println((i + 1) + ". ");  
+            cList.get(i).showDetails();
         }
     }
     //Display: END
@@ -123,13 +125,29 @@ public class CustomerManager implements IFeatures<Customer> {
     }
     //WriteToFile:END
 
-    public void add(){
+    @Override
+    //Add new customer
+    public boolean add(){
         System.out.println("--------------Add new customer--------------");
         String name = ClientValidator.isNameValid(sc);
         String email = ClientValidator.isEmailAdressValid(sc);
+
+        //check if email is already in use
+        if (isEmailAlreadyUsed(email)) {
+            System.out.println("This email is already registered. Please try a different email.");
+            return false; //Exit the method if email is not unique
+        }
+
         String password = ClientValidator.isPasswordValid(sc);
         String contact = ClientValidator.isContactNumberValid(sc);
 
+        // Check if the contact number is already in use
+        if (isContactNumberAlreadyUsed(contact)) {
+            System.out.println("This contact number is already registered. Please try a different contact number.");
+            return false;  // Exit the method if contact number is not unique
+        }
+
+        //address
         String houseNumber = sc.nextLine().trim();
         String street = sc.nextLine().trim();
         String ward = sc.nextLine().trim();
@@ -141,14 +159,41 @@ public class CustomerManager implements IFeatures<Customer> {
         Customer newCustomer = new Customer(id, name, email, password, contact, address);
 
         cList.add(newCustomer);
+        System.out.println("New customer created successfully with ID: " + id);
+        cList.sort((c1, c2) -> Integer.compare(c1.getID(), c2.getID()));
+
+        
+        return true;
+    }
+
+    private boolean isEmailAlreadyUsed(String email) {
+        for (Customer customer : cList) {
+            if (customer.getEmail().equalsIgnoreCase(email)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isContactNumberAlreadyUsed(String contact) {
+        for (Customer customer : cList) {
+            if (customer.getContactNumber().equals(contact)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public void delete(Customer toDeleteCustomer) {
-        cList.remove(toDeleteCustomer);
+        if (toDeleteCustomer != null && cList.remove(toDeleteCustomer)) {
+            System.out.println("Customer member with ID " + toDeleteCustomer.getID() + " deleted successfully.");
+        } else {
+            System.out.println("Customer member not found.");
+        }
     }
-    
 
+    @Override
     public Customer search() {
         System.out.println("Search by: ");
         System.out.println("1. Customer ID");
@@ -166,11 +211,7 @@ public class CustomerManager implements IFeatures<Customer> {
                 System.out.print("Enter customer ID: ");
                 int id = sc.nextInt();
                 sc.nextLine();
-                for (Customer customer : cList) {
-                    if (customer.getID() == id) {
-                        searchResults.add(customer);
-                    }
-                }
+                searchResults.add(getCustomerById(id));
                 break;
     
             case 2:
@@ -187,7 +228,7 @@ public class CustomerManager implements IFeatures<Customer> {
             case 3:
                 // Search by Email
                 System.out.print("Enter customer email: ");
-                String email = sc.nextLine().trim();
+                String email = ClientValidator.isEmailAdressValid(sc);
                 for (Customer customer : cList) {
                     if (customer.getEmail().equalsIgnoreCase(email)) {
                         searchResults.add(customer);
@@ -227,16 +268,129 @@ public class CustomerManager implements IFeatures<Customer> {
         }
     }
     
-
-    public void update(){
-
+    @Override
+    public void update(Customer customerToUpdate) {
+        System.out.println("------- Update Your Information -------");
+        System.out.println("Updating details for " + customerToUpdate.getName() + "...");
+    
+        boolean keepUpdating = true;
+        while (keepUpdating) {
+            System.out.println("\nSelect the field to update:");
+            System.out.println("1. Name");
+            System.out.println("2. Email");
+            System.out.println("3. Contact Number");
+            System.out.println("4. Address");
+            System.out.println("5. Finish updating");
+    
+            System.out.print("Enter your choice (1-5): ");
+            int choice = sc.nextInt();
+            sc.nextLine(); // Consume the newline
+    
+            switch (choice) {
+                case 1:
+                    updateName(customerToUpdate);
+                    break;
+                case 2:
+                    updateEmail(customerToUpdate);
+                    break;
+                case 3:
+                    updateContactNumber(customerToUpdate);
+                    break;
+                case 4:
+                    updateAddress(customerToUpdate);
+                    break;
+                case 5:
+                    System.out.println("Finished updating.");
+                    keepUpdating = false;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please select a valid option.");
+                    break;
+            }
+        }
+    }
+    
+    private void updateName(Customer customer) {
+        System.out.println("Current Name: " + customer.getName());
+        String newName = ClientValidator.isNameValid(sc);
+        customer.setName(newName);
+        System.out.println("Name updated successfully!");
+    }
+    
+    private void updateEmail(Customer customer) {
+        System.out.println("Current Email: " + customer.getEmail());
+        String newEmail = ClientValidator.isEmailAdressValid(sc);
+        customer.setEmail(newEmail);
+        System.out.println("Email updated successfully!");
+    }
+    
+    private void updateContactNumber(Customer customer) {
+        System.out.println("Current Contact Number: " + customer.getContactNumber());
+        String newContact = ClientValidator.isContactNumberValid(sc);
+        customer.setContactNumber(newContact);
+        System.out.println("Contact Number updated successfully!");
+    }
+    
+    private void updateAddress(Customer customer) {
+        System.out.println("Updating Address:");
+        System.out.println("Current Address: " + customer.getAddress().toString());
+    
+        System.out.print("Enter House Number: ");
+        String houseNumber = sc.nextLine().trim();
+        System.out.print("Enter Street: ");
+        String street = sc.nextLine().trim();
+        System.out.print("Enter Ward: ");
+        String ward = sc.nextLine().trim();
+        System.out.print("Enter District: ");
+        String district = sc.nextLine().trim();
+        System.out.print("Enter City: ");
+        String city = sc.nextLine().trim();
+    
+        Location newAddress = new Location(houseNumber, street, ward, district, city);
+        customer.setAddress(newAddress);
+        System.out.println("Address updated successfully!");
     }
 
+    //Save data after changes
+    //Called by customer manage menu
     public void saveData(){
         writeToFile();
         if(idCustomer.writeIDsToFile(Customer_FILE_NAME)){
             System.out.println("Customer id file saved successfully");
         }
+    }
+
+    //Customer login
+    //return the customer with correct email and password
+    public Customer login(String email, String password){
+        for (Customer customer : cList) {
+            if(customer.getEmail().equals(email)){
+                if (customer.getPassword().equals(password)) {
+                    return customer;
+                }
+            }
+        }
+        return null;
+    }
+
+    //Check if an email exists for customer's password recovery
+    public Customer searchByEmailCaseSensitive(String email){
+        for (Customer customer : cList) {
+            if(customer.getEmail().equals(email)){
+                return customer;
+            }
+        }
+        return null;
+    }
+
+    public Customer getCustomerById(int id){
+        Customer result = new Customer();
+        for (Customer customer : cList) {
+            if(customer.getID()==id){
+                result = customer;
+            }
+        }
+        return result;
     }
 }
     

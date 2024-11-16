@@ -22,9 +22,7 @@ public class Customer extends Person{
         return purchaseHistory;
     }
 
-    @Override
-    public void showDetails(){
-        super.showDetails();
+    public void showPurchaseHistory(){
         System.out.println("Purchase Histrory: ");
         for(String purchase:purchaseHistory){
             System.out.println("- "+purchase);
@@ -32,10 +30,15 @@ public class Customer extends Person{
     }
 
     @Override
+    public void showDetails(){
+        super.showDetails();
+    }
+
+    @Override
     public String toString(){
         if(!purchaseHistory.isEmpty()){
             String purchaseString=String.join("|",purchaseHistory);
-            return super.toString()+"\t"+purchaseString;
+            return super.toString()+"\t"+purchaseString+"\n";
         }
         return super.toString();
     }
