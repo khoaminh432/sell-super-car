@@ -1,4 +1,5 @@
 package department_car;
+<<<<<<< Updated upstream
 import carstore.IdManager;
 import java.io.*;
 import java.util.ArrayList;
@@ -7,6 +8,19 @@ public class List_sport_car extends List_Car {
     private ArrayList<Sport_car> Lscar;
     private IdManager id_car;
     private Scanner scanner = new  Scanner(System.in);
+=======
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import carstore.IdManager;
+public class List_sport_car extends List_Car {
+    private ArrayList<Sport_car> Lscar;
+    private IdManager id_car = new IdManager(ID_FILE_NAME);
+    private Scanner scanner = new Scanner(System.in);
+    private static final String SPORTCAR_FILE_NAME = "Data/sportCar.txt";
+    private static final String ID_FILE_NAME = "Data/sportCarID.txt";
+>>>>>>> Stashed changes
     public List_sport_car() {
         super();
         Lscar = new ArrayList<>();
@@ -40,19 +54,22 @@ public class List_sport_car extends List_Car {
         System.out.println("Acceleration: ");double acceleration = scanner.nextDouble();
         System.out.println("Drive Type: ");String drive = scanner.nextLine().trim();
         Sport_car newCar = new Sport_car(id,name,pricebuy,pricesell,weight,length,height,width,quantityof_car,CompanyCar,engine,top_speed,acceleration,drive);
+        Lscar.add(newCar);
     }
     
 
-    public void setlist(Sport_car sp) {
-        super.add(sp);
-    }
+    
     public void set(int index,Sport_car sc){
         Lscar.set(index,sc);
     }
     @Override
+<<<<<<< Updated upstream
     public void WriteFile(String filename){
+=======
+    public void WriteFile(String SPORTCAR_FILE_NAME){
+>>>>>>> Stashed changes
         try{
-            FileWriter fw = new FileWriter(filename);
+            FileWriter fw = new FileWriter(SPORTCAR_FILE_NAME);
             for(Sport_car lc: Lscar){
                 fw.write(lc.toString()+"\n");
             }
@@ -272,7 +289,11 @@ public class List_sport_car extends List_Car {
                     }
                     break;
                 case 6:
+<<<<<<< Updated upstream
                     WriteFile("data");
+=======
+                    WriteFile(SPORTCAR_FILE_NAME);
+>>>>>>> Stashed changes
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
@@ -280,4 +301,5 @@ public class List_sport_car extends List_Car {
                         
         }while(choice !=0);
     }
+
 }

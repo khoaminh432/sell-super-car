@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Scanner;
 public class List_Car implements Ishowfor{
     private ArrayList<Super_car> Lcar;
-    private Scanner scanner ;
     private static final String SUPERCAR_FILE_NAME = "Data/superCar.txt";
     private static final String ID_FILE_NAME = "Data/superCarID.txt";
     private IdManager id_car = new IdManager(ID_FILE_NAME);
@@ -26,8 +25,7 @@ public class List_Car implements Ishowfor{
         Lcar.add(index,sc);
     }
     //thêm vào id còn trống
-    public void add(){
-        scanner = new Scanner(System.in);
+    public void add(Scanner scanner){
         System.out.println("=================ADD=============");
         int id = id_car.idGenerator();
         String name = scanner.nextLine().trim();
@@ -40,7 +38,6 @@ public class List_Car implements Ishowfor{
         int quantityof_car = scanner.nextInt();
         String CompanyCar = scanner.nextLine().trim();
         add(new Super_car(id,name,pricesell,pricebuy,weight,length,height,width,quantityof_car,CompanyCar));
-        scanner.close();
     }
     //xoa
     public void Remove(Super_car sc){
@@ -222,7 +219,7 @@ public class List_Car implements Ishowfor{
         
             switch(choice){
                 case 1:
-                    add();
+                    add(scanner);
                     break;
                 case 2:
                     System.out.println("=============REMOVE============");
@@ -396,8 +393,7 @@ public class List_Car implements Ishowfor{
         System.out.println("0. Exit.");
         System.out.print("Your choose: ");
     }
-    public void menuForCustomer(){
-        scanner = new Scanner(System.in);
+    public void menuForCustomer(Scanner scanner){
         int choose;
         
         do{
@@ -457,7 +453,6 @@ public class List_Car implements Ishowfor{
                 break;
                 
         }while(true);
-    scanner.close();
     }
     
     

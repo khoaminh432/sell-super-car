@@ -1,20 +1,22 @@
 package department_car;
 
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import carstore.IdManager;
-import java.io.*;
-import java.util.*;
 
 public class List_luxury_car extends List_Car {
     private ArrayList<Luxury_car> Lxcar;
-    private IdManager id_car;
-    
+    private IdManager id_car = new IdManager(ID_FILE_NAME);
+    private static final String LUXURYCAR_FILE_NAME = "Data/luxuryCar.txt";
+    private static final String ID_FILE_NAME = "Data/luxeryCarID.txt";
     public List_luxury_car() {
         super();
         Lxcar = new ArrayList<>();
     }
     @Override
-    public void add(){
-        Scanner scanner = new Scanner(System.in);
+    public void add(Scanner scanner){
         System.out.println("=================ADD=============");
         int id = id_car.idGenerator();
         System.out.println("Name: ");String name = scanner.nextLine().trim();
@@ -31,7 +33,7 @@ public class List_luxury_car extends List_Car {
         System.out.println("Sound System: ");String SoundSystem = scanner.nextLine().trim();
         System.out.println("Safety Feeatures: ");String SafetyFeatures = scanner.nextLine().trim();
         Luxury_car newCar = new Luxury_car(id,name,pricebuy,pricesell,weight,length,height,width,quantityof_car,CompanyCar,InteriorMaterial,SoundSystem,ClimateControl,SafetyFeatures);
-        scanner.close();
+        Lxcar.add(newCar);
     }
     
     // tạo ds chỉ luxury car từ list super car
@@ -40,12 +42,8 @@ public class List_luxury_car extends List_Car {
             if(Luxury_car.checkLuxuryCar(sCar))
                 super.getList().add(sCar);
     }
-    public void setlist(Luxury_car lc){
-        super.add(lc);
-    }
-    public void set(int index,Luxury_car lc){
-        Lxcar.set(index,lc);
-    }
+    
+
     @Override
     public void WriteFile(String filename){
         try{
@@ -73,9 +71,9 @@ public class List_luxury_car extends List_Car {
     }
     
     
-    @Override
-    public void menuForManager(){
-        Scanner scanner = new  Scanner(System.in);
+    
+    public void menuForManager(Scanner scanner){
+        ReadFile(LUXURYCAR_FILE_NAME);
         int choice;
         do{
             System.out.println("====================MENU===============");
@@ -84,13 +82,13 @@ public class List_luxury_car extends List_Car {
             System.out.println("3.Change the informations of car");
             System.out.println("4.Search car");
             System.out.println("5.Show the informations of cars");
-            System.out.println("6.Output luxury car to file");
+            System.out.println("6.Save");
             System.out.println("0.Exit");
             choice = scanner.nextInt();
         
             switch(choice){
                 case 1:
-                    add();
+                    add(scanner);
                     break;
                 case 2:
                     System.out.println("=============REMOVE============");
@@ -237,6 +235,7 @@ public class List_luxury_car extends List_Car {
                                     System.out.println("Safety Features: ");
                                     String safetyFeatures = scanner.nextLine().trim();
                                     setClimateControl(position,safetyFeatures);
+                                    break;
                                 default:
                                     System.out.println("Invalid choice. Please try again.");
                             }
@@ -268,13 +267,12 @@ public class List_luxury_car extends List_Car {
                     }
                     break;
                 case 6:
-                    WriteFile("data");
+                    WriteFile(LUXURYCAR_FILE_NAME);
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
                         
         }while(choice !=0);
-        scanner.close();
     }
 }
