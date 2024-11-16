@@ -1,5 +1,7 @@
 package carstore;
 
+import java.util.Scanner;
+
 /**
  * author: lyhieunghia
  * 
@@ -90,4 +92,16 @@ package carstore;
       System.out.println("Contact Number: " +contactNumber);
       address.showDetails();
    }
+
+   public void changePassword(Scanner sc){
+      System.out.println("Create a new password: ");
+      String newPassword = ClientValidator.isPasswordValid(sc);
+      System.out.println("Confirm your password: ");
+      String confirmPassword = ClientValidator.isPasswordValid(sc);
+      if(newPassword==confirmPassword){
+         password=newPassword;
+         System.out.println("Password changed successfully.");
+      }
+   }
 }
+
