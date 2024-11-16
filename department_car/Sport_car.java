@@ -14,9 +14,9 @@ public class Sport_car extends Super_car implements Ishowfor{
         drive_type="none";
         number_of_sportCar++;
     }
-    public Sport_car(String name,int pricebuy,int pricesell,float weight,float length,float height,float width,int quantityof_car,String Companycar,String engine, double top_speed,double acceleration,String drive_type)
+    public Sport_car(int id_car,String name,int pricebuy,int pricesell,float weight,float length,float height,float width,int quantityof_car,String Companycar,String engine, double top_speed,double acceleration,String drive_type)
     {
-        super(name,pricebuy,pricesell,weight,length,height,width,quantityof_car,Companycar);
+        super(id_car,name,pricebuy,pricesell,weight,length,height,width,quantityof_car,Companycar);
         this.engine = engine;
         this.top_speed = top_speed;
         this.acceleration = acceleration;
@@ -25,7 +25,7 @@ public class Sport_car extends Super_car implements Ishowfor{
     }
     public Sport_car(Sport_car sc)
     {
-        super(sc.getName(),sc.getPricebuy(),sc.getPricesell(),sc.getWeight(),sc.getLength(),sc.getHeight(),sc.getWidth(),sc.getQuantityof_car(),sc.getCompanyCar());
+        super(sc.getId_car(),sc.getName(),sc.getPricebuy(),sc.getPricesell(),sc.getWeight(),sc.getLength(),sc.getHeight(),sc.getWidth(),sc.getQuantityof_car(),sc.getCompanyCar());
         this.engine = sc.engine;
         this.top_speed = sc.top_speed;
         this.acceleration = sc.acceleration;
