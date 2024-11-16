@@ -99,6 +99,7 @@ public class CustomerManager implements IFeatures<Customer> {
         } catch (IOException e) {
             System.out.println("Error reading customer file: " + e.getMessage());
         }
+        
     }
     //ReadFromFile:END
 
@@ -146,8 +147,8 @@ public class CustomerManager implements IFeatures<Customer> {
     public void delete(Customer toDeleteCustomer) {
         cList.remove(toDeleteCustomer);
     }
-
     
+
     public Customer search() {
         System.out.println("Search by: ");
         System.out.println("1. Customer ID");

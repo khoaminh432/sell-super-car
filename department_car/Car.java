@@ -1,8 +1,8 @@
 package department_car;
-import carstore.IdManager;
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Car implements Ishowfor{
-    private IdManager id_car;
+    private int id_car;
     private String name;
     private int pricesell;
     private int pricebuy;
@@ -15,7 +15,7 @@ public class Car implements Ishowfor{
     
     //khởi tạo
     public Car() {
-        
+        id_car = 0;
         name = "none";
         pricebuy = 0;
         pricesell = 0;
@@ -27,8 +27,8 @@ public class Car implements Ishowfor{
         QuantityCar++;
         
     }
-    public Car(String name,int pricebuy,int pricesell,float weight,float length,float height,float width,int quantityof_car){
-        
+    public Car(int id_car,String name,int pricebuy,int pricesell,float weight,float length,float height,float width,int quantityof_car){
+        this.id_car = id_car;
         this.name = name;
         this.pricebuy = pricebuy;
         this.pricesell = pricesell;
@@ -40,8 +40,21 @@ public class Car implements Ishowfor{
         QuantityCar++;
         
     }
-    public Car(Car car){
+    public Car(ArrayList<String> car_infor){
+        id_car = chooseInteger(car_infor.get(0));
+        name = car_infor.get(1);
+        pricebuy = chooseInteger(car_infor.get(2));
+        pricesell = chooseInteger(car_infor.get(3));
+        weight = chooseFloat(car_infor.get(4));
+        length = chooseFloat(car_infor.get(5));
+        height = chooseFloat(car_infor.get(6));
+        width = chooseFloat(car_infor.get(7));
+        quantityof_car = chooseInteger(car_infor.get(8));
         
+
+    }
+    public Car(Car car){
+        id_car = car.id_car;
         name = car.name;
         pricebuy = car.pricebuy;
         pricesell = car.pricesell;
@@ -54,8 +67,10 @@ public class Car implements Ishowfor{
         
     }
     // hàm get
-    
-    
+
+    public int getId_car() {
+        return id_car;
+    }
     public int getPricesell(){
         return pricesell;
     }
@@ -82,6 +97,9 @@ public class Car implements Ishowfor{
         return quantityof_car;
     }
     // hàm set
+    public void setId_car(int id_car) {
+        this.id_car = id_car;
+    }
     public void setName(String name) {
         this.name = name;
     }
@@ -114,7 +132,7 @@ public class Car implements Ishowfor{
             return false;
         }
     }
-    public static Object IntegerNumber(String str) {
+    public static boolean IntegerNumber(String str) {
         try {
             Integer.parseInt(str);
             return true;
@@ -122,6 +140,44 @@ public class Car implements Ishowfor{
             return false;
         }
     }
+    public static boolean DoubleNumber(String str){
+        try{
+            Double.parseDouble(str);
+            return true;
+        }catch(NumberFormatException e){
+            return false;
+        }
+    }
+    public static int chooseInteger(String str){
+        int m;
+        try{
+            return Integer.parseInt(str);
+        }catch (NumberFormatException e){
+            System.out.println(str+" must be an Integer!");
+            return -1;
+        }}
+
+    public static float chooseFloat(String str){
+        float m;
+    try{
+            return Float.parseFloat(str);
+            
+        }catch (NumberFormatException e){
+            System.out.println(str+" must be an Float!");
+            return  -1;
+        }}
+    public static double  chooseDouble(String str){
+        double m;
+        
+            try{
+                return Double.parseDouble(str);
+                
+            }
+            catch(NumberFormatException e){
+                System.out.println(str+"must be an Double!");
+                return  -1;
+            }
+        } 
     @Override
     public String toString() {
         return id_car+"\t"+name+"\t"+pricebuy+"\t"+pricesell+"\t"+weight+"\t"+length+
@@ -147,7 +203,7 @@ public class Car implements Ishowfor{
         System.out.println("Weight: " + weight);
         System.out.println("Length: "+ length);
         System.out.println("height: " + height);
-        System.out.println("width" + width);
+        System.out.println("width: " + width);
     }
     public void input(){
         Scanner sc = new Scanner(System.in);
@@ -161,4 +217,5 @@ public class Car implements Ishowfor{
         quantityof_car = sc.nextInt();
         sc.close();
     }
+
 }   

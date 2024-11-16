@@ -1,4 +1,7 @@
 package department_car;
+
+import java.util.ArrayList;
+
 public class Sport_car extends Super_car implements Ishowfor{
     private String engine;
     private double top_speed;
@@ -14,9 +17,17 @@ public class Sport_car extends Super_car implements Ishowfor{
         drive_type="none";
         number_of_sportCar++;
     }
-    public Sport_car(String name,int pricebuy,int pricesell,float weight,float length,float height,float width,int quantityof_car,String Companycar,String engine, double top_speed,double acceleration,String drive_type)
+    public Sport_car(ArrayList<String> sportcar){
+        super(new ArrayList<>(sportcar.subList(0, 10)));
+        engine=sportcar.get(10);
+        top_speed=chooseDouble(sportcar.get(11));
+        acceleration=chooseDouble(sportcar.get(12));
+        drive_type=sportcar.get(13);
+        number_of_sportCar++;
+    }
+    public Sport_car(int id_car,String name,int pricebuy,int pricesell,float weight,float length,float height,float width,int quantityof_car,String Companycar,String engine, double top_speed,double acceleration,String drive_type)
     {
-        super(name,pricebuy,pricesell,weight,length,height,width,quantityof_car,Companycar);
+        super(id_car,name,pricebuy,pricesell,weight,length,height,width,quantityof_car,Companycar);
         this.engine = engine;
         this.top_speed = top_speed;
         this.acceleration = acceleration;
@@ -25,7 +36,7 @@ public class Sport_car extends Super_car implements Ishowfor{
     }
     public Sport_car(Sport_car sc)
     {
-        super(sc.getName(),sc.getPricebuy(),sc.getPricesell(),sc.getWeight(),sc.getLength(),sc.getHeight(),sc.getWidth(),sc.getQuantityof_car(),sc.getCompanyCar());
+        super(sc.getId_car(),sc.getName(),sc.getPricebuy(),sc.getPricesell(),sc.getWeight(),sc.getLength(),sc.getHeight(),sc.getWidth(),sc.getQuantityof_car(),sc.getCompanyCar());
         this.engine = sc.engine;
         this.top_speed = sc.top_speed;
         this.acceleration = sc.acceleration;
@@ -85,7 +96,10 @@ public class Sport_car extends Super_car implements Ishowfor{
     @Override
     public void showforCustomer(){
         super.showforCustomer();
-        System.out.println("top speed: "+top_speed);
+        System.out.println("Engine:" +engine);
+        System.out.println("Top speed: "+top_speed);
+        System.out.println("Acceleration: "+acceleration);
+        System.out.println("Drive type: "+drive_type);
     }
     @Override
     public String toString() {

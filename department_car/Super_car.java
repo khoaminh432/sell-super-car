@@ -11,21 +11,17 @@ public class Super_car extends Car implements Ishowfor{
     }
     // mảng có 10 phần tử
     public Super_car(ArrayList<String> super_car){
-        
-        
-        super(super_car.get(1),Integer.parseInt(super_car.get(2)),Integer.parseInt(super_car.get(3)),
-        Float.parseFloat(super_car.get(4)), Float.parseFloat(super_car.get(5)), Float.parseFloat(super_car.get(6)),
-        Float.parseFloat(super_car.get(7)),Integer.parseInt(super_car.get(8)));
-        
-        
+        super(new ArrayList<>(super_car.subList(0,9)));
+        CompanyCar = super_car.get(9);
+        quantitysupper_car++;
     }
-    public Super_car(String name,int pricebuy,int pricesell,float weight,float length,float height,float width,int quantityof_car,String Companycar){
-        super(name,pricebuy,pricesell,weight,length,height,width,quantityof_car);
+    public Super_car(int id_car,String name,int pricebuy,int pricesell,float weight,float length,float height,float width,int quantityof_car,String Companycar){
+        super(id_car,name,pricebuy,pricesell,weight,length,height,width,quantityof_car);
         this.CompanyCar = Companycar;
         quantitysupper_car++;
     }
     public Super_car(Super_car sc){
-        super(sc.getName(),sc.getPricebuy(),sc.getPricesell(),sc.getWeight(),sc.getLength(),sc.getHeight(),sc.getWidth(),sc.getQuantityof_car());
+        super(sc.getId_car(),sc.getName(),sc.getPricebuy(),sc.getPricesell(),sc.getWeight(),sc.getLength(),sc.getHeight(),sc.getWidth(),sc.getQuantityof_car());
         CompanyCar = sc.CompanyCar;
         quantitysupper_car++;
     }
@@ -46,8 +42,8 @@ public class Super_car extends Car implements Ishowfor{
     }
     @Override
     public void showforCustomer(){
-        System.out.println("Company Car:"+CompanyCar);
         super.showforCustomer();
+        System.out.println("Company Car:"+CompanyCar);
     }
     public void input(){
         Scanner sc = new  Scanner(System.in);

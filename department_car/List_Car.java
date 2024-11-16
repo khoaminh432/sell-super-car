@@ -4,17 +4,21 @@ import carstore.IdManager;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 public class List_Car implements Ishowfor{
     private ArrayList<Super_car> Lcar;
-    
+    private Scanner scanner ;
+    private static final String SUPERCAR_FILE_NAME = "Data/superCar.txt";
+    private static final String ID_FILE_NAME = "Data/superCarID.txt";
+    private IdManager id_car = new IdManager(ID_FILE_NAME);
+
     public List_Car(){
         Lcar = new ArrayList<>();
     }
     //thêm phần tử vào cuối mảng
     public void add(Super_car sc){
         Lcar.add(sc);
-        
     }
     
     //thêm phần tử tại vị trí
@@ -23,8 +27,9 @@ public class List_Car implements Ishowfor{
     }
     //thêm vào id còn trống
     public void add(){
+        scanner = new Scanner(System.in);
         System.out.println("=================ADD=============");
-        int id = IdManager.idGenerator();
+        int id = id_car.idGenerator();
         String name = scanner.nextLine().trim();
         int pricesell = scanner.nextInt();
         int pricebuy = scanner.nextInt();
@@ -34,7 +39,8 @@ public class List_Car implements Ishowfor{
         float width = scanner.nextFloat();
         int quantityof_car = scanner.nextInt();
         String CompanyCar = scanner.nextLine().trim();
-        Super_car newCar = new Super_car(id,name,pricesell,pricebuy,weight,length,height,width,CompanyCar,quantityof_car);
+        add(new Super_car(id,name,pricesell,pricebuy,weight,length,height,width,quantityof_car,CompanyCar));
+        scanner.close();
     }
     //xoa
     public void Remove(Super_car sc){
@@ -114,7 +120,15 @@ public class List_Car implements Ishowfor{
                 return spc;
         return null;
     }
+    public void search_company(String name){
+        for(Super_car sCar: Lcar)
+        if(Luxury_car.checkLuxuryCar(sCar))
+        sCar.showforCustomer();
+    else if(Sport_car.checkSportCar(sCar))
+        sCar.showforCustomer();
+    else sCar.showforCustomer();
 
+    }
     @Override
     public void showDetails() {
         for(Super_car sc: Lcar){
@@ -138,9 +152,9 @@ public class List_Car implements Ishowfor{
             }
     }
     
-    public void WriteFile(String filename){
+    public void WriteFile(final String SUPERCAR_FILE_NAME){
         try{
-            FileWriter fw = new FileWriter(filename);
+            FileWriter fw = new FileWriter(SUPERCAR_FILE_NAME);
             for(Super_car sc: Lcar){
                 fw.write(sc.toString()+"\n");
             }
@@ -149,9 +163,9 @@ public class List_Car implements Ishowfor{
             e.printStackTrace();
         }
     }
-    public void AppendFile(String filename){
+    public void AppendFile(final String SUPERCAR_FILE_NAME){
         try{
-            FileWriter fw = new FileWriter(filename);
+            FileWriter fw = new FileWriter(SUPERCAR_FILE_NAME);
             for(Super_car sc: Lcar){
                 fw.append(sc.toString()+"\n");
             }
@@ -160,10 +174,10 @@ public class List_Car implements Ishowfor{
             e.printStackTrace();
         }
     }
-    public ArrayList<String> ReadFile(String filename){
+    public ArrayList<String> ReadFile(final String SUPERCAR_FILE_NAME){
         ArrayList<String> arr = new ArrayList<>();
         try {
-            FileReader fw = new FileReader(filename);
+            FileReader fw = new FileReader(SUPERCAR_FILE_NAME);
             int data = fw.read();
             String name="";
             while(data !=-1){
@@ -180,14 +194,19 @@ public class List_Car implements Ishowfor{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        for(String car:arr)
-            System.out.print(car.split("\t").length+" ");
-            
-        
+        for(String supercar: arr){
+            ArrayList<String> carindex = new ArrayList<>(Arrays.asList(supercar.split("\t")));
+            if (carindex.size()==10)
+                add(new Super_car(carindex));
+            else if(Car.DoubleNumber(carindex.get(11)))
+                add(new Sport_car(carindex));
+            else
+                add(new Luxury_car(carindex));
+        }
         return arr;
     }
     public void menuForManager(){
-
+        scanner = new Scanner(System.in);
         int choice;
         do{
             System.out.println("====================MENU===============");
@@ -279,7 +298,7 @@ public class List_Car implements Ishowfor{
                                     String company = scanner.nextLine();
                                     System.out.println("The number of cars: ");
                                     int number = scanner.nextInt();
-                                    Super_car sc = new Super_car(id,name2,pricebuy,pricesell,weight,length,height,width,company,number);
+                                    Super_car sc = new Super_car(id,name2,pricebuy,pricesell,weight,length,height,width,number,company);
                                     set(position,sc);
                                     break;
                                 case 2:
@@ -348,13 +367,97 @@ public class List_Car implements Ishowfor{
                     }
                     break;
                 case 6:
-                    writefile("data");
+                    WriteFile(SUPERCAR_FILE_NAME);
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
                         
         }while(choice !=0);
+        scanner.close();
     }
+    private void menu(){
+        System.out.println("===================Welcome customer====================");
+        System.out.println("1. Display car list.");
+        System.out.println("2. Search from car list.");
+        System.out.println("3. Show your profile.");
+        System.out.println("4. Edit your profile.");
+        System.out.println("0. Exit.");
+        System.out.print("Your choose: ");
+        
+    }
+    public void menusearch(){
+        System.out.println("1. Search by Id.");
+        System.out.println("2. Search by name.");
+        System.out.println("3. Search by Company Car.");
+        System.out.println("4. Search by Luxury Car.");
+        System.out.println("5. Search by Sport Car.");
+        System.out.println("0. Exit.");
+        System.out.print("Your choose: ");
+    }
+    public void menuForCustomer(){
+        scanner = new Scanner(System.in);
+        int choose;
+        
+        do{
+            menu();
+            choose = Car.chooseInteger(scanner.nextLine());
+            ReadFile("department_car/list_car.txt");
+            switch (choose) {
+                case 1:
+                    showforCustomer();
+                    break;
+                case 2:
+                    
+                    do { 
+                        menusearch();
+                        choose = Car.chooseInteger(scanner.nextLine());
+                        
+                        switch (choose) {
+                            case 1:
+                                int id = Car.chooseInteger(scanner.nextLine());
+                                Search_idcar(id).showforCustomer();
+                                break;
+                            case 2:
+                                String name= scanner.nextLine();
+                                Search_name(name).showforCustomer();
+                                break; 
+                            case 3:
+                                String company = scanner.nextLine();
+                                search_company(company);
+                                break;
+                            case 4:
+                                List_luxury_car listlucar= new List_luxury_car();
+                                listlucar.setList(Lcar); 
+                                listlucar.showforCustomer();
+                                break;
+                            case 5:
+                            List_sport_car listspcar= new List_sport_car();
+                            listspcar.setList(Lcar);        
+                            listspcar.showforCustomer();
+                            break;
+                            default:
+                                
+                        }
+                        if(choose==0)
+                            {choose = -1;
+                            break;}
+                    } while (true);
+                    break;
+                case 3:
+
+                    break;
+                case 4:
+                    break;
+                default:
+                    
+            }
+            if(choose==0)
+                break;
+                
+        }while(true);
+    scanner.close();
+    }
+    
     
 }

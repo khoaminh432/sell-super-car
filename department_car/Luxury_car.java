@@ -1,5 +1,7 @@
 package department_car;
 
+import java.util.ArrayList;
+
 public class Luxury_car extends Super_car implements Ishowfor{
     private String interior_material; // vat lieu noi that
     private String sound_system; // he thong am thanh
@@ -15,11 +17,19 @@ public class Luxury_car extends Super_car implements Ishowfor{
         safety_features = "none";
         number_of_LuxuryCar++;
     }
+    public Luxury_car(ArrayList<String> luxurycar){
+        super(new ArrayList<>(luxurycar.subList(0, 10)));
+        interior_material = luxurycar.get(10);
+        sound_system = luxurycar.get(11);
+        climate_control =luxurycar.get(12);
+        safety_features = luxurycar.get(13);
+        number_of_LuxuryCar++;
+
+    }
     
-    
-    public Luxury_car(String name,int pricebuy,int pricesell,float weight,float length,float height,float width,int quantityof_car,String Companycar,String interior_material,String sound_system, String climate_control,String safety_features)
+    public Luxury_car(int id_car,String name,int pricebuy,int pricesell,float weight,float length,float height,float width,int quantityof_car,String Companycar,String interior_material,String sound_system, String climate_control,String safety_features)
     {
-        super(name,pricebuy,pricesell,weight,length,height,width,quantityof_car,Companycar);
+        super(id_car,name,pricebuy,pricesell,weight,length,height,width,quantityof_car,Companycar);
         this.interior_material = interior_material;
         this.sound_system = sound_system;
         this.climate_control =  climate_control;
@@ -28,7 +38,7 @@ public class Luxury_car extends Super_car implements Ishowfor{
     }
     public Luxury_car(Luxury_car lc)
     {
-        super(lc.getName(),lc.getPricebuy(),lc.getPricesell(),lc.getWeight(),lc.getLength(),lc.getHeight(),lc.getWidth(),lc.getQuantityof_car(),lc.getCompanyCar());
+        super(lc.getId_car(),lc.getName(),lc.getPricebuy(),lc.getPricesell(),lc.getWeight(),lc.getLength(),lc.getHeight(),lc.getWidth(),lc.getQuantityof_car(),lc.getCompanyCar());
         this.interior_material = lc.interior_material;
         this.sound_system = lc.sound_system;
         this.climate_control = lc.climate_control;
