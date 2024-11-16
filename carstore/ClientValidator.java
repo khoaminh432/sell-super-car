@@ -7,7 +7,7 @@ public class ClientValidator {
     //NAME VALIDATOR: BEGIN
    public static String isNameValid(Scanner sc) {
     while(true){
-        System.out.println("Write your name: ");
+        System.out.println("Enter your name: ");
         String name = sc.nextLine();
 
         //A valid name can only contain at least two words that are capitalized.
@@ -32,7 +32,7 @@ public class ClientValidator {
     //PHONE NUMBER VALIDATOR: BEGIN
     public static String isContactNumberValid(Scanner sc){
         while(true){
-            System.out.println("Write your phone number: ");
+            System.out.println("Enter your phone number: ");
             String number = sc.nextLine();
 
             //a valid contact number has 10 numbers and starts with 0.
@@ -50,7 +50,7 @@ public class ClientValidator {
     //EMAIL VALIDATOR: BEGIN
     public static String isEmailAdressValid(Scanner sc){
         while(true){
-            System.out.println("Write your email: ");
+            System.out.println("Enter your email: ");
             String email = sc.nextLine();
 
             //Use RFC 5322 to check if the email is valid.
@@ -66,7 +66,7 @@ public class ClientValidator {
     //PASSWORD VALIDATOR: BEGIN
     public static String isPasswordValid(Scanner sc){
         while(true){
-            System.out.println("Write your password: ");
+            System.out.println("Enter your password: ");
             String password = sc.nextLine();
 
             //There are at least 8 chars
@@ -108,4 +108,23 @@ public class ClientValidator {
         }
     }
     //PASSWORD VALIDATOR: END
+
+    public static double isSalaryValid(Scanner sc) {
+        double salary;
+        while (true) {
+            System.out.print("Enter salary:");
+            try {
+                String input = sc.nextLine().trim();
+                salary = Double.parseDouble(input);
+            
+                if (salary >= 0) {
+                    return salary;
+                } else {
+                    System.out.println("Salary must be a non-negative number. Please try again.");
+                }
+            } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a valid numeric salary.");
+            }
+        }
+    }
 }
