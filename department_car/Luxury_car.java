@@ -17,7 +17,7 @@ public class Luxury_car extends Super_car implements Ishowfor{
     }
     
     
-    public Luxury_car(int id_carString name,int pricebuy,int pricesell,float weight,float length,float height,float width,int quantityof_car,String Companycar,String interior_material,String sound_system, String climate_control,String safety_features)
+    public Luxury_car(int id_car,String name,int pricebuy,int pricesell,float weight,float length,float height,float width,int quantityof_car,String Companycar,String interior_material,String sound_system, String climate_control,String safety_features)
     {
         super(id_car,name,pricebuy,pricesell,weight,length,height,width,quantityof_car,Companycar);
         this.interior_material = interior_material;
