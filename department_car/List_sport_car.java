@@ -1,14 +1,4 @@
 package department_car;
-<<<<<<< Updated upstream
-import carstore.IdManager;
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
-public class List_sport_car extends List_Car {
-    private ArrayList<Sport_car> Lscar;
-    private IdManager id_car;
-    private Scanner scanner = new  Scanner(System.in);
-=======
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -17,10 +7,8 @@ import carstore.IdManager;
 public class List_sport_car extends List_Car {
     private ArrayList<Sport_car> Lscar;
     private IdManager id_car = new IdManager(ID_FILE_NAME);
-    private Scanner scanner = new Scanner(System.in);
     private static final String SPORTCAR_FILE_NAME = "Data/sportCar.txt";
     private static final String ID_FILE_NAME = "Data/sportCarID.txt";
->>>>>>> Stashed changes
     public List_sport_car() {
         super();
         Lscar = new ArrayList<>();
@@ -37,7 +25,7 @@ public class List_sport_car extends List_Car {
         }
     }
     @Override
-    public void add(){
+    public void add(Scanner scanner){
         System.out.println("=================ADD=============");
         int id = id_car.idGenerator();
         System.out.println("Name: ");String name = scanner.nextLine().trim();
@@ -63,13 +51,9 @@ public class List_sport_car extends List_Car {
         Lscar.set(index,sc);
     }
     @Override
-<<<<<<< Updated upstream
     public void WriteFile(String filename){
-=======
-    public void WriteFile(String SPORTCAR_FILE_NAME){
->>>>>>> Stashed changes
         try{
-            FileWriter fw = new FileWriter(SPORTCAR_FILE_NAME);
+            FileWriter fw = new FileWriter(filename);
             for(Sport_car lc: Lscar){
                 fw.write(lc.toString()+"\n");
             }
@@ -95,8 +79,7 @@ public class List_sport_car extends List_Car {
         ((Sport_car) super.getList().get(index)).setDriveType(drive_type);
     }
 
-    public void menuForManager(){
-
+    public void menuForManager(Scanner scanner){
         int choice;
         do{
             System.out.println("====================MENU===============");
@@ -111,7 +94,7 @@ public class List_sport_car extends List_Car {
         
             switch(choice){
                 case 1:
-                    add();
+                    add(scanner);
                     break;
                 case 2:
                     System.out.println("=============REMOVE============");
@@ -289,11 +272,7 @@ public class List_sport_car extends List_Car {
                     }
                     break;
                 case 6:
-<<<<<<< Updated upstream
-                    WriteFile("data");
-=======
                     WriteFile(SPORTCAR_FILE_NAME);
->>>>>>> Stashed changes
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");

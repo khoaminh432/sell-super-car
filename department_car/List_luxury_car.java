@@ -10,7 +10,7 @@ public class List_luxury_car extends List_Car {
     private ArrayList<Luxury_car> Lxcar;
     private IdManager id_car = new IdManager(ID_FILE_NAME);
     private static final String LUXURYCAR_FILE_NAME = "Data/luxuryCar.txt";
-    private static final String ID_FILE_NAME = "Data/luxeryCarID.txt";
+    private static final String ID_FILE_NAME = "Data/luxuryCarID.txt";
     public List_luxury_car() {
         super();
         Lxcar = new ArrayList<>();
@@ -73,7 +73,6 @@ public class List_luxury_car extends List_Car {
     
     
     public void menuForManager(Scanner scanner){
-        ReadFile(LUXURYCAR_FILE_NAME);
         int choice;
         do{
             System.out.println("====================MENU===============");
