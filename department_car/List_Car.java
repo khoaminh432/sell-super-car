@@ -8,11 +8,10 @@ import java.util.Arrays;
 import java.util.Scanner;
 public class List_Car implements Ishowfor{
     private ArrayList<Super_car> Lcar;
-    private Scanner scanner ;
     private static final String SUPERCAR_FILE_NAME = "Data/superCar.txt";
     private static final String ID_FILE_NAME = "Data/superCarID.txt";
     private IdManager id_car = new IdManager(ID_FILE_NAME);
-
+    Scanner scanner;
     public List_Car(){
         Lcar = new ArrayList<>();
     }
@@ -26,8 +25,7 @@ public class List_Car implements Ishowfor{
         Lcar.add(index,sc);
     }
     //thêm vào id còn trống
-    public void add(){
-        scanner = new Scanner(System.in);
+    public void add(Scanner scanner){
         System.out.println("=================ADD=============");
         int id = id_car.idGenerator();
         String name = scanner.nextLine().trim();
@@ -40,7 +38,6 @@ public class List_Car implements Ishowfor{
         int quantityof_car = scanner.nextInt();
         String CompanyCar = scanner.nextLine().trim();
         add(new Super_car(id,name,pricesell,pricebuy,weight,length,height,width,quantityof_car,CompanyCar));
-        scanner.close();
     }
     //xoa
     public void Remove(Super_car sc){
@@ -208,8 +205,9 @@ public class List_Car implements Ishowfor{
         }
         return arr;
     }
-    public void menuForManager(){
-        scanner = new Scanner(System.in);
+
+    public void menuForManager(Scanner scanner){
+        ReadFile(SUPERCAR_FILE_NAME);
         int choice;
         do{
             System.out.println("====================MENU===============");
@@ -218,13 +216,13 @@ public class List_Car implements Ishowfor{
             System.out.println("3.Change the informations of car");
             System.out.println("4.Search car");
             System.out.println("5.Show the informations of cars");
-            System.out.println("6.Output to file");
+            System.out.println("6.Save");
             System.out.println("0.Exit");
             choice = scanner.nextInt();
         
             switch(choice){
                 case 1:
-                    add();
+                    add(scanner);
                     break;
                 case 2:
                     System.out.println("=============REMOVE============");
@@ -504,7 +502,6 @@ public class List_Car implements Ishowfor{
                 break;
                 
         }while(true);
-    scanner.close();
     }
     
     
