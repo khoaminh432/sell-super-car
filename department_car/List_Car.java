@@ -149,9 +149,9 @@ public class List_Car implements Ishowfor{
             }
     }
     
-    public void WriteFile(final String SUPERCAR_FILE_NAME){
+    public void WriteFile(final String filename){
         try{
-            FileWriter fw = new FileWriter(SUPERCAR_FILE_NAME);
+            FileWriter fw = new FileWriter(filename);
             for(Super_car sc: Lcar){
                 fw.write(sc.toString()+"\n");
             }
@@ -160,9 +160,9 @@ public class List_Car implements Ishowfor{
             e.printStackTrace();
         }
     }
-    public void AppendFile(final String SUPERCAR_FILE_NAME){
+    public void AppendFile(final String filename){
         try{
-            FileWriter fw = new FileWriter(SUPERCAR_FILE_NAME);
+            FileWriter fw = new FileWriter(filename);
             for(Super_car sc: Lcar){
                 fw.append(sc.toString()+"\n");
             }
@@ -171,10 +171,10 @@ public class List_Car implements Ishowfor{
             e.printStackTrace();
         }
     }
-    public ArrayList<String> ReadFile(final String SUPERCAR_FILE_NAME){
+    public ArrayList<String> ReadFile(final String filename){
         ArrayList<String> arr = new ArrayList<>();
         try {
-            FileReader fw = new FileReader(SUPERCAR_FILE_NAME);
+            FileReader fw = new FileReader(filename);
             int data = fw.read();
             String name="";
             while(data !=-1){

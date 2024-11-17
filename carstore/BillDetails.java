@@ -56,5 +56,14 @@ public class BillDetails {
     }
 
 
-    
+    public void showDetails(){
+        System.out.println("Car Name: " + carName);
+        System.out.println("Car ID: " + carId);
+        System.out.println("Amount: " + amount);
+        System.out.println("Balance: " + totalBalance);
+    }
+
+    public String toString() {
+        return  carName + "," + carId + "," + amount + "," + price + "," + totalBalance;
+    }
 }

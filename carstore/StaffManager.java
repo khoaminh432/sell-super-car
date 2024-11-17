@@ -428,4 +428,103 @@ public class StaffManager implements IFeatures<Staff> {
         }
         return null;
     }
+
+    public void sortByName() {
+    if (sList.isEmpty()) {
+        System.out.println("Staff list is empty. Nothing to sort.");
+        return;
+    }
+    sList.sort((staff1, staff2) -> staff1.getName().compareToIgnoreCase(staff2.getName()));
+    System.out.println("Staff list sorted by name successfully.");
+    }
+    /**
+    * Sort the staff list by ID in ascending order.
+    */
+    public void sortById() {
+        if (sList.isEmpty()) {
+            System.out.println("Staff list is empty. Nothing to sort.");
+            return;
+        }
+        sList.sort((staff1, staff2) -> Integer.compare(staff1.getID(), staff2.getID()));
+        System.out.println("Staff list sorted by ID successfully.");
+    }
+
+    public void staffManagementMenu(Scanner sc) {
+        boolean isRunning = true;
+        while (isRunning) {
+            System.out.println("\n=== Staff Management Menu ===");
+            System.out.println("1. Display all staff");
+            System.out.println("2. Add new staff");
+            System.out.println("3. Update staff details");
+            System.out.println("4. Delete staff");
+            System.out.println("5. Search staff");
+            System.out.println("6. Update staff salary");
+            System.out.println("7. Sort staff by name");
+            System.out.println("8. Sort staff by ID");
+            System.out.println("9. Save and exit");
+            System.out.print("Enter your choice: ");
+            
+            int choice;
+            try {
+                choice = Integer.parseInt(sc.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                continue;
+            }
+    
+            switch (choice) {
+                case 1:
+                    display();
+                    break;
+                case 2:
+                    if (add()) {
+                        System.out.println("Staff added successfully!");
+                    }
+                    break;
+                case 3:
+                    Staff staffToUpdate = search();
+                    if (staffToUpdate != null) {
+                        update(staffToUpdate);
+                    } else {
+                        System.out.println("No staff selected for update.");
+                    }
+                    break;
+                case 4:
+                    Staff staffToDelete = search();
+                    if (staffToDelete != null) {
+                        delete(staffToDelete);
+                    } else {
+                        System.out.println("No staff selected for deletion.");
+                    }
+                    break;
+                case 5:
+                    search();
+                    break;
+                case 6:
+                    Staff staffToAdjustSalary = search();
+                    if (staffToAdjustSalary != null) {
+                        updateSalary(staffToAdjustSalary);
+                    } else {
+                        System.out.println("No staff selected for salary update.");
+                    }
+                    break;
+                case 7:
+                    sortByName();
+                    display();
+                    break;
+                case 8:
+                    sortById();
+                    display();
+                    break;
+                case 9:
+                    System.out.println("Saving data and exiting...");
+                    saveData();
+                    isRunning = false;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please select a valid option.");
+                    break;
+            }
+        }
+    }
 }
