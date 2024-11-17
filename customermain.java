@@ -4,9 +4,8 @@ public class customermain {
     public static void main(String[] args) {
         
         
-        List_Car listca = new List_Car();
-        
-        listca.menuForCustomer();
+        List_Car car = new List_Car();
+        car.menuForCustomer();
 
     }
 }

@@ -14,14 +14,16 @@ public class bill {
     public static int quantitybill = 0;
 
     public bill(){
-        id_bill++;
+        
         quantitybill++;
         quantityordercar = 0;
+        id_bill = quantitybill;
         
     }
     public bill(Customer myCustomer,Super_car cSuper_car,int quantityordercar){
-        id_bill++;
+        
         quantitybill++;
+        id_bill = quantitybill;
         this.myCustomer = myCustomer;
         cus_Super_car = cSuper_car;
         this.quantityordercar = quantityordercar;

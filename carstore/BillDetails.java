@@ -54,7 +54,4 @@ public class BillDetails {
     public double getTotalBalance() {
         return totalBalance;
     }
-
-
-    
 }

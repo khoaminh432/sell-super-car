@@ -6,11 +6,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-
+import carstore.BillDetails;
 import department_car.List_Car;
 import department_car.Super_car;
 
 public class Bill {
+    
     private int billId;
     private static int billNextId = 1;
     private BillDetails billDetails;
@@ -20,9 +21,9 @@ public class Bill {
     private boolean isChecked;
     
     
-    public Bill(Customer customer) {
+    public Bill(Customer customer,Super_car super_car,int numcar) {
         billId = billNextId++;
-        billDetails = new BillDetails();
+        billDetails = new BillDetails(super_car.getName(),super_car.getId_car(),numcar,(double) super_car.getPricesell());
         this.customer = customer;
         isChecked = false;
 

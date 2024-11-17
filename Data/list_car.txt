@@ -1,4 +1,23 @@
-1	name	0	0	0.0	0.0	3.5	0.0	0	no
-2	none	0	0	0.0	0.0	0.0	0.0	0	no
-3	none	0	0	0.0	0.0	0.0	0.0	0	no	none	none	none	none
-4	none	0	0	0.0	0.0	0.0	0.0	0	no	none	0.0	0.0	none
+1	Lamborghini Centenario	2500000	3500000	1500.0	4.79	1.14	1.10	2	Lamborghini	V12	350.0	2.8	AWD
+2	Lamborghini Aventador	300000	450000	1575.0	4.79	1.14	2.03	5	Lamborghini
+3	Lamborghini Huracan	200000	300000	1422.0	4.52	1.16	1.93	3	Lamborghini
+4	Lamborghini Urus	180000	220000	2200.0	5.11	1.64	2.02	4	Lamborghini
+5	Rolls-Royce Phantom	500000	750000	2500.0	5.98	1.60	1.75	3	Rolls-Royce	Leather	Premium Sound	Automatic Climate Control	Advanced Safety Features
+6	Rolls-Royce Wraith	350000	500000	2500.0	5.28	1.55	1.60	4	Rolls-Royce	Leather	Premium Sound	Automatic Climate Control	Advanced Safety Features
+7	Rolls-Royce Dawn	400000	600000	2500.0	5.28	1.56	1.50	2	Rolls-Royce	Leather	Premium Sound	Automatic Climate Control	Advanced Safety Features
+8	Tesla Roadster	200000	250000	1200.0	4.50	1.20	1.15	4	Tesla
+9	Tesla Model S Plaid	130000	150000	2000.0	4.98	1.96	1.44	3	Tesla
+10	Tesla Model X Plaid	120000	160000	2400.0	5.04	2.00	1.68	5	Tesla
+11	Lamborghini Reventón	2000000	3000000	1650.0	4.57	1.13	1.17	3	Lamborghini	V12	340.0	3.4	AWD
+12	Aston Martin Rapide AMR	215000	280000	1900.0	5.02	1.94	1.35	4	Aston Martin	Leather	Premium Sound	Automatic Climate Control	Advanced Safety Features
+13	Bugatti Chiron	3000000	4000000	1900.0	4.54	1.99	1.21	2	Bugatti	W16	420.0	2.5	AWD
+14	Bugatti Veyron	1500000	2000000	1800.0	4.46	1.92	1.20	3	Bugatti	W16	410.0	2.8	AWD
+15	Bugatti Divo	5000000	6000000	1888.0	4.73	1.99	1.21	2	Bugatti	W16	380.0	2.4	AWD
+16	Lamborghini Diablo	350000	550000	1570.0	4.43	1.12	1.11	4	Lamborghini	V12	320.0	4.2	RWD
+17	Bugatti Centodieci	9000000	11000000	1700.0	4.72	1.99	1.21	1	Bugatti	W16	380.0	2.5	AWD
+18	Bugatti Bolide	4000000	5000000	1450.0	4.36	1.99	1.12	4	Bugatti	W16	500.0	2.2	AWD
+19	Rolls-Royce Cullinan	350000	500000	2700.0	5.34	1.83	1.83	5	Rolls-Royce	Leather	Premium Sound	Automatic Climate Control	Advanced Safety Features
+20	Aston Martin DB11	205000	250000	1900.0	4.73	1.94	1.30	2	Aston Martin	Leather	Premium Sound	Automatic Climate Control	Advanced Safety Features
+21	Aston Martin Vantage	139000	180000	1600.0	4.38	1.94	1.28	3	Aston Martin	Leather	Premium Sound	Automatic Climate Control	Advanced Safety Features
+22	Aston Martin DBS Superleggera	315000	400000	1700.0	4.71	1.95	1.30	2	Aston Martin	Leather	Premium Sound	Automatic Climate Control	Advanced Safety Features
+23	Aston Martin DBX	185000	240000	2200.0	5.03	2.00	1.68	5	Aston Martin	Leather	Premium Sound	Automatic Climate Control	Advanced Safety Features

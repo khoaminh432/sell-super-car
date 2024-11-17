@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 public class List_Car implements Ishowfor{
     private ArrayList<Super_car> Lcar;
-    private static final String SUPERCAR_FILE_NAME = "Data/superCar.txt";
+    private static final String SUPERCAR_FILE_NAME = "Data/car.txt";
     private static final String ID_FILE_NAME = "Data/superCarID.txt";
     private IdManager id_car = new IdManager(ID_FILE_NAME);
     Scanner scanner;
@@ -174,7 +174,7 @@ public class List_Car implements Ishowfor{
             e.printStackTrace();
         }
     }
-    public ArrayList<String> ReadFile(final String SUPERCAR_FILE_NAME){
+    public void  ReadFile(final String SUPERCAR_FILE_NAME){
         ArrayList<String> arr = new ArrayList<>();
         try {
             FileReader fw = new FileReader(SUPERCAR_FILE_NAME);
@@ -196,17 +196,20 @@ public class List_Car implements Ishowfor{
         }
         for(String supercar: arr){
             ArrayList<String> carindex = new ArrayList<>(Arrays.asList(supercar.split("\t")));
-            if (carindex.size()==10)
-                add(new Super_car(carindex));
-            else if(Car.DoubleNumber(carindex.get(11)))
+            
+            if(carindex.size()==14){ if(Car.DoubleNumber(carindex.get(11)))
                 add(new Sport_car(carindex));
             else
-                add(new Luxury_car(carindex));
+                add(new Luxury_car(carindex));}
+            else if(carindex.size() == 10) 
+                add(new Super_car(carindex));
+            else continue;
+            System.out.println("car index: "+carindex.size());
         }
-        return arr;
+        
     }
 
-    public void menuForManager(Scanner scanner){
+    public void menuForManager(){
         ReadFile(SUPERCAR_FILE_NAME);
         int choice;
         do{
@@ -406,11 +409,10 @@ public class List_Car implements Ishowfor{
     public void menuForCustomer(){
         scanner = new Scanner(System.in);
         int choose;
-        
+        ReadFile("Data/list_car.txt");
         do{
             menu();
-            choose = Car.chooseInteger(scanner.nextLine());
-            ReadFile("Data/list_car.txt");
+            choose = Car.chooseInteger(scanner.nextLine().trim());
             switch (choose) {
                 case 1:
                 decorateheader("Super Car");
@@ -422,13 +424,13 @@ public class List_Car implements Ishowfor{
                     
                     do { 
                         menusearch();
-                        choose = Car.chooseInteger(scanner.nextLine());
+                        choose = Car.chooseInteger(scanner.nextLine().trim());
                         
                         switch (choose) {
                             case 1:
                             decorateheader("Search ID car");
                             do{try{System.out.print("Enter ID Car: ");
-                                int id = Car.chooseInteger(scanner.nextLine());
+                                int id = Car.chooseInteger(scanner.nextLine().trim());
                                 Search_idcar(id).showforCustomer();
                             break;}catch(Exception e){
                             System.out.println("Invalid ID");}
@@ -438,7 +440,7 @@ public class List_Car implements Ishowfor{
                             case 2:
                             decorateheader("Search Name Car");
                             do{try{System.out.print("Enter name Car: ");
-                                String name= scanner.nextLine();
+                                String name= scanner.nextLine().trim();
                                 Search_name(name).showforCustomer();break;}catch(Exception e){
                                     System.out.println("Invalid Name");
                                 }}while(true);
@@ -447,7 +449,7 @@ public class List_Car implements Ishowfor{
                             case 3:
                             decorateheader("Search Company Car");
                             do{try{System.out.print("Enter name Company Car: ");
-                                String company = scanner.nextLine();
+                                String company = scanner.nextLine().trim();
                                 search_company(company);break;}catch(Exception e){
                                     System.out.println("Invalid Company Car");
                             }}while(true);
@@ -465,7 +467,7 @@ public class List_Car implements Ishowfor{
                             decorateheader("Search Sport Car");
                             Sport_car.quantitycar();
                             List_sport_car listspcar= new List_sport_car();
-                            listspcar.setList(Lcar);        
+                            listspcar.setList(Lcar);
                             listspcar.showforCustomer();
                             decoratefooter();
                             break;
@@ -485,18 +487,30 @@ public class List_Car implements Ishowfor{
                 decorateheader("Buy Super Car");
                     System.out.print("You want buy Car: (y/n)");
                     char buyString = scanner.next().charAt(0);
+                    scanner.nextLine();
                     if (buyString=='n')
-                        {System.out.println("Thank you for much");
+                        {System.out.println("Thank you so much");
                         break;}
                     else if(buyString=='y')
                         {
-                        System.out.println();
-                        }
-                    
+                        System.out.print("You can search Id Car or search Name: ");
+                        do
+                        {Object option = scanner.nextLine().trim();
+                        if(Search_idcar(Car.chooseInteger((String)option))!=null||Search_name((String)option)!=null)
+                        {if (Car.IntegerNumber((String)option)){
+                            Super_car supcar = Search_idcar(Car.chooseInteger((String)option));
+                            supcar.showDetails();
+                            }
+                        else 
+                        Search_name((String) option).showforCustomer();
+                    break;}
+                        else System.out.println("ID or Name car does not exist");
+                        }while(true);
+                    } 
                 decoratefooter();
+                
                     break;
-                default:decoratefooter();
-                    
+                default:decoratefooter();                
             }
             if(choose==0)
                 break;

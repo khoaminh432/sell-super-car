@@ -149,32 +149,32 @@ public class Car implements Ishowfor{
         }
     }
     public static int chooseInteger(String str){
-        int m;
+        
         try{
             return Integer.parseInt(str);
         }catch (NumberFormatException e){
-            System.out.println(str+" must be an Integer!");
+            
             return -1;
         }}
 
     public static float chooseFloat(String str){
-        float m;
+        
     try{
             return Float.parseFloat(str);
             
         }catch (NumberFormatException e){
-            System.out.println(str+" must be an Float!");
+            
             return  -1;
         }}
     public static double  chooseDouble(String str){
-        double m;
+        
         
             try{
                 return Double.parseDouble(str);
                 
             }
             catch(NumberFormatException e){
-                System.out.println(str+"must be an Double!");
+                
                 return  -1;
             }
         } 
