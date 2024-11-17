@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 public class List_Car implements Ishowfor{
     private ArrayList<Super_car> Lcar;
-    private static final String SUPERCAR_FILE_NAME = "Data/car.txt";
+    private static final String SUPERCAR_FILE_NAME = "Data/list_car.txt";
     private static final String ID_FILE_NAME = "Data/superCarID.txt";
     private IdManager id_car = new IdManager(ID_FILE_NAME);
     Scanner scanner;
@@ -410,7 +410,7 @@ public class List_Car implements Ishowfor{
     public void menuForCustomer(){
         scanner = new Scanner(System.in);
         int choose;
-        ReadFile("Data/list_car.txt");
+        ReadFile(SUPERCAR_FILE_NAME);
         do{
             menu();
             choose = Car.chooseInteger(scanner.nextLine().trim());
