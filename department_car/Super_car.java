@@ -51,5 +51,8 @@ public class Super_car extends Car implements Ishowfor{
         sc.close();
     }
     
+    public static void quantitycar(){
+        System.out.println("Quantity Super Car: "+quantitysupper_car);
+    }
     
 }  

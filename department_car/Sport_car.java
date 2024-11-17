@@ -106,5 +106,8 @@ public class Sport_car extends Super_car implements Ishowfor{
         // TODO Auto-generated method stub
         return super.toString()+'\t'+engine+'\t'+top_speed+'\t'+acceleration+'\t'+drive_type;
     }
+    public static void quantitycar(){
+        System.out.println("Quantity Sport Car: "+number_of_sportCar);
+    }
 
 }
