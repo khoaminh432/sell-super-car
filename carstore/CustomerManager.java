@@ -392,5 +392,101 @@ public class CustomerManager implements IFeatures<Customer> {
         }
         return result;
     }
+    /**
+    * Sort the customer list by name in alphabetical order.
+    */
+    public void sortByName() {
+        if (cList.isEmpty()) {
+            System.out.println("Customer list is empty. Nothing to sort.");
+            return;
+        }
+        cList.sort((customer1, customer2) -> customer1.getName().compareToIgnoreCase(customer2.getName()));
+        System.out.println("Customer list sorted by name successfully.");
+    }
+
+    /**
+    * Sort the customer list by ID in ascending order.
+    */
+    public void sortById() {
+        if (cList.isEmpty()) {
+            System.out.println("Customer list is empty. Nothing to sort.");
+            return;
+        }
+        cList.sort((customer1, customer2) -> Integer.compare(customer1.getID(), customer2.getID()));
+        System.out.println("Customer list sorted by ID successfully.");
+    }
+
+    
+    public void customerManagementMenu(Scanner sc) {
+        boolean isRunning = true;
+        while (isRunning) {
+            System.out.println("\n=== Customer Management Menu ===");
+            System.out.println("1. Display all customers");
+            System.out.println("2. Add new customer");
+            System.out.println("3. Update customer details");
+            System.out.println("4. Delete customer");
+            System.out.println("5. Search customer");
+            System.out.println("6. Sort customers by name");
+            System.out.println("7. Sort customers by ID");
+            System.out.println("8. Save data and exit");
+            System.out.print("Enter your choice: ");
+            
+            int choice;
+            try {
+                choice = Integer.parseInt(sc.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                continue;
+            }
+    
+            switch (choice) {
+                case 1:
+                    display();
+                    break;
+                case 2:
+                    if (add()) {
+                        System.out.println("Customer added successfully!");
+                    }
+                    break;
+                case 3:
+                    Customer customerToUpdate = search();
+                    if (customerToUpdate != null) {
+                        update(customerToUpdate);
+                    } else {
+                        System.out.println("No customer selected for update.");
+                    }
+                    break;
+                case 4:
+                    Customer customerToDelete = search();
+                    if (customerToDelete != null) {
+                        delete(customerToDelete);
+                    } else {
+                        System.out.println("No customer selected for deletion.");
+                    }
+                    break;
+                case 5:
+                    search();
+                    break;
+                case 6:
+                    sortByName();
+                    display();
+                    break;
+                case 7:
+                    sortById();
+                    display();
+                    break;
+                case 8:
+                    System.out.println("Saving data and exiting...");
+                    saveData();
+                    isRunning = false;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please select a valid option.");
+                    break;
+            }
+        }
+    }
+
+    
 }
     

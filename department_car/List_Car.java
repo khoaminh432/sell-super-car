@@ -116,17 +116,17 @@ public class List_Car implements Ishowfor{
             if (spc.getName().equals(name))
                 return spc;
         return null;
+
     }
-    public void search_company(String name){
+    public void search_company(String companycar){
         int number_of_SuperCar = 0;
         for(Super_car sCar: Lcar)
-        if(sCar.getName()==name)
-        if(Luxury_car.checkLuxuryCar(sCar)){
-        sCar.showforCustomer();
-        number_of_SuperCar++;}
-    else if(Sport_car.checkSportCar(sCar)){
-        sCar.showforCustomer();number_of_SuperCar++;}
-    else {sCar.showforCustomer();number_of_SuperCar++;}
+        if(sCar.getCompanyCar().equals(companycar))
+        if(Luxury_car.checkLuxuryCar(sCar))
+        {sCar.showforCustomer();number_of_SuperCar++;}
+        else if(Sport_car.checkSportCar(sCar))
+        {sCar.showforCustomer();number_of_SuperCar++;}
+        else if(sCar instanceof Super_car){sCar.showforCustomer();number_of_SuperCar++;}
         System.out.println("Quantity SUper Car: "+number_of_SuperCar);
     }
     @Override
@@ -152,9 +152,9 @@ public class List_Car implements Ishowfor{
             }
     }
     
-    public void WriteFile(final String SUPERCAR_FILE_NAME){
+    public void WriteFile(final String filename){
         try{
-            FileWriter fw = new FileWriter(SUPERCAR_FILE_NAME);
+            FileWriter fw = new FileWriter(filename);
             for(Super_car sc: Lcar){
                 fw.write(sc.toString()+"\n");
             }
@@ -163,9 +163,9 @@ public class List_Car implements Ishowfor{
             e.printStackTrace();
         }
     }
-    public void AppendFile(final String SUPERCAR_FILE_NAME){
+    public void AppendFile(final String filename){
         try{
-            FileWriter fw = new FileWriter(SUPERCAR_FILE_NAME);
+            FileWriter fw = new FileWriter(filename);
             for(Super_car sc: Lcar){
                 fw.append(sc.toString()+"\n");
             }
@@ -185,9 +185,10 @@ public class List_Car implements Ishowfor{
                 name += (char)data;
                 if(data=='\n')
                 {
-                    arr.add(name);
+                    arr.add(name.replace("\n","" ));
                     name = "";
                 }
+                
                 data = fw.read();
             }
             fw.close();
