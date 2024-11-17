@@ -121,13 +121,16 @@ public class List_Car implements Ishowfor{
         return null;
     }
     public void search_company(String name){
+        int number_of_SuperCar = 0;
         for(Super_car sCar: Lcar)
-        if(Luxury_car.checkLuxuryCar(sCar))
+        if(sCar.getName()==name)
+        if(Luxury_car.checkLuxuryCar(sCar)){
         sCar.showforCustomer();
-    else if(Sport_car.checkSportCar(sCar))
-        sCar.showforCustomer();
-    else sCar.showforCustomer();
-
+        number_of_SuperCar++;}
+    else if(Sport_car.checkSportCar(sCar)){
+        sCar.showforCustomer();number_of_SuperCar++;}
+    else {sCar.showforCustomer();number_of_SuperCar++;}
+        System.out.println("Quantity SUper Car: "+number_of_SuperCar);
     }
     @Override
     public void showDetails() {
@@ -382,6 +385,7 @@ public class List_Car implements Ishowfor{
         System.out.println("2. Search from car list.");
         System.out.println("3. Show your profile.");
         System.out.println("4. Edit your profile.");
+        System.out.println("5. Buy Car");
         System.out.println("0. Exit.");
         System.out.print("Your choose: ");
         
@@ -395,6 +399,12 @@ public class List_Car implements Ishowfor{
         System.out.println("0. Exit.");
         System.out.print("Your choose: ");
     }
+    public static void decorateheader(String contend){
+        System.out.println("================================="+contend+"=================================");
+    }
+    public static void decoratefooter(){
+        System.out.println("===============================================================================");
+    }
     public void menuForCustomer(){
         scanner = new Scanner(System.in);
         int choose;
@@ -402,10 +412,13 @@ public class List_Car implements Ishowfor{
         do{
             menu();
             choose = Car.chooseInteger(scanner.nextLine());
-            ReadFile("department_car/list_car.txt");
+            ReadFile("Data/list_car.txt");
             switch (choose) {
                 case 1:
+                decorateheader("Super Car");
+                    Super_car.quantitycar();
                     showforCustomer();
+                decoratefooter();
                     break;
                 case 2:
                     
@@ -415,29 +428,50 @@ public class List_Car implements Ishowfor{
                         
                         switch (choose) {
                             case 1:
+                            decorateheader("Search ID car");
+                            do{try{System.out.print("Enter ID Car: ");
                                 int id = Car.chooseInteger(scanner.nextLine());
                                 Search_idcar(id).showforCustomer();
+                            break;}catch(Exception e){
+                            System.out.println("Invalid ID");}
+                            }while(true);
+                            decoratefooter();
                                 break;
                             case 2:
+                            decorateheader("Search Name Car");
+                            do{try{System.out.print("Enter name Car: ");
                                 String name= scanner.nextLine();
-                                Search_name(name).showforCustomer();
+                                Search_name(name).showforCustomer();break;}catch(Exception e){
+                                    System.out.println("Invalid Name");
+                                }}while(true);
+                            decoratefooter();
                                 break; 
                             case 3:
+                            decorateheader("Search Company Car");
+                            do{try{System.out.print("Enter name Company Car: ");
                                 String company = scanner.nextLine();
-                                search_company(company);
+                                search_company(company);break;}catch(Exception e){
+                                    System.out.println("Invalid Company Car");
+                            }}while(true);
+                            decoratefooter();
                                 break;
                             case 4:
+                            decorateheader("Search Luxury Car");
+                                Luxury_car.quantitycar();
                                 List_luxury_car listlucar= new List_luxury_car();
                                 listlucar.setList(Lcar); 
                                 listlucar.showforCustomer();
+                            decoratefooter();
                                 break;
                             case 5:
+                            decorateheader("Search Sport Car");
+                            Sport_car.quantitycar();
                             List_sport_car listspcar= new List_sport_car();
                             listspcar.setList(Lcar);        
                             listspcar.showforCustomer();
+                            decoratefooter();
                             break;
-                            default:
-                                
+                            default: System.out.println("Invalid Choose");
                         }
                         if(choose==0)
                             {choose = -1;
@@ -449,7 +483,21 @@ public class List_Car implements Ishowfor{
                     break;
                 case 4:
                     break;
-                default:
+                case 5:
+                decorateheader("Buy Super Car");
+                    System.out.print("You want buy Car: (y/n)");
+                    char buyString = scanner.next().charAt(0);
+                    if (buyString=='n')
+                        {System.out.println("Thank you for much");
+                        break;}
+                    else if(buyString=='y')
+                        {
+                        System.out.println();
+                        }
+                    
+                decoratefooter();
+                    break;
+                default:decoratefooter();
                     
             }
             if(choose==0)

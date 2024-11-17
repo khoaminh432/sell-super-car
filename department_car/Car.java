@@ -217,5 +217,7 @@ public class Car implements Ishowfor{
         quantityof_car = sc.nextInt();
         sc.close();
     }
-
+    public static void quantitycar(){
+        System.out.println("Quantity car: "+QuantityCar);
+    }
 }   

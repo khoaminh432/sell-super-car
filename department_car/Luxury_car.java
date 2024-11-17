@@ -106,7 +106,9 @@ public class Luxury_car extends Super_car implements Ishowfor{
         return super.toString()+'\t'+interior_material+'\t'+sound_system+'\t'
         +climate_control+'\t'+safety_features;
     }
-    
+    public static void quantitycar(){
+        System.out.println("Quantity Luxury Car: "+number_of_LuxuryCar);
+    }
     
     
 }
