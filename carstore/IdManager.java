@@ -49,7 +49,7 @@ public class IdManager {
     //ReleaseID: END
 
 
-    private boolean readIDsFromFile(String FILE_NAME) {
+    private boolean readIDsFromFile(final String FILE_NAME) {
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_NAME))) {
             String line=br.readLine();
             nextId=Integer.parseInt(line.trim());

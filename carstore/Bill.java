@@ -3,21 +3,9 @@ package carstore;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-<<<<<<< HEAD
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-import carstore.BillDetails;
-import department_car.List_Car;
-import department_car.Super_car;
-
-public class Bill {
-    
-=======
 
 
 public class Bill extends BillDetails {
->>>>>>> 39e9a9054194348d614b482e2d4678da9fd9ee65
     private int billId;
     private static int billNextId = 1;
     private String customerName;
@@ -26,20 +14,12 @@ public class Bill extends BillDetails {
     private LocalDateTime date;
     private boolean isChecked;
     
-<<<<<<< HEAD
-    
-    public Bill(Customer customer,Super_car super_car,int numcar) {
-        billId = billNextId++;
-        billDetails = new BillDetails(super_car.getName(),super_car.getId_car(),numcar,(double) super_car.getPricesell());
-        this.customer = customer;
-=======
     //Contructor
     public Bill(String customerName, int customerId, String carName, int carId, int amount, double price) {
         super(carName, carId, amount, price);
         billId = billNextId++;
         this.customerId = customerId;
         this.customerName = customerName;
->>>>>>> 39e9a9054194348d614b482e2d4678da9fd9ee65
         isChecked = false;
         date = LocalDateTime.now();
     }

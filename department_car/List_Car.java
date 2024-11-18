@@ -1,6 +1,9 @@
 package department_car;
 
+import carstore.Customer;
 import carstore.IdManager;
+import carstore.Location;
+import carstore.MenuSystem;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -386,8 +389,7 @@ public class List_Car implements Ishowfor{
         System.out.println("1. Display car list.");
         System.out.println("2. Search from car list.");
         System.out.println("3. Show your profile.");
-        System.out.println("4. Edit your profile.");
-        System.out.println("5. Buy Car");
+        System.out.println("4. Buy Car");
         System.out.println("0. Exit.");
         System.out.print("Your choose: ");
         
@@ -401,8 +403,8 @@ public class List_Car implements Ishowfor{
         System.out.println("0. Exit.");
         System.out.print("Your choose: ");
     }
-    public static void decorateheader(String contend){
-        System.out.println("================================="+contend+"=================================");
+    public static void decorateheader(String content){
+        System.out.println("================================="+content+"=================================");
     }
     public static void decoratefooter(){
         System.out.println("===============================================================================");
@@ -434,7 +436,7 @@ public class List_Car implements Ishowfor{
                                 int id = Car.chooseInteger(scanner.nextLine().trim());
                                 Search_idcar(id).showforCustomer();
                             break;}catch(Exception e){
-                            System.out.println("Invalid ID");}
+                            System.out.println("Invalid ID");break;}
                             }while(true);
                             decoratefooter();
                                 break;
@@ -443,7 +445,7 @@ public class List_Car implements Ishowfor{
                             do{try{System.out.print("Enter name Car: ");
                                 String name= scanner.nextLine().trim();
                                 Search_name(name).showforCustomer();break;}catch(Exception e){
-                                    System.out.println("Invalid Name");
+                                    System.out.println("Invalid Name");break;
                                 }}while(true);
                             decoratefooter();
                                 break; 
@@ -452,7 +454,7 @@ public class List_Car implements Ishowfor{
                             do{try{System.out.print("Enter name Company Car: ");
                                 String company = scanner.nextLine().trim();
                                 search_company(company);break;}catch(Exception e){
-                                    System.out.println("Invalid Company Car");
+                                    System.out.println("Invalid Company Car");break;
                             }}while(true);
                             decoratefooter();
                                 break;
@@ -472,7 +474,7 @@ public class List_Car implements Ishowfor{
                             listspcar.showforCustomer();
                             decoratefooter();
                             break;
-                            default: System.out.println("Invalid Choose");
+                            default: System.out.println("Invalid Choose");break;
                         }
                         if(choose==0)
                             {choose = -1;
@@ -480,20 +482,12 @@ public class List_Car implements Ishowfor{
                     } while (true);
                     break;
                 case 3:
-
+                    MenuSystem newmenusys = new MenuSystem();
+                    newmenusys.showCustomerProfileMenu(new Customer(1,"khoa","khoa","Abcd%4321","0123123131"
+                    ,new Location("1","PHC","P10","Q5","tp HCM")));
                     break;
                 case 4:
-                    break;
-                case 5:
                 decorateheader("Buy Super Car");
-                    System.out.print("You want buy Car: (y/n)");
-                    char buyString = scanner.next().charAt(0);
-                    scanner.nextLine();
-                    if (buyString=='n')
-                        {System.out.println("Thank you so much");
-                        break;}
-                    else if(buyString=='y')
-                        {
                         System.out.print("You can search Id Car or search Name: ");
                         do
                         {Object option = scanner.nextLine().trim();
@@ -507,11 +501,25 @@ public class List_Car implements Ishowfor{
                     break;}
                         else System.out.println("ID or Name car does not exist");
                         }while(true);
-                    } 
+                        System.out.print("You want buy Car: (y/n)");
+                    char buyString = scanner.next().charAt(0);
+                    scanner.nextLine();
+                    do{
+                        try{System.out.println("You want buy quantity car: ");
+                        int quantity = scanner.nextInt();
+                        break;}catch(NumberFormatException e){
+                            System.out.println("your choose must be a Integer");
+                        }
+                    }while(true);
+                    if (buyString=='n')
+                        {System.out.println("Thank you so much");
+                        break;}
+                    else if(buyString=='y')
+                        {}
                 decoratefooter();
                 
                     break;
-                default:decoratefooter();                
+                default:decoratefooter(); break;               
             }
             if(choose==0)
                 break;

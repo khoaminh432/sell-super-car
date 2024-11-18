@@ -76,7 +76,7 @@ public class CustomerManager implements IFeatures<Customer> {
                 String street = info[6].trim();
                 String ward = info[7].trim();
                 String district = info[8].trim();
-                String city = info[9].trim();
+                String city = info[9].trim().replace("\n", "");
                 Location address = new Location(houseNumber, street, ward, district, city);
     
                 // Creating customer and adding purchase history
@@ -89,6 +89,7 @@ public class CustomerManager implements IFeatures<Customer> {
                 }
                 cList.add(customer);
             }
+            br.close();
         } catch (FileNotFoundException e) {
             System.out.println("Customer file not found. Creating a new one.");
             try {
@@ -118,6 +119,7 @@ public class CustomerManager implements IFeatures<Customer> {
                 bw.newLine();
             }
             System.out.println("Customer data saved saves successfully");
+            bw.close();
         } catch (IOException e) {
             System.out.println("Error writing to file: " + e.getMessage());
         }

@@ -1,13 +1,19 @@
 package carstore;
+import department_car.List_Car;
 import java.util.Scanner;
 
 public class MenuSystem {
 
-    private Scanner sc = new Scanner(System.in);
+    private Scanner sc ;
     private CustomerManager customerManager = new CustomerManager();
     private StaffManager staffManager = new StaffManager();
     private Admin admin = new Admin();
     private BillManager billManager = new BillManager();
+    
+
+    public MenuSystem(){
+        sc =  new Scanner(System.in);
+    }
 
     /**
      * Displays the main login menu with options for customer and staff login,
@@ -150,7 +156,7 @@ public class MenuSystem {
                     showStaffProfileMenu(staff);
                     break;
                 case 3:
-                    manageCustomerMenu();
+                    
                     break;
                 case 4:
                     manageCarMenu();
@@ -234,10 +240,10 @@ public class MenuSystem {
     }
 
 
-    private void showCustomerProfileMenu(Customer customer) {
+    public void showCustomerProfileMenu(Customer customer) {
         boolean keepRunning = true;
         while (keepRunning) {
-            System.out.println("----- Profile Menu -----");
+            List_Car.decorateheader("Profile Menu");
             System.out.println("1. View Profile Details");
             System.out.println("2. View Purchase History");
             System.out.println("3. Update Information");
@@ -282,6 +288,7 @@ public class MenuSystem {
                     System.out.println("Invalid choice. Please select a valid option.");
             }
         }
+        
     }
 
     private void shoppingMenu(Customer customer){
@@ -301,4 +308,5 @@ public class MenuSystem {
     private void showAdminMainMenu(){
         
     }
+    
 }
