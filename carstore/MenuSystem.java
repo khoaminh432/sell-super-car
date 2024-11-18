@@ -118,8 +118,9 @@ public class MenuSystem {
     }
     
     //password recovery.
-    //only available for customer or staff.
-    //if admin forgot his password: i dont know.
+    //will send a recovery code to your email.
+    //you need to enter the code to change your password.
+    //DISCLAIMER: NO IT DOESNT, I DONT KNOW HOW TO SEND AN EMAIL BY JAVA CODE
     private void forgotPassword(){
         System.out.println("Enter your email: ");
         String email = ClientValidator.isEmailAdressValid(sc);
@@ -128,6 +129,7 @@ public class MenuSystem {
             System.out.println("Recovery code has been sent to your email.");
             System.out.println("......*Insert recovery code*)");
             admin.changePassword(sc);
+            admin.saveData();
             return;
         }
 
@@ -141,11 +143,13 @@ public class MenuSystem {
             System.out.println("Recovery code has been sent to your email.");
             System.out.println("......*Insert recovery code*)");
             recoveryStaff.changePassword(sc);
+            customerManager.saveData();
             return;
         }
         System.out.println("Recovery code has been sent to your email.");
         System.out.println("......*Insert recovery code*)");
         recoveryCustomer.changePassword(sc);
+        customerManager.saveData();
     }
 
     private void showStaffMainMenu(Staff staff) {
