@@ -1,21 +1,25 @@
 package department_car;
 
 
-import java.io.FileWriter;
+
+import carstore.IdManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import carstore.IdManager;
-
 public class List_luxury_car extends List_Car {
     private ArrayList<Luxury_car> Lxcar;
     private IdManager id_car = new IdManager(ID_FILE_NAME);
-    private static final String LUXURYCAR_FILE_NAME = "Data/luxuryCar.txt";
+    private List_Car lcar = new List_Car();
+    
+    protected  static final String LUXURYCAR_FILE_NAME = "Data/luxuryCar.txt";
     private static final String ID_FILE_NAME = "Data/luxuryCarID.txt";
+    
     public List_luxury_car() {
         super();
         Lxcar = new ArrayList<>();
+        lcar.ReadFile(List_Car.SUPERCAR_FILE_NAME);
+        setList(lcar.getList());
     }
     @Override
     public void add(Scanner scanner){
@@ -57,19 +61,19 @@ public class List_luxury_car extends List_Car {
         return ID_FILE_NAME;
     }
 
-    @Override
-    public void WriteFile(String filename){
-        try{
-            FileWriter fw = new FileWriter(filename);
-            for(Luxury_car lc: Lxcar){
-                fw.write(lc.toString()+"\n");
-            }
-            fw.close();
-        }catch(Exception e){
-            e.printStackTrace();
-            System.out.println("");
-        }
+    public ArrayList<Luxury_car> getLxcar() {
+        return Lxcar;
     }
+
+    public static String getLuxurycarFileName() {
+        return LUXURYCAR_FILE_NAME;
+    }
+
+    public static String getIdFileName() {
+        return ID_FILE_NAME;
+    }
+
+    
     public void setInteriorMaterial(int index,String interior_material){
         ((Luxury_car)super.getList().get(index)).setInteriorMaterial(interior_material);
     }
@@ -145,8 +149,8 @@ public class List_luxury_car extends List_Car {
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
-    
-        } while (choice != 0);
+                        
+        }while(choice !=0);
     }
     
     private void update(Scanner scanner, Luxury_car sc) {

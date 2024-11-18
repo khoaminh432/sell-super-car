@@ -1,18 +1,20 @@
 package department_car;
+import carstore.IdManager;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-import carstore.IdManager;
 public class List_sport_car extends List_Car {
     private ArrayList<Sport_car> Lscar;
     private IdManager id_car = new IdManager(ID_FILE_NAME);
+    private List_Car lcar = new List_Car();
     private static final String SPORTCAR_FILE_NAME = "Data/sportCar.txt";
     private static final String ID_FILE_NAME = "Data/sportCarID.txt";
     public List_sport_car() {
         super();
         Lscar = new ArrayList<>();
+        lcar.ReadFile(List_Car.SUPERCAR_FILE_NAME);
+        setList(lcar.getList());
     }
 
     
@@ -141,8 +143,8 @@ public class List_sport_car extends List_Car {
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
-    
-        } while (choice != 0);
+                        
+        }while(choice !=0);
     }
     
     private void update(Scanner scanner, Sport_car sc) {

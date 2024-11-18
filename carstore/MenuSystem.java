@@ -3,7 +3,10 @@ import department_car.List_Car;
 import department_car.Luxury_car;
 import department_car.Sport_car;
 import department_car.Super_car;
+<<<<<<< HEAD
+=======
 
+>>>>>>> 68319e11ce8e6be0d5ba755490e9c15ad3db1b44
 import java.util.Scanner;
 
 public class MenuSystem {
@@ -281,7 +284,16 @@ public class MenuSystem {
                     customerManager.update(customer);
                     break;
                 case 4:
-                    customer.changePassword(sc);
+                System.out.println("------Customer Password Recovery------");
+                System.out.println("Create a new password: ");
+                String newPassword = ClientValidator.isPasswordValid(sc);
+                System.out.println("Confirm your password: ");
+                String confirmPassword = ClientValidator.isPasswordValid(sc);
+                if(newPassword==confirmPassword){
+                   customerManager.getCustomer(customer).setPassword(newPassword);
+                   System.out.println("Password changed successfully.");
+                }
+                    customerManager.writeToFile();
                     break;
                 case 5:
                     System.out.println("WARNING! This action will permanently delete your account.");
@@ -640,4 +652,8 @@ public class MenuSystem {
             }
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 68319e11ce8e6be0d5ba755490e9c15ad3db1b44

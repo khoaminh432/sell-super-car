@@ -57,7 +57,6 @@ public class Customer extends Person{
         }
         return false;
     }
-
     @Override
     public void changePassword(Scanner sc){
         System.out.println("------Customer Password Recovery------");
@@ -70,5 +69,4 @@ public class Customer extends Person{
            System.out.println("Password changed successfully.");
         }
    }
-
 }
