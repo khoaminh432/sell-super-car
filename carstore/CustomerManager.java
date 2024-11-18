@@ -68,7 +68,7 @@ public class CustomerManager implements IFeatures<Customer> {
                 String[] info = line.split("\t");
     
                 // Parsing customer information
-                int id = Integer.parseInt(info[0].trim());
+                int id = Integer.parseInt(info[0]);
                 String name = info[1].trim();
                 String email = info[2].trim();
                 String password = info[4].trim();
@@ -450,6 +450,7 @@ public class CustomerManager implements IFeatures<Customer> {
                     if (add()) {
                         System.out.println("Customer added successfully!");
                     }
+                    writeToFile();
                     break;
                 case 3:
                     Customer customerToUpdate = search();
@@ -458,6 +459,7 @@ public class CustomerManager implements IFeatures<Customer> {
                     } else {
                         System.out.println("No customer selected for update.");
                     }
+                    writeToFile();
                     break;
                 case 4:
                     Customer customerToDelete = search();
@@ -466,17 +468,21 @@ public class CustomerManager implements IFeatures<Customer> {
                     } else {
                         System.out.println("No customer selected for deletion.");
                     }
+                    saveData();
                     break;
                 case 5:
                     search();
+                    writeToFile();
                     break;
                 case 6:
                     sortByName();
                     display();
+                    writeToFile();
                     break;
                 case 7:
                     sortById();
                     display();
+                    writeToFile();
                     break;
                 case 8:
                     System.out.println("Saving data and exiting...");

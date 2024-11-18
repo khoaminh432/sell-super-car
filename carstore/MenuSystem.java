@@ -228,7 +228,7 @@ public class MenuSystem {
                     showCustomerProfileMenu(customer);
                     break;
                 case 2:
-                    lcCar.menuForCustomer(sc);
+                    lcCar.menuForCustomer(sc,customer);
                     break;
                 case 3:
                     keepRunning = false;
@@ -340,5 +340,20 @@ public class MenuSystem {
             }
         }
     }
-    
-}
+    public void showforCustomer(){
+        Scanner scanner = new Scanner(System.in);
+        CustomerManager customermanagement = new CustomerManager();
+        customermanagement.readFromFile();
+        ClientValidator checkmailpassword = new ClientValidator();
+        
+        do{
+        String Email = checkmailpassword.isEmailAdressValid(scanner);
+        String password = checkmailpassword.isPasswordValid(scanner); 
+        Customer customer = customermanagement.login(Email, password);
+        if(customer!=null){
+        showCustomerMainMenu(customer);
+        scanner.close();break;
+        }
+        else System.out.println("Email or Password don't exist!");
+    }while(true);
+}}

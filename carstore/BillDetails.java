@@ -119,6 +119,6 @@ public class BillDetails {
     }
 
     public String toString() {
-        return carName +  "," + carId + "," + amount + "," + totalBalance + "," + date + "," + isChecked;
+        return carName +  "\t" + carId + "\t" + amount + "\t" + totalBalance + "\t" + date + "\t" + isChecked;
     }
 }

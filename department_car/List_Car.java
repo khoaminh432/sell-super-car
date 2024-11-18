@@ -2,8 +2,6 @@ package department_car;
 
 import carstore.Customer;
 import carstore.IdManager;
-import carstore.Location;
-import carstore.MenuSystem;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -386,8 +384,7 @@ public class List_Car implements Ishowfor{
         System.out.println("===================Welcome customer====================");
         System.out.println("1. Display car list.");
         System.out.println("2. Search from car list.");
-        System.out.println("3. Show your profile.");
-        System.out.println("4. Buy Car");
+        System.out.println("3. Buy Car");
         System.out.println("0. Exit.");
         System.out.print("Your choose: ");
         
@@ -407,8 +404,8 @@ public class List_Car implements Ishowfor{
     public static void decoratefooter(){
         System.out.println("===============================================================================");
     }
-    public void menuForCustomer(Scanner scanner){
-        int choose;
+    public void menuForCustomer(Scanner scanner,Customer customer){
+        {int choose;
         do{
             menu();
             choose = Car.chooseInteger(scanner.nextLine().trim());
@@ -478,11 +475,6 @@ public class List_Car implements Ishowfor{
                     } while (true);
                     break;
                 case 3:
-                    MenuSystem newmenusys = new MenuSystem();
-                    newmenusys.showCustomerProfileMenu(new Customer(1,"khoa","khoa","Abcd%4321","0123123131"
-                    ,new Location("1","PHC","P10","Q5","tp HCM")));
-                    break;
-                case 4:
                 decorateheader("Buy Super Car");
                         System.out.print("You can search Id Car or search Name: ");
                         do
@@ -521,7 +513,5 @@ public class List_Car implements Ishowfor{
                 break;
                 
         }while(true);
-    }
-    
-    
-}
+
+}}}

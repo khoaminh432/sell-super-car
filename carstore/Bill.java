@@ -71,7 +71,7 @@ public class Bill extends BillDetails {
 
     @Override
     public String toString() {
-        return super.toString() + "," + billId + "," + customerName + "," + customerId + "\n";
+        return super.toString() + "\t" + billId + "\t" + customerName + "\t" + customerId;
     }
 
 }

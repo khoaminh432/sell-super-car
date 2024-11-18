@@ -58,6 +58,7 @@ public class ClientValidator {
                 System.out.println("Your email is invalid.");
                 continue;
             }
+        
         return email;
         }
     }

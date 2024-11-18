@@ -90,7 +90,7 @@ public class IdManager {
     
             // Write the available IDs on the second line, joined by '|'
             bw.write(String.join("|", availableId.stream().map(String::valueOf).toArray(String[]::new)));
-
+            bw.close();
             return true;
         } catch (IOException e) {
             System.out.println("Error writing to file: " + e.getMessage());
