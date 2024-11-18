@@ -62,14 +62,17 @@ public class CustomerManager implements IFeatures<Customer> {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if(line == ""){
+                    continue;
+                }
                 String[] info = line.split("\t");
     
                 // Parsing customer information
                 int id = Integer.parseInt(info[0].trim());
                 String name = info[1].trim();
                 String email = info[2].trim();
-                String password = info[3].trim();
-                String contact = info[4].trim();
+                String password = info[4].trim();
+                String contact = info[3].trim();
     
                 // Parsing address
                 String houseNumber = info[5].trim();
@@ -81,12 +84,7 @@ public class CustomerManager implements IFeatures<Customer> {
     
                 // Creating customer and adding purchase history
                 Customer customer = new Customer(id, name, email, password, contact, address);
-                if (info.length > 10) {
-                    String[] purchases = info[10].split("\\|");
-                    for (String purchase : purchases) {
-                        customer.addPurchase(purchase.trim());
-                    }
-                }
+                
                 cList.add(customer);
             }
             br.close();
@@ -116,7 +114,6 @@ public class CustomerManager implements IFeatures<Customer> {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(Customer_FILE_NAME))) {
             for(Customer c:cList){
                 bw.write(c.toString());
-                bw.newLine();
             }
             System.out.println("Customer data saved saves successfully");
             bw.close();
@@ -150,10 +147,15 @@ public class CustomerManager implements IFeatures<Customer> {
         }
 
         //address
+        System.out.println("House Number: ");
         String houseNumber = sc.nextLine().trim();
+        System.out.println("Street: ");
         String street = sc.nextLine().trim();
+        System.out.println("Ward: ");
         String ward = sc.nextLine().trim();
+        System.out.println("District: ");
         String district = sc.nextLine().trim();
+        System.out.println("City: ");
         String city = sc.nextLine().trim();
 
         int id = idCustomer.idGenerator();
@@ -163,7 +165,8 @@ public class CustomerManager implements IFeatures<Customer> {
         cList.add(newCustomer);
         System.out.println("New customer created successfully with ID: " + id);
         cList.sort((c1, c2) -> Integer.compare(c1.getID(), c2.getID()));
-
+        //writeToFile();
+        //idCustomer.writeIDsToFile(Customer_ID_FILE_NAME);
         
         return true;
     }
@@ -357,7 +360,7 @@ public class CustomerManager implements IFeatures<Customer> {
     //Called by customer manage menu
     public void saveData(){
         writeToFile();
-        if(idCustomer.writeIDsToFile(Customer_FILE_NAME)){
+        if(idCustomer.writeIDsToFile(Customer_ID_FILE_NAME)){
             System.out.println("Customer id file saved successfully");
         }
     }
@@ -366,10 +369,8 @@ public class CustomerManager implements IFeatures<Customer> {
     //return the customer with correct email and password
     public Customer login(String email, String password){
         for (Customer customer : cList) {
-            if(customer.getEmail().equals(email)){
-                if (customer.getPassword().equals(password)) {
-                    return customer;
-                }
+            if(customer.login(email, password)){
+                return customer;
             }
         }
         return null;

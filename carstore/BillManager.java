@@ -2,6 +2,7 @@ package carstore;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +23,7 @@ public class BillManager {
     }
 
     // Add a new bill
-    public void addBill(Bill bill) {
+    public void createNewBill(Bill bill) {
         if (bill.isChecked()) {
             receipts.add(bill);
         } else {
@@ -40,7 +41,6 @@ public class BillManager {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             for (Bill bill : billList) {
                 writer.write(bill.toString());
-                writer.newLine();
             }
             System.out.println("Bills saved to file: " + fileName);
         } catch (IOException e) {
@@ -56,33 +56,38 @@ public class BillManager {
     }
 
     private List<Bill> loadFromFile(String fileName) {
-        List<Bill> billList = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts.length == 7) { // Ensure the correct number of fields
-                    String customerName = parts[0];
-                    int customerId = Integer.parseInt(parts[1]);
-                    String carName = parts[2];
-                    int carId = Integer.parseInt(parts[3]);
-                    int amount = Integer.parseInt(parts[4]);
-                    double price = Double.parseDouble(parts[5]);
-                    boolean isChecked = Boolean.parseBoolean(parts[6]);
+    List<Bill> billList = new ArrayList<>();
+    try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(",");
+            if (parts.length == 10) { // Ensure the correct number of fields
+                String carName = parts[0];
+                int carId = Integer.parseInt(parts[1]);
+                int amount = Integer.parseInt(parts[2]);
+                double price = Double.parseDouble(parts[3]);
+                double totalBalance = Double.parseDouble(parts[4]);
+                LocalDateTime date = LocalDateTime.parse(parts[5], BillDetails.getFormatter());
+                boolean isChecked = Boolean.parseBoolean(parts[6]);
+                int billId = Integer.parseInt(parts[7]);
+                String customerName = parts[8];
+                int customerId = Integer.parseInt(parts[9]);
 
-                    Bill bill = new Bill(customerName, customerId, carName, carId, amount, price);
-                    if (isChecked) {
-                        bill.check(); // Finalize the bill if marked as checked
-                    }
-                    billList.add(bill);
-                }
+                // Create a Bill object
+                Bill bill = new Bill(carName, carId, amount, price, totalBalance, date, isChecked, billId, customerName, customerId);
+                billList.add(bill);
+            } else {
+                System.err.println("Malformed line in file: " + line);
             }
-        } catch (IOException e) {
-            System.err.println("Error loading from file: " + fileName);
-            e.printStackTrace();
         }
-        return billList;
+    } catch (IOException e) {
+        System.err.println("Error reading from file: " + fileName);
+        e.printStackTrace();
+    } catch (Exception e) {
+        System.err.println("Error parsing data: " + e.getMessage());
     }
+    return billList;
+}
 
     // Display unchecked bills to staff
     public void showUncheckedBillsToStaff(Scanner sc) {
@@ -124,7 +129,7 @@ public class BillManager {
     System.out.println("=== Statistics by Month ===");
     Map<String, Double> revenueByMonth = new HashMap<>();
     for (Bill bill : receipts) {
-        String month = bill.getDate().getMonth().toString(); // Example: JANUARY
+        String month = bill.getDate().getMonth().toString(); 
         revenueByMonth.put(month, revenueByMonth.getOrDefault(month, 0.0) + bill.getTotalBalance());
     }
     for (Map.Entry<String, Double> entry : revenueByMonth.entrySet()) {
@@ -167,6 +172,7 @@ public void billManagerForStaff(Scanner sc) {
     do {
         System.out.println("\n=== Bill Management Menu ===");
         System.out.println("1. Show Unchecked Bills");
+        System.out.println("1. Show Bills");
         System.out.println("2. Statistic by months");
         System.out.println("3. Statistic by date");
         System.out.println("4. Save and exit");
@@ -198,5 +204,20 @@ public void billManagerForStaff(Scanner sc) {
         }
     } while (flag);
 
-}
+    }
+    
+    public List<Bill> getBillByCustomerId(int customerId) {
+        List<Bill> customerBills = new ArrayList<>();
+        for (Bill bill : receipts) {
+            if (bill.getCustomerId() == customerId) {
+                customerBills.add(bill);
+            }
+        }
+        for (Bill bill : bills) {
+            if (bill.getCustomerId() == customerId) {
+                customerBills.add(bill);
+            }
+        }
+        return customerBills;
+    }   
 }

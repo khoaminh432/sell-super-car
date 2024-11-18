@@ -14,7 +14,6 @@ public class List_Car implements Ishowfor{
     private static final String SUPERCAR_FILE_NAME = "Data/list_car.txt";
     private static final String ID_FILE_NAME = "Data/superCarID.txt";
     private IdManager id_car = new IdManager(ID_FILE_NAME);
-    Scanner scanner;
     public List_Car(){
         Lcar = new ArrayList<>();
     }
@@ -213,8 +212,7 @@ public class List_Car implements Ishowfor{
         
     }
 
-    public void menuForManager(){
-        ReadFile(SUPERCAR_FILE_NAME);
+    public void menuForManager(Scanner scanner){
         int choice;
         do{
             System.out.println("====================MENU===============");
@@ -409,10 +407,8 @@ public class List_Car implements Ishowfor{
     public static void decoratefooter(){
         System.out.println("===============================================================================");
     }
-    public void menuForCustomer(){
-        scanner = new Scanner(System.in);
+    public void menuForCustomer(Scanner scanner){
         int choose;
-        ReadFile(SUPERCAR_FILE_NAME);
         do{
             menu();
             choose = Car.chooseInteger(scanner.nextLine().trim());

@@ -7,7 +7,7 @@ import java.util.Scanner;
  * 
  */
 
- public class Person 
+ public abstract class Person 
  {
    private int id;
    private String name, email, password, contactNumber;
@@ -93,15 +93,9 @@ import java.util.Scanner;
       address.showDetails();
    }
 
-   public void changePassword(Scanner sc){
-      System.out.println("Create a new password: ");
-      String newPassword = ClientValidator.isPasswordValid(sc);
-      System.out.println("Confirm your password: ");
-      String confirmPassword = ClientValidator.isPasswordValid(sc);
-      if(newPassword==confirmPassword){
-         password=newPassword;
-         System.out.println("Password changed successfully.");
-      }
-   }
+   public abstract void changePassword(Scanner sc);
+
+   public abstract boolean login(String email, String password);
+   
 }
 
