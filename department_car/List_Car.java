@@ -6,10 +6,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 public class List_Car implements Ishowfor{
     private ArrayList<Super_car> Lcar;
-    private static final String SUPERCAR_FILE_NAME = "Data/list_car.txt";
+    protected static final String SUPERCAR_FILE_NAME = "Data/list_car.txt";
     private static final String ID_FILE_NAME = "Data/superCarID.txt";
     private IdManager id_car = new IdManager(ID_FILE_NAME);
     public List_Car(){
@@ -112,11 +113,12 @@ public class List_Car implements Ishowfor{
         return null;
     }
     
-    public Super_car Search_name(String name){
+    public ArrayList<Super_car> Search_name(String name){
+        ArrayList<Super_car> results = new ArrayList<>();
         for(Super_car spc: Lcar)
-            if (spc.getName().equals(name))
-                return spc;
-        return null;
+            if (spc.getName().toLowerCase().contains(name))
+                results.add(spc);
+        return results;
 
     }
     public void search_company(String companycar){
@@ -211,308 +213,302 @@ public class List_Car implements Ishowfor{
         
     }
 
-    public void menuForManager(Scanner scanner){
+    public void menuForManager(Scanner scanner) {
         int choice;
-        do{
+        do {
             System.out.println("====================MENU===============");
-            System.out.println("1.Add a new super car");
-            System.out.println("2.Remove car");
-            System.out.println("3.Change the informations of car");
-            System.out.println("4.Search car");
-            System.out.println("5.Show the informations of cars");
-            System.out.println("6.Save");
-            System.out.println("0.Exit");
+            System.out.println("1. Add a new super car");
+            System.out.println("2. Remove car");
+            System.out.println("3. Change the information of car");
+            System.out.println("4. Search car");
+            System.out.println("5. Show all cars");
+            System.out.println("6. Save");
+            System.out.println("0. Exit");
             choice = scanner.nextInt();
-        
-            switch(choice){
+    
+            switch (choice) {
                 case 1:
                     add(scanner);
+                    WriteFile(SUPERCAR_FILE_NAME);
                     break;
+    
                 case 2:
-                    System.out.println("=============REMOVE============");
-                    System.out.println("1.Remove by Id");
-                    System.out.println("2.Remove by name");
-                    System.out.println("Enter your choice (1-2): ");
-                    int choose;
-                    choose = scanner.nextInt();
-                    switch(choose){
-                        case 1:
-                            System.out.println("Enter name: ");
-                            String name1 = scanner.nextLine().trim();
-                            Super_car sc = Search_name(name1);
-                            Remove(sc);
-                            break;
-                        case 2:
-                            System.out.println("Enter id: ");
-                            int id1 = scanner.nextInt();
-                            Super_car spc = Search_idcar(id1);
-                            Remove(spc);
-                            break;
-                        default:
-                            System.out.println("Invalid choice. Please choose a valid option.");
+                    Super_car super_carToRemove = search(scanner);
+                    if (super_carToRemove != null) {
+                        Remove(super_carToRemove);
                     }
+                    WriteFile(SUPERCAR_FILE_NAME);
+                    break;
+    
                 case 3:
-                    System.out.println("===============CHANGE============");
-                    System.out.println("1.Change by name ");
-                    System.out.println("2.Change by Id");
-                    System.out.println("Enter your choice(1-2):");
-                    choose = scanner.nextInt();
-                    int position;
-                    if(choose == 1)
-                    {
-                        System.out.println("Enter name: ");
-                        String name = scanner.nextLine().trim();
-                        position = getindex(name);
-                    }else{
-                        System.out.println("Enter Id car: ");
-                        int idCar = scanner.nextInt();
-                        position = getindex(idCar);
+                    Super_car super_carToUpdate = search(scanner);
+                    if (super_carToUpdate != null) {
+                        super_carToUpdate.showDetails();
+                        update(scanner, super_carToUpdate);
                     }
-                    do{
-                            System.out.println("===============CHANGE OPTION============");
-                            System.out.println("1.Change All");
-                            System.out.println("2.Change Id");
-                            System.out.println("3.Change Pricesell");
-                            System.out.println("4.Change Pricebuy");
-                            System.out.println("5.Change Lenght");
-                            System.out.println("6.Change Weight");
-                            System.out.println("7.Change Height");
-                            System.out.println("8.Change Width");
-                            System.out.println("0.Exit");
-                            System.out.println("Enter your choice(1-8):");
-                            choose = scanner.nextInt();
-                            switch(choose){
-                                case 1:
-                                    System.out.println("Id car: ");
-                                    int id = scanner.nextInt();
-                                    System.out.println("Name: ");
-                                    String name2 = scanner.nextLine().trim();
-                                    System.out.println("Pricesell: ");
-                                    int pricesell = scanner.nextInt();
-                                    System.out.println("Pricebuy: ");
-                                    int pricebuy = scanner.nextInt();
-                                    System.out.println("Lenght: ");
-                                    float length = scanner.nextFloat();
-                                    System.out.println("Height: ");
-                                    float height = scanner.nextFloat();
-                                    System.out.println("Weight: ");
-                                    float weight = scanner.nextFloat();
-                                    System.out.println("Width: ");
-                                    float width = scanner.nextFloat();
-                                    System.out.println("Company: ");
-                                    String company = scanner.nextLine();
-                                    System.out.println("The number of cars: ");
-                                    int number = scanner.nextInt();
-                                    Super_car sc = new Super_car(id,name2,pricebuy,pricesell,weight,length,height,width,number,company);
-                                    set(position,sc);
-                                    break;
-                                case 2:
-                                    System.out.println("Id car: ");
-                                    int id2 = scanner.nextInt();
-                                    setId_car(position,id2);
-                                    break;
-                                case 3:
-                                    System.out.println("Pricesell: ");
-                                    int price = scanner.nextInt();
-                                    setPricesell(position,price);
-                                    break;
-                                case 4:
-                                    System.out.println("Pricebuy: ");
-                                    int price2 = scanner.nextInt();
-                                    setPricebuy(position,price2);
-                                    break;   
-                                case 5:
-                                    System.out.println("Length: ");
-                                    float l = scanner.nextFloat();
-                                    setLength(position,l);
-                                    break;
-                                case 6:
-                                    System.out.println("Weight: ");
-                                    float w = scanner.nextFloat();
-                                    setWeight(position,w);
-                                    break;
-                                case 7:
-                                    System.out.println("Height: ");
-                                    float h = scanner.nextFloat();
-                                    setHeight(position,h);
-                                    break;
-                                case 8:
-                                    System.out.println("Width: ");
-                                    float wid = scanner.nextFloat();
-                                    setWidth(position,wid);
-                                    break;
-                                default:
-                                    System.out.println("Invalid choice. Please try again.");
-                            }
-                    }while(choose != 0);
+                    WriteFile(SUPERCAR_FILE_NAME);
                     break;
+    
                 case 4:
-                    System.out.println("=============SEARCH==========");
-                    System.out.println("1.Search by Id");
-                    System.out.println("2.Search by name");
-                    System.out.println("Enter your choice(1-2): ");
-                    int choose4 = scanner.nextInt();
-                    if(choose4 == 1)
-                    {
-                        System.out.println("Enter Name: ");
-                        String name4 = scanner.nextLine().trim();
-                        Super_car sc4 = Search_name(name4);
-                        sc4.showDetails();
-                    }else{
-                        System.out.println("Enter Id: ");
-                        int idCar4 = scanner.nextInt();
-                        Super_car sc5 = Search_idcar(idCar4);
-                        sc5.showDetails();
+                    Super_car carToSearch = search(scanner);
+                    if (carToSearch != null) {
+                        carToSearch.showDetails();
+                    } else {
+                        System.out.println("Car not found.");
                     }
                     break;
+    
                 case 5:
                     System.out.println("=============LIST CAR==================");
-                    for(Super_car car : Lcar){
+                    for (Super_car car : Lcar) {
                         car.showDetails();
                     }
                     break;
+    
                 case 6:
                     WriteFile(SUPERCAR_FILE_NAME);
                     break;
+    
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
-                        
-        }while(choice !=0);
-        scanner.close();
+    
+        } while (choice != 0);
     }
-    private void menu(){
-        System.out.println("===================Welcome customer====================");
-        System.out.println("1. Display car list.");
-        System.out.println("2. Search from car list.");
-        System.out.println("3. Buy Car");
-        System.out.println("0. Exit.");
-        System.out.print("Your choose: ");
-        
-    }
-    public void menusearch(){
-        System.out.println("1. Search by Id.");
-        System.out.println("2. Search by name.");
-        System.out.println("3. Search by Company Car.");
-        System.out.println("4. Search by Luxury Car.");
-        System.out.println("5. Search by Sport Car.");
-        System.out.println("0. Exit.");
-        System.out.print("Your choose: ");
-    }
-    public static void decorateheader(String content){
-        System.out.println("================================="+content+"=================================");
-    }
-    public static void decoratefooter(){
-        System.out.println("===============================================================================");
-    }
-    public void menuForCustomer(Scanner scanner,Customer customer){
-        {int choose;
-        do{
-            menu();
-            choose = Car.chooseInteger(scanner.nextLine().trim());
+    
+    private void update(Scanner scanner, Super_car sc) {
+        int choose = -1;
+        do {
+            System.out.println("===============CHANGE OPTION============");
+            System.out.println("1. Change All");
+            System.out.println("3. Change Pricesell");
+            System.out.println("4. Change Pricebuy");
+            System.out.println("5. Change Length");
+            System.out.println("6. Change Weight");
+            System.out.println("7. Change Height");
+            System.out.println("8. Change Width");
+            System.out.println("0. Exit");
+            System.out.println("Enter your choice(1-8):");
+            choose = scanner.nextInt();
+    
             switch (choose) {
                 case 1:
-                decorateheader("Super Car");
-                    Super_car.quantitycar();
-                    showforCustomer();
-                decoratefooter();
+                    System.out.println("Enter new Name: ");
+                    String newName = scanner.nextLine().trim();
+                    System.out.println("Enter new Price Sell: ");
+                    int newPricesell = scanner.nextInt();
+                    System.out.println("Enter new Price Buy: ");
+                    int newPricebuy = scanner.nextInt();
+                    System.out.println("Enter new Length: ");
+                    float newLength = scanner.nextFloat();
+                    System.out.println("Enter new Height: ");
+                    float newHeight = scanner.nextFloat();
+                    System.out.println("Enter new Weight: ");
+                    float newWeight = scanner.nextFloat();
+                    System.out.println("Enter new Width: ");
+                    float newWidth = scanner.nextFloat();
+                    System.out.println("Enter new Company: ");
+                    scanner.nextLine();  // consume the newline
+                    String newCompany = scanner.nextLine().trim();
+                    System.out.println("Enter new Quantity: ");
+                    int newQuantity = scanner.nextInt();
+    
+                    // Update the Super_car with new values
+                    sc.setName(newName);
+                    sc.setPricesell(newPricesell);
+                    sc.setPricebuy(newPricebuy);
+                    sc.setLength(newLength);
+                    sc.setHeight(newHeight);
+                    sc.setWeight(newWeight);
+                    sc.setWidth(newWidth);
+                    sc.setCompanyCar(newCompany);
+                    sc.setQuantityof_car(newQuantity);
                     break;
-                case 2:
-                    
-                    do { 
-                        menusearch();
-                        choose = Car.chooseInteger(scanner.nextLine().trim());
-                        
-                        switch (choose) {
-                            case 1:
-                            decorateheader("Search ID car");
-                            do{try{System.out.print("Enter ID Car: ");
-                                int id = Car.chooseInteger(scanner.nextLine().trim());
-                                Search_idcar(id).showforCustomer();
-                            break;}catch(Exception e){
-                            System.out.println("Invalid ID");break;}
-                            }while(true);
-                            decoratefooter();
-                                break;
-                            case 2:
-                            decorateheader("Search Name Car");
-                            do{try{System.out.print("Enter name Car: ");
-                                String name= scanner.nextLine().trim();
-                                Search_name(name).showforCustomer();break;}catch(Exception e){
-                                    System.out.println("Invalid Name");break;
-                                }}while(true);
-                            decoratefooter();
-                                break; 
-                            case 3:
-                            decorateheader("Search Company Car");
-                            do{try{System.out.print("Enter name Company Car: ");
-                                String company = scanner.nextLine().trim();
-                                search_company(company);break;}catch(Exception e){
-                                    System.out.println("Invalid Company Car");break;
-                            }}while(true);
-                            decoratefooter();
-                                break;
-                            case 4:
-                            decorateheader("Search Luxury Car");
-                                Luxury_car.quantitycar();
-                                List_luxury_car listlucar= new List_luxury_car();
-                                listlucar.setList(Lcar); 
-                                listlucar.showforCustomer();
-                            decoratefooter();
-                                break;
-                            case 5:
-                            decorateheader("Search Sport Car");
-                            Sport_car.quantitycar();
-                            List_sport_car listspcar= new List_sport_car();
-                            listspcar.setList(Lcar);
-                            listspcar.showforCustomer();
-                            decoratefooter();
-                            break;
-                            default: System.out.println("Invalid Choose");break;
-                        }
-                        if(choose==0)
-                            {choose = -1;
-                            break;}
-                    } while (true);
-                    break;
+    
                 case 3:
-                decorateheader("Buy Super Car");
-                        System.out.print("You can search Id Car or search Name: ");
-                        do
-                        {Object option = scanner.nextLine().trim();
-                        if(Search_idcar(Car.chooseInteger((String)option))!=null||Search_name((String)option)!=null)
-                        {if (Car.IntegerNumber((String)option)){
-                            Super_car supcar = Search_idcar(Car.chooseInteger((String)option));
-                            supcar.showDetails();
-                            }
-                        else 
-                        Search_name((String) option).showforCustomer();
-                    break;}
-                        else System.out.println("ID or Name car does not exist");
-                        }while(true);
-                        System.out.print("You want buy Car: (y/n)");
-                    char buyString = scanner.next().charAt(0);
-                    scanner.nextLine();
-                    do{
-                        try{System.out.println("You want buy quantity car: ");
-                        int quantity = scanner.nextInt();
-                        break;}catch(NumberFormatException e){
-                            System.out.println("your choose must be a Integer");
-                        }
-                    }while(true);
-                    if (buyString=='n')
-                        {System.out.println("Thank you so much");
-                        break;}
-                    else if(buyString=='y')
-                        {}
-                decoratefooter();
-                
+                    System.out.println("Enter new Price Sell: ");
+                    int priceSell = scanner.nextInt();
+                    sc.setPricesell(priceSell);
                     break;
-                default:decoratefooter(); break;               
+    
+                case 4:
+                    System.out.println("Enter new Price Buy: ");
+                    int priceBuy = scanner.nextInt();
+                    sc.setPricebuy(priceBuy);
+                    break;
+    
+                case 5:
+                    System.out.println("Enter new Length: ");
+                    float length = scanner.nextFloat();
+                    sc.setLength(length);
+                    break;
+    
+                case 6:
+                    System.out.println("Enter new Weight: ");
+                    float weight = scanner.nextFloat();
+                    sc.setWeight(weight);
+                    break;
+    
+                case 7:
+                    System.out.println("Enter new Height: ");
+                    float height = scanner.nextFloat();
+                    sc.setHeight(height);
+                    break;
+    
+                case 8:
+                    System.out.println("Enter new Width: ");
+                    float width = scanner.nextFloat();
+                    sc.setWidth(width);
+                    break;
+    
+                case 0:
+                    System.out.println("Exiting update menu...");
+                    break;
+    
+                default:
+                    System.out.println("Invalid choice. Please try again.");
             }
-            if(choose==0)
-                break;
-                
-        }while(true);
+        } while (choose != 0);
+    }
 
-}}}
+    public Super_car search(Scanner sc) {
+        int choice = -1;
+        
+        // Prompt user for search type with validation
+        while (choice != 0) {
+            System.out.println("1. Search by Id.");
+            System.out.println("2. Search by name.");
+            System.out.println("3. Search by Company Car.");
+            System.out.println("0. Exit.");
+            System.out.print("Enter your choice (1-3): ");
+            
+            try {
+                choice = Integer.parseInt(sc.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number between 1 and 3.");
+                continue; // Restart the loop on invalid input
+            }
+            
+            List<Super_car> searchResults = new ArrayList<>();
+            
+            switch (choice) {
+                case 1:
+                    // Search by ID
+                    int id = -1;
+                    while (id < 0) {
+                        try {
+                            System.out.print("Enter Super Car ID: ");
+                            id = Integer.parseInt(sc.nextLine().trim());
+                            if (id < 0) {
+                                System.out.println("ID cannot be negative. Please enter a valid number.");
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Invalid ID format. Please enter a valid number.");
+                        }
+                    }
+                    for (Super_car car : Lcar) {
+                        if (car.getId_car() == id) {
+                            searchResults.add(car);
+                        }
+                    }
+                    return showSearchResults(sc, searchResults);
+    
+                case 2:
+                    // Search by Name
+                    String name;
+                    do {
+                        System.out.print("Enter Super Car name (or part of the name): ");
+                        name = sc.nextLine().trim().toLowerCase();
+                        if (name.isEmpty()) {
+                            System.out.println("Name cannot be empty. Please enter a valid name.");
+                        }
+                    } while (name.isEmpty());
+                    
+                    for (Super_car car : Lcar) {
+                        if (car.getName().toLowerCase().contains(name)) {
+                            searchResults.add(car);
+                        }
+                    }
+                    return showSearchResults(sc, searchResults);
+    
+                case 3:
+                    // Search by Company (Brand) Name
+                    String brandName;
+                    do {
+                        System.out.print("Enter Super Car brand name (or part of the name): ");
+                        brandName = sc.nextLine().trim().toLowerCase();
+                        if (brandName.isEmpty()) {
+                            System.out.println("Brand name cannot be empty. Please enter a valid brand name.");
+                        }
+                    } while (brandName.isEmpty());
+                    
+                    for (Super_car car : Lcar) {
+                        if (car.getCompanyCar().toLowerCase().contains(brandName)) {
+                            searchResults.add(car);
+                        }
+                    }
+                    return showSearchResults(sc, searchResults);
+    
+                case 0:
+                    System.out.println("Exiting search.");
+                    return null;
+    
+                default:
+                    System.out.println("Invalid input. Please enter a number between 1 and 3.");
+                    break; // Continue asking for input
+            }
+        }
+        return null; // In case of exit from the loop, return null
+    }
+    
+    private Super_car showSearchResults(Scanner sc,List<Super_car> searchResults) {
+        if(searchResults.isEmpty()){
+            System.out.println("No Super Cars found matching your search criteria");
+            return null;
+        }
+        // Display search results
+        System.out.println("Search Results:");
+        for (int i = 0; i < searchResults.size(); i++) {
+            System.out.println((i + 1) + ". ");
+            searchResults.get(i).showDetails();
+            System.out.println("------------------------------------");
+        }
+    
+        // Allow the user to select a car from the search results
+        int selection = -1;
+        while (selection < 0 || selection > searchResults.size()) {
+            try {
+                System.out.print("Enter the number of the car to select (or 0 to cancel): ");
+                selection = Integer.parseInt(sc.nextLine().trim());
+                if (selection < 0 || selection > searchResults.size()) {
+                    System.out.println("Invalid selection. Please enter a number between 0 and " + searchResults.size() + ".");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid selection. Please enter a valid number.");
+            }
+        }
+    
+        if (selection > 0) {
+            Super_car selectedCar = searchResults.get(selection - 1);
+            System.out.println("You selected: " + selectedCar.getName());
+            return selectedCar;
+        } else {
+            System.out.println("Selection cancelled.");
+            return null;
+        }
+    }
+
+    public Luxury_car searchLuxuryCar(Scanner sc){
+        List_luxury_car list_luxury_car = new List_luxury_car();
+        list_luxury_car.setList(Lcar);
+        return list_luxury_car.searchLXCar(sc);
+    }
+
+    public Sport_car searchSportCar(Scanner sc){
+        List_sport_car list_sport_car = new List_sport_car();
+        list_sport_car.setList(Lcar);
+        return list_sport_car.searchSPCar(sc);
+    }
+    
+}
+    
