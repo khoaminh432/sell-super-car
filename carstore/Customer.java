@@ -2,9 +2,11 @@ package carstore;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Customer extends Person{
-    private List<String> purchaseHistory;
+    private List<Bill> purchaseHistory;
+
     public Customer() {
     }
 
@@ -14,18 +16,22 @@ public class Customer extends Person{
     }
 
     //getter and setter
-    public void addPurchase(String purchaseDetail) {
+    public void addPurchase(Bill purchaseDetail) {
         purchaseHistory.add(purchaseDetail);
     }
 
-    public List<String> getPurchaseHistory() {
+    public List<Bill> getPurchaseHistory() {
         return purchaseHistory;
     }
 
+    public void readPurchaseHistory(BillManager billManager){
+        purchaseHistory=billManager.getBillByCustomerId(getID());
+    }
+
     public void showPurchaseHistory(){
-        System.out.println("Purchase Histrory: ");
-        for(String purchase:purchaseHistory){
-            System.out.println("- "+purchase);
+        for (Bill bill : purchaseHistory) {
+            bill.showBillDetails();
+            System.out.println("---------");
         }
     }
 
@@ -36,12 +42,30 @@ public class Customer extends Person{
 
     @Override
     public String toString(){
-        if(!purchaseHistory.isEmpty()){
-            String purchaseString=String.join("|",purchaseHistory);
-            return super.toString()+"\t"+purchaseString+"\n";
-        }
-        return super.toString();
+        return super.toString()+"\n";
     }
 
+    @Override
+    public boolean login(String email, String password){
+        if(this.getEmail().equals(email)){
+            if (this.getPassword().equals(password)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void changePassword(Scanner sc){
+        System.out.println("------Customer Password Recovery------");
+        System.out.println("Create a new password: ");
+        String newPassword = ClientValidator.isPasswordValid(sc);
+        System.out.println("Confirm your password: ");
+        String confirmPassword = ClientValidator.isPasswordValid(sc);
+        if(newPassword==confirmPassword){
+           setPassword(newPassword);
+           System.out.println("Password changed successfully.");
+        }
+   }
 
 }

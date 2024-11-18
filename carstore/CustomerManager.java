@@ -81,12 +81,7 @@ public class CustomerManager implements IFeatures<Customer> {
     
                 // Creating customer and adding purchase history
                 Customer customer = new Customer(id, name, email, password, contact, address);
-                if (info.length > 10) {
-                    String[] purchases = info[10].split("\\|");
-                    for (String purchase : purchases) {
-                        customer.addPurchase(purchase.trim());
-                    }
-                }
+                
                 cList.add(customer);
             }
         } catch (FileNotFoundException e) {
@@ -148,10 +143,15 @@ public class CustomerManager implements IFeatures<Customer> {
         }
 
         //address
+        System.out.println("House Number: ");
         String houseNumber = sc.nextLine().trim();
+        System.out.println("Street: ");
         String street = sc.nextLine().trim();
+        System.out.println("Ward: ");
         String ward = sc.nextLine().trim();
+        System.out.println("District: ");
         String district = sc.nextLine().trim();
+        System.out.println("City: ");
         String city = sc.nextLine().trim();
 
         int id = idCustomer.idGenerator();
@@ -161,7 +161,7 @@ public class CustomerManager implements IFeatures<Customer> {
         cList.add(newCustomer);
         System.out.println("New customer created successfully with ID: " + id);
         cList.sort((c1, c2) -> Integer.compare(c1.getID(), c2.getID()));
-
+        writeToFile();
         
         return true;
     }
@@ -364,10 +364,8 @@ public class CustomerManager implements IFeatures<Customer> {
     //return the customer with correct email and password
     public Customer login(String email, String password){
         for (Customer customer : cList) {
-            if(customer.getEmail().equals(email)){
-                if (customer.getPassword().equals(password)) {
-                    return customer;
-                }
+            if(customer.login(email, password)){
+                return customer;
             }
         }
         return null;

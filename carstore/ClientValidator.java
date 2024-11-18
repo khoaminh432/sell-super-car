@@ -11,7 +11,7 @@ public class ClientValidator {
         String name = sc.nextLine();
 
         //A valid name can only contain at least two words that are capitalized.
-        if(!name.matches("^[AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]+\s[AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]+(?:\s[AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]*)*"))
+        if(!name.matches("^[A-Z][a-z]* [A-Z][a-z]*(?: [A-Z][a-z]*)*$"))
         {
             System.out.println("Invalid Name!");
             System.out.println("A valid name can only contain at least two words that are capitalized.");
@@ -64,49 +64,51 @@ public class ClientValidator {
     //EMAIL VALIDATOR: END
 
     //PASSWORD VALIDATOR: BEGIN
-    public static String isPasswordValid(Scanner sc){
-        while(true){
+    public static String isPasswordValid(Scanner sc) {
+        while(true) {
             System.out.println("Enter your password: ");
             String password = sc.nextLine();
-
-            //There are at least 8 chars
-            if(!password.matches(".{8,}")){
+    
+            // There are at least 8 chars
+            if (!password.matches(".{8,}")) {
                 System.out.println("The password must contain at least 8 characters.");
                 continue;
             }
-
-            //A digit must occur at least once
-            if(!password.matches("(?=.*[0-9])")){
+    
+            // A digit must occur at least once
+            if (!password.matches(".*[0-9].*")) {
                 System.out.println("The password must contain at least 1 digit.");
                 continue;
             }
-
-            //A lowercase letter must occur at least once
-            if(!password.matches("(?=.*[a-z])")){
+    
+            // A lowercase letter must occur at least once
+            if (!password.matches(".*[a-z].*")) {
                 System.out.println("The password must contain at least 1 lowercase letter.");
                 continue;
             }
-
-            //An uppercase letter must occur at least once
-            if(!password.matches("(?=.*[A-Z])")){
+    
+            // An uppercase letter must occur at least once
+            if (!password.matches(".*[A-Z].*")) {
                 System.out.println("The password must contain at least 1 uppercase letter.");
                 continue;
             }
-
-            //A special character must occur at least once
-            if(!password.matches("(?=.*[@#$%^&+=])")){
+    
+            // A special character must occur at least once
+            if (!password.matches(".*[@#$%^&+=!].*")) {
                 System.out.println("The password must contain at least 1 special character.");
                 continue;
             }
-
-            //No whitespace allowed in the password.
-            if(!password.matches("(?=\\S+$)")){
+    
+            // No whitespace allowed in the password.
+            if (password.contains(" ")) {
                 System.out.println("No whitespace allowed in the password.");
                 continue;
             }
-            return password;
-        }
-    }
+    
+            return password; // Return valid password
+        }}
+    
+    
     //PASSWORD VALIDATOR: END
 
     public static double isSalaryValid(Scanner sc) {

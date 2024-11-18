@@ -400,10 +400,8 @@ public class StaffManager implements IFeatures<Staff> {
 
     public Staff login(String email, String password){
         for (Staff staff : sList) {
-            if(staff.getEmail().equals(email)){
-                if (staff.getPassword().equals(password)) {
-                    return staff;
-                }
+            if(staff.login(email,password)){
+                return staff;
             }
         }
         return null;

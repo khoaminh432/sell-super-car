@@ -1,5 +1,7 @@
 package carstore;
 
+import java.util.Scanner;
+
 public class Staff extends Person{
     private double salary;
 
@@ -31,6 +33,26 @@ public class Staff extends Person{
         System.out.println("Salary: "+salary);
     }
     
-    
-    
+    @Override
+    public boolean login(String email, String password){
+        if(this.getEmail().equals(email)){
+            if (this.getPassword().equals(password)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void changePassword(Scanner sc){
+        System.out.println("------Staff Password Recovery------");
+        System.out.println("Create a new password: ");
+        String newPassword = ClientValidator.isPasswordValid(sc);
+        System.out.println("Confirm your password: ");
+        String confirmPassword = ClientValidator.isPasswordValid(sc);
+        if(newPassword==confirmPassword){
+           setPassword(newPassword);
+           System.out.println("Password changed successfully.");
+        }
+   }
 }

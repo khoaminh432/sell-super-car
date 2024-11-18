@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 
 public class Admin extends Person {
@@ -31,7 +32,7 @@ public class Admin extends Person {
                 String email = info[2].trim();
                 this.setEmail(email);
                 String password = info[3].trim();
-                this.setEmail(password);
+                this.setPassword(password);
                 String contact = info[4].trim();
                 this.setContactNumber(contact);
 
@@ -68,5 +69,18 @@ public class Admin extends Person {
         }
         return false;
     }
+
+    @Override
+    public void changePassword(Scanner sc){
+        System.out.println("------Admin Password Recovery------");
+        System.out.println("Create a new password: ");
+        String newPassword = ClientValidator.isPasswordValid(sc);
+        System.out.println("Confirm your password: ");
+        String confirmPassword = ClientValidator.isPasswordValid(sc);
+        if(newPassword==confirmPassword){
+           setPassword(newPassword);
+           System.out.println("Password changed successfully.");
+        }
+   }
 }
 

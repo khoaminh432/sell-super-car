@@ -1,6 +1,8 @@
 package carstore;
 import java.util.Scanner;
 
+import department_car.List_Car;
+
 public class MenuSystem {
 
     private Scanner sc = new Scanner(System.in);
@@ -8,6 +10,14 @@ public class MenuSystem {
     private StaffManager staffManager = new StaffManager();
     private Admin admin = new Admin();
     private BillManager billManager = new BillManager();
+    private List_Car carManager = new List_Car();
+
+    public void readFiles(){
+        customerManager.readFromFile();
+        staffManager.readFromFile();
+        billManager.readFromFile();
+        carManager.ReadFile(null);
+    }
 
     /**
      * Displays the main login menu with options for customer and staff login,
@@ -115,7 +125,9 @@ public class MenuSystem {
         String email = ClientValidator.isEmailAdressValid(sc);
 
         if(admin.getEmail().equals(email)){
-            System.out.println("You lost your account.");
+            System.out.println("Recovery code has been sent to your email.");
+            System.out.println("......*Insert recovery code*)");
+            admin.changePassword(sc);
             return;
         }
 
@@ -126,9 +138,13 @@ public class MenuSystem {
             if(recoveryStaff==null){
                 System.out.println("This email is not registered.");
             }
+            System.out.println("Recovery code has been sent to your email.");
+            System.out.println("......*Insert recovery code*)");
             recoveryStaff.changePassword(sc);
             return;
         }
+        System.out.println("Recovery code has been sent to your email.");
+        System.out.println("......*Insert recovery code*)");
         recoveryCustomer.changePassword(sc);
     }
 
@@ -150,7 +166,7 @@ public class MenuSystem {
                     showStaffProfileMenu(staff);
                     break;
                 case 3:
-                    manageCustomerMenu();
+                    customerManager.customerManagementMenu(sc);
                     break;
                 case 4:
                     manageCarMenu();
@@ -160,7 +176,7 @@ public class MenuSystem {
                     break;
                 case 6:
                     keepRunning = false;
-                    System.out.println("Returning to Main Menu...");
+                    System.out.println("Returning to Login Menu...");
                     break;
                 default:
                     System.out.println("Invalid choice. Please select a valid option.");
@@ -208,6 +224,7 @@ public class MenuSystem {
     private void showCustomerMainMenu(Customer customer) {
         boolean keepRunning = true;
         while (keepRunning) {
+            customer.readPurchaseHistory(billManager);
             System.out.println("----- Customer Menu -----");
             System.out.println("1. View Profile");
             System.out.println("2. Buy Car");
@@ -221,7 +238,7 @@ public class MenuSystem {
                     showCustomerProfileMenu(customer);
                     break;
                 case 2:
-                    shoppingMenu(customer);
+                    carManager.menuForCustomer(sc);
                     break;
                 case 3:
                     keepRunning = false;
@@ -284,21 +301,52 @@ public class MenuSystem {
         }
     }
 
-    private void shoppingMenu(Customer customer){
 
-        System.out.println("---------------Shopping-------------");
-        System.out.println("1. Show Luxury Car List");
-        System.out.println("2. Show Sport Car List");
-        System.out.println("3. Search for Luxury Car");
-        System.out.println("4. Search for Sport Car");
-        System.out.println("5. Return");
-    }
-
-    private void viewCartMenu(Customer customer){
-
-    }
     
-    private void showAdminMainMenu(){
-        
+    private void showAdminMainMenu() {
+        boolean keepRunning = true;
+        while (keepRunning) {
+            System.out.println("----- Admin Menu -----");
+            System.out.println("1. View Profile");
+            System.out.println("2. Manage Customer");
+            System.out.println("3. Manage Car");
+            System.out.println("4. Manage Bill");
+            System.out.println("5. Manage Staff");
+            System.out.println("6. Return to Login Menu");
+            System.out.print("Enter your choice (1-6): ");
+    
+            if (!sc.hasNextInt()) {
+                sc.nextLine(); // Clear invalid input
+                System.out.println("Invalid input. Please enter a valid option.");
+                continue;
+            }
+    
+            int choice = sc.nextInt();
+            sc.nextLine();
+    
+            switch (choice) {
+                case 1:
+                    admin.showDetails();
+                    break;
+                case 2:
+                    customerManager.customerManagementMenu(sc);
+                    break;
+                case 3:
+                    carManager.menuForManager(sc);
+                    break;
+                case 4:
+                    billManager.billManagerForStaff(sc);
+                    break;
+                case 5:
+                    staffManager.staffManagementMenu(sc);
+                    break;
+                case 6:
+                    keepRunning = false;
+                    System.out.println("Returning to Login Menu...");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please select a valid option.");
+            }
+        }
     }
 }

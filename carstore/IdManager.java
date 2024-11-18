@@ -52,7 +52,10 @@ public class IdManager {
     private boolean readIDsFromFile(String FILE_NAME) {
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_NAME))) {
             String line=br.readLine();
-            nextId=Integer.parseInt(line.trim());
+            if(line==null){
+                return false;
+            }
+            nextId=Integer.parseInt(line);
             line=br.readLine();
             availableId=parseIdList(line);
             return true; // If the file was read successfully
@@ -65,7 +68,7 @@ public class IdManager {
     
 
     // Method to parse a string of IDs to Integer List
-    private List<Integer> parseIdList(String idList) {
+    public static List<Integer> parseIdList(String idList) {
         List<Integer> ids = new ArrayList<>();
         if (!idList.isEmpty()) {
             String[] idArray = idList.split("\\|");
