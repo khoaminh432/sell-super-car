@@ -1,6 +1,7 @@
 package department_car;
 
 
+
 import carstore.IdManager;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +48,18 @@ public class List_luxury_car extends List_Car {
             if(Luxury_car.checkLuxuryCar(sCar))
                 super.getList().add(sCar);
     }
-    
+
+    public ArrayList<Luxury_car> getLxcar() {
+        return Lxcar;
+    }
+
+    public static String getLuxurycarFileName() {
+        return LUXURYCAR_FILE_NAME;
+    }
+
+    public static String getIdFileName() {
+        return ID_FILE_NAME;
+    }
 
     public ArrayList<Luxury_car> getLxcar() {
         return Lxcar;
@@ -137,8 +149,8 @@ public class List_luxury_car extends List_Car {
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
-    
-        } while (choice != 0);
+                        
+        }while(choice !=0);
     }
     
     private void update(Scanner scanner, Luxury_car sc) {

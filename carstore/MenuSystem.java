@@ -3,6 +3,10 @@ import department_car.List_Car;
 import department_car.Luxury_car;
 import department_car.Sport_car;
 import department_car.Super_car;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 68319e11ce8e6be0d5ba755490e9c15ad3db1b44
 import java.util.Scanner;
 
 public class MenuSystem {
@@ -642,4 +646,8 @@ public class MenuSystem {
             }
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 68319e11ce8e6be0d5ba755490e9c15ad3db1b44

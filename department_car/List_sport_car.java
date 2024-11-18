@@ -143,8 +143,8 @@ public class List_sport_car extends List_Car {
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
-    
-        } while (choice != 0);
+                        
+        }while(choice !=0);
     }
     
     private void update(Scanner scanner, Sport_car sc) {

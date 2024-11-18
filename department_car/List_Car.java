@@ -28,15 +28,15 @@ public class List_Car implements Ishowfor{
     public void add(Scanner scanner){
         System.out.println("=================ADD=============");
         int id = id_car.idGenerator();
-        String name = scanner.nextLine().trim();
-        int pricesell = scanner.nextInt();
-        int pricebuy = scanner.nextInt();
-        float weight = scanner.nextFloat();
-        float length = scanner.nextFloat();
-        float height = scanner.nextFloat();
-        float width = scanner.nextFloat();
-        int quantityof_car = scanner.nextInt();
-        String CompanyCar = scanner.nextLine().trim();
+        System.out.println("Name: ");String name = scanner.nextLine().trim();
+        System.out.println("Pricesell: ");int pricesell = scanner.nextInt();
+        System.out.println("Pricebuy: ");int pricebuy = scanner.nextInt();
+        System.out.println("Weight: ");float weight = scanner.nextFloat();
+        System.out.println("Length: ");float length = scanner.nextFloat();
+        System.out.println("Height: ");float height = scanner.nextFloat();
+        System.out.println("Width: ");float width = scanner.nextFloat();
+        System.out.println("The number of cars: ");int quantityof_car = scanner.nextInt();
+        System.out.println("Company: ");String CompanyCar = scanner.nextLine().trim();
         add(new Super_car(id,name,pricesell,pricebuy,weight,length,height,width,quantityof_car,CompanyCar));
     }
     //xoa
@@ -431,94 +431,43 @@ public class List_Car implements Ishowfor{
                     return showSearchResults(sc, searchResults);
     
                 case 3:
-                    // Search by Company (Brand) Name
-                    String brandName;
-                    do {
-                        System.out.print("Enter Super Car brand name (or part of the name): ");
-                        brandName = sc.nextLine().trim().toLowerCase();
-                        if (brandName.isEmpty()) {
-                            System.out.println("Brand name cannot be empty. Please enter a valid brand name.");
+                decorateheader("Buy Super Car");
+                        System.out.print("You can search Id Car or search Name: ");
+                        do
+                        {Object option = scanner.nextLine().trim();
+                        if(Search_idcar(Car.chooseInteger((String)option))!=null||Search_name((String)option)!=null)
+                        {if (Car.IntegerNumber((String)option)){
+                            Super_car supcar = Search_idcar(Car.chooseInteger((String)option));
+                            supcar.showDetails();
+                            }
+                        else 
+                        Search_name((String) option).showforCustomer();
+                    break;}
+                        else System.out.println("ID or Name car does not exist");
+                        }while(true);
+                        System.out.print("You want buy Car: (y/n)");
+                    char buyString = scanner.next().charAt(0);
+                    scanner.nextLine();
+                    do{
+                        try{System.out.println("You want buy quantity car: ");
+                        int quantity = scanner.nextInt();
+                        break;}catch(NumberFormatException e){
+                            System.out.println("your choose must be a Integer");
                         }
-                    } while (brandName.isEmpty());
-                    
-                    for (Super_car car : Lcar) {
-                        if (car.getCompanyCar().toLowerCase().contains(brandName)) {
-                            searchResults.add(car);
-                        }
-                    }
-                    return showSearchResults(sc, searchResults);
-    
-                case 0:
-                    System.out.println("Exiting search.");
-                    return null;
-    
-                default:
-                    System.out.println("Invalid input. Please enter a number between 1 and 3.");
-                    break; // Continue asking for input
+                    }while(true);
+                    if (buyString=='n')
+                        {System.out.println("Thank you so much");
+                        break;}
+                    else if(buyString=='y')
+                        {}
+                decoratefooter();
+                
+                    break;
+                default:decoratefooter(); break;               
             }
-        }
-        return null; // In case of exit from the loop, return null
-    }
-    
-    private Super_car showSearchResults(Scanner sc,List<Super_car> searchResults) {
-        if(searchResults.isEmpty()){
-            System.out.println("No Super Cars found matching your search criteria");
-            return null;
-        }
-        // Display search results
-        System.out.println("Search Results:");
-        for (int i = 0; i < searchResults.size(); i++) {
-            System.out.println((i + 1) + ". ");
-            searchResults.get(i).showDetails();
-            System.out.println("------------------------------------");
-        }
-    
-        // Allow the user to select a car from the search results
-        int selection = -1;
-        while (selection < 0 || selection > searchResults.size()) {
-            try {
-                System.out.print("Enter the number of the car to select (or 0 to cancel): ");
-                selection = Integer.parseInt(sc.nextLine().trim());
-                if (selection < 0 || selection > searchResults.size()) {
-                    System.out.println("Invalid selection. Please enter a number between 0 and " + searchResults.size() + ".");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid selection. Please enter a valid number.");
-            }
-        }
-    
-        if (selection > 0) {
-            Super_car selectedCar = searchResults.get(selection - 1);
-            System.out.println("You selected: " + selectedCar.getName());
-            return selectedCar;
-        } else {
-            System.out.println("Selection cancelled.");
-            return null;
-        }
-    }
+            if(choose==0)
+                break;
+                
+        }while(true);
 
-    public Luxury_car searchLuxuryCar(Scanner sc){
-        List_luxury_car list_luxury_car = new List_luxury_car();
-        list_luxury_car.setList(Lcar);
-        return list_luxury_car.searchLXCar(sc);
-    }
-
-    public Sport_car searchSportCar(Scanner sc){
-        List_sport_car list_sport_car = new List_sport_car();
-        list_sport_car.setList(Lcar);
-        return list_sport_car.searchSPCar(sc);
-    }
-
-    public void showLxrCarMenuForManager(Scanner sc){
-        List_luxury_car list_luxury_car = new List_luxury_car();
-        list_luxury_car.setList(Lcar);
-        list_luxury_car.menuForManager(sc);
-    }
-    
-    public void showSptCarMenuForManager(Scanner sc){
-        List_sport_car list_sport_car = new List_sport_car();
-        list_sport_car.setList(Lcar);
-        list_sport_car.menuForManager(sc);
-    }
-}
-    
+}}}
