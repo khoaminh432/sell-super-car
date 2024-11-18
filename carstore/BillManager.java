@@ -11,14 +11,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class BillManager {
-    public static void main(String[] args) {
-        BillManager billManager = new BillManager();
-        billManager.readFromFile();
-        List<Bill> bs = billManager.getBills();
-        for (Bill bill : bs) {
-            bill.showDetails();
-        }
-    }
+   
     private static final String CHECKED_BILL_FILE_NAME = "Data/Receipt.txt";
     private static final String NOT_CHECKED_BILL_FILE_NAME = "Data/Bill.txt";
     private List<Bill> bills; // Unchecked bills
@@ -75,7 +68,7 @@ public class BillManager {
         String line;
         while ((line = reader.readLine()) != null) {
             String[] parts = line.split(",");
-            if (parts.length == 9) { 
+            if (parts.length == 10) { 
                 String carName = parts[0];
                 int carId = Integer.parseInt(parts[1]);
                 int amount = Integer.parseInt(parts[2]);
@@ -145,6 +138,7 @@ public class BillManager {
         } else {
             System.out.println("Bill is already checked.");
         }
+        writeToFile();
     }
 
     

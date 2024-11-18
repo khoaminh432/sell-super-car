@@ -95,7 +95,7 @@ public class ClientValidator {
             }
     
             // A special character must occur at least once
-            if (!password.matches(".*[@#$%^&+=!].*")) {
+            if (!password.matches(".*[@#$%^&+=!*()_-].*")) {
                 System.out.println("The password must contain at least 1 special character.");
                 continue;
             }

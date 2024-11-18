@@ -45,28 +45,10 @@ public class List_luxury_car extends List_Car {
     // tạo ds chỉ luxury car từ list super car
     public void setList(ArrayList<Super_car> sc){
         for(Super_car sCar:sc)
-            if(Luxury_car.checkLuxuryCar(sCar))
-                super.getList().add(sCar);
-    }
-
-    public ArrayList<Luxury_car> getLxcar() {
-        return Lxcar;
-    }
-
-    public static String getLuxurycarFileName() {
-        return LUXURYCAR_FILE_NAME;
-    }
-
-    public static String getIdFileName() {
-        return ID_FILE_NAME;
-    }
-
-    public ArrayList<Luxury_car> getLxcar() {
-        return Lxcar;
-    }
-
-    public static String getLuxurycarFileName() {
-        return LUXURYCAR_FILE_NAME;
+            if(Luxury_car.checkLuxuryCar(sCar)){
+                Luxury_car luxury_car = (Luxury_car) sCar;
+                Lxcar.add(luxury_car);
+            }
     }
 
     public static String getIdFileName() {
@@ -92,7 +74,7 @@ public class List_luxury_car extends List_Car {
     public void menuForManager(Scanner scanner) {
         int choice;
         do {
-            System.out.println("====================MENU===============");
+            System.out.println("====================Luxury Car=================");
             System.out.println("1. Add a new super car");
             System.out.println("2. Remove car");
             System.out.println("3. Change the information of car");

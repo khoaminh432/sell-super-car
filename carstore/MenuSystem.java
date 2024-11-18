@@ -1,12 +1,10 @@
 package carstore;
 import department_car.List_Car;
+import department_car.List_luxury_car;
+import department_car.List_sport_car;
 import department_car.Luxury_car;
 import department_car.Sport_car;
 import department_car.Super_car;
-<<<<<<< HEAD
-=======
-
->>>>>>> 68319e11ce8e6be0d5ba755490e9c15ad3db1b44
 import java.util.Scanner;
 
 public class MenuSystem {
@@ -17,6 +15,8 @@ public class MenuSystem {
     private Admin admin = new Admin();
     private BillManager billManager = new BillManager();
     private List_Car lcCar = new List_Car();
+    private List_luxury_car lxCar = new List_luxury_car();
+    private List_sport_car lsCar = new List_sport_car();
 
     public MenuSystem(Scanner sc){
         this.sc = sc;
@@ -40,7 +40,12 @@ public class MenuSystem {
             System.out.println("4. Forgot Password");
             System.out.println("5. Exit");
             System.out.print("Enter your choice (1-5): ");
-            int choice = sc.nextInt();
+            int choice;
+            try {choice = Integer.parseInt(sc.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("!!!Invalid amount. Please enter a valid number.!!!");
+                continue;
+            }
             sc.nextLine(); // Consume newline character
     
             switch (choice) {
@@ -80,7 +85,7 @@ public class MenuSystem {
             System.out.println("Try again.");
             return;
         }
-        System.out.println("Customer login successful.");
+        System.out.println("***Customer login successful.***");
         showCustomerMainMenu(customer);
     }
 
@@ -94,7 +99,7 @@ public class MenuSystem {
         String password = ClientValidator.isPasswordValid(sc);
 
         if(admin.login(email,password)){
-            System.out.println("Manager login successful.");
+            System.out.println("***Manager login successful.***");
             showAdminMainMenu();
         }
 
@@ -105,7 +110,7 @@ public class MenuSystem {
             return;
         }
 
-        System.out.println("Staff login successful.");
+        System.out.println("***Staff login successful.***");
         showStaffMainMenu(staff);
     }
 
@@ -120,7 +125,7 @@ public class MenuSystem {
             return; // return to the login menu 
         }
     
-        System.out.println("Customer registered successfully.");
+        System.out.println("***Customer registered successfully.***");
         return; // return to the login menu
     }
     
@@ -145,7 +150,7 @@ public class MenuSystem {
 
         if(recoveryCustomer==null){
             if(recoveryStaff==null){
-                System.out.println("This email is not registered.");
+                System.out.println("!!!This email is not registered.!!!");
             }
             System.out.println("Recovery code has been sent to your email.");
             System.out.println("......*Insert recovery code*)");
@@ -291,12 +296,12 @@ public class MenuSystem {
                 String confirmPassword = ClientValidator.isPasswordValid(sc);
                 if(newPassword==confirmPassword){
                    customerManager.getCustomer(customer).setPassword(newPassword);
-                   System.out.println("Password changed successfully.");
+                   System.out.println("***Password changed successfully.***");
                 }
                     customerManager.writeToFile();
                     break;
                 case 5:
-                    System.out.println("WARNING! This action will permanently delete your account.");
+                    System.out.println("WARNING!!! This action will permanently delete your account.***");
                     System.out.print("Enter 1 to confirm (Press any other keys to exit): ");
                     String confirmation = sc.nextLine();
                     if ("1".equals(confirmation)) {
@@ -305,7 +310,7 @@ public class MenuSystem {
                         System.out.println("Exiting system... Goodbye!");
                         System.exit(0);  // Terminate the program completely
                     } else {
-                        System.out.println("Account deletion canceled.");
+                        System.out.println("***Account deletion canceled.***");
                     }
                     break;
                 case 6:
@@ -313,7 +318,7 @@ public class MenuSystem {
                     System.out.println("Returning to Main Menu...");
                     break;
                 default:
-                    System.out.println("Invalid choice. Please select a valid option.");
+                    System.out.println("!!!Invalid choice. Please select a valid option.!!!");
             }
         }
         
@@ -335,7 +340,7 @@ public class MenuSystem {
     
             if (!sc.hasNextInt()) {
                 sc.nextLine(); // Clear invalid input
-                System.out.println("Invalid input. Please enter a valid option.");
+                System.out.println("!!!Invalid input. Please enter a valid option.!!!");
                 continue;
             }
     
@@ -363,7 +368,7 @@ public class MenuSystem {
                     System.out.println("Returning to Login Menu...");
                     break;
                 default:
-                    System.out.println("Invalid choice. Please select a valid option.");
+                    System.out.println("!!!Invalid choice. Please select a valid option.!!!");
             }
         }
     }
@@ -375,7 +380,7 @@ public class MenuSystem {
         double price = car.getPricesell();
         String customerName = customer.getName();
         int customerId = customer.getID();
-        System.out.print("You selected: " + carName + "\t ID: "+ carId);
+        System.out.println("You selected: " + carName + "\t ID: "+ carId);
         System.out.println("Stocks amount: " + stocks);
 
         int amount = - 1;
@@ -384,15 +389,16 @@ public class MenuSystem {
             try {
                 amount = Integer.parseInt(sc.nextLine().trim());
                 if (amount < 0){
-                    System.out.println("Amount must be more than 0");
+                    System.out.println("!!!Amount must be more than 0!!!");
                     continue;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid amount. Please enter a valid number.");
+                System.out.println("!!!Invalid amount. Please enter a valid number.!!!");
                 continue;
             }
             if(amount > stocks){
                 System.out.println("Amount must be not more than " + stocks);
+                continue;
             }
             break;
         }
@@ -408,13 +414,13 @@ public class MenuSystem {
         }
         switch (choice) {
             case 1:
-                System.out.println("Pay by cash. Please show the bill to the cashier");
+                System.out.println("===Pay by cash. Please show the bill to the cashier===");
                 break;
             case 2:
-                System.out.println("Pay by Debit Card. Please show the bill to the cashier");
+                System.out.println("===Pay by Debit Card. Please show the bill to the cashier===");
                 break;
             case 3:
-                System.out.println("Pay by Credit Card. Please show the bill to the cashier");
+                System.out.println("===Pay by Credit Card. Please show the bill to the cashier===");
                 break;
             default:
                 return;
@@ -423,7 +429,7 @@ public class MenuSystem {
         Bill newBill = new Bill(carName, carId, amount, price, customerName, customerId);
         newBill.showDetails();
         billManager.createNewBill(newBill);
-        System.out.println("Buy car successfully.");
+        System.out.println("***Buy car successfully.***");
         billManager.writeToFile();
     }
 
@@ -434,7 +440,7 @@ public class MenuSystem {
         double price = car.getPricesell();
         String customerName = customer.getName();
         int customerId = customer.getID();
-        System.out.print("You selected: " + carName + "\t ID: "+ carId);
+        System.out.println("You selected: " + carName + "\t ID: "+ carId);
         System.out.println("Stocks amount: " + stocks);
 
         int amount = - 1;
@@ -443,11 +449,11 @@ public class MenuSystem {
             try {
                 amount = Integer.parseInt(sc.nextLine().trim());
                 if (amount < 0){
-                    System.out.println("Amount must be more than 0");
+                    System.out.println("!!!Amount must be more than 0!!!");
                     continue;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid amount. Please enter a valid number.");
+                System.out.println("!!!Invalid amount. Please enter a valid number.!!!");
                 continue;
             }
             if(amount > stocks){
@@ -467,13 +473,13 @@ public class MenuSystem {
         }
         switch (choice) {
             case 1:
-                System.out.println("Pay by cash. Please show the bill to the cashier");
+                System.out.println("===Paid by cash. Please show the bill to the cashier===");
                 break;
             case 2:
-                System.out.println("Pay by Debit Card. Please show the bill to the cashier");
+                System.out.println("===Paid by Debit Card. Please show the bill to the cashier===");
                 break;
             case 3:
-                System.out.println("Pay by Credit Card. Please show the bill to the cashier");
+                System.out.println("===Paid by Credit Card. Please show the bill to the cashier===");
                 break;
             default:
                 return;
@@ -482,7 +488,7 @@ public class MenuSystem {
         Bill newBill = new Bill(carName, carId, amount, price, customerName, customerId);
         newBill.showDetails();
         billManager.createNewBill(newBill);
-        System.out.println("Buy car successfully.");
+        System.out.println("***Buy car successfully.***");
         billManager.writeToFile();
     }
 
@@ -493,7 +499,7 @@ public class MenuSystem {
         double price = car.getPricesell();
         String customerName = customer.getName();
         int customerId = customer.getID();
-        System.out.print("You selected: " + carName + "\t ID: "+ carId);
+        System.out.println("You selected: " + carName + "\t ID: "+ carId);
         System.out.println("Stocks amount: " + stocks);
 
         int amount = - 1;
@@ -502,15 +508,16 @@ public class MenuSystem {
             try {
                 amount = Integer.parseInt(sc.nextLine().trim());
                 if (amount < 0){
-                    System.out.println("Amount must be more than 0");
+                    System.out.println("!!!Amount must be more than 0!!!");
                     continue;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid amount. Please enter a valid number.");
+                System.out.println("!!!Invalid amount. Please enter a valid number.!!!");
                 continue;
             }
             if(amount > stocks){
                 System.out.println("Amount must be not more than " + stocks);
+                continue;
             }
             break;
         }
@@ -541,7 +548,7 @@ public class MenuSystem {
         Bill newBill = new Bill(carName, carId, amount, price, customerName, customerId);
         newBill.showDetails();
         billManager.createNewBill(newBill);
-        System.out.println("Buy car successfully.");
+        System.out.println("***Buy car successfully.***");
         billManager.writeToFile();
     }
 
@@ -573,7 +580,7 @@ public class MenuSystem {
                     break;
                     
                 case 2:
-                    Luxury_car luxuryCar = lcCar.searchLuxuryCar(sc);  // Assuming a separate search for luxury cars
+                    Luxury_car luxuryCar = lxCar.searchLXCar(sc);  
                     if (luxuryCar != null) {
                         System.out.println("You selected: " + luxuryCar.getName());
                         System.out.print("Do you want to buy this car? (y/n): ");
@@ -587,25 +594,24 @@ public class MenuSystem {
     
                 case 3:
                     // Buy Sport Car (Similar to Super Car)
-                    Sport_car sportCar = lcCar.searchSportCar(sc);  // Assuming a separate search for sport cars
+                    Sport_car sportCar = lsCar.searchSPCar(sc);  // Assuming a separate search for sport cars
                     if (sportCar != null) {
-                        System.out.println("You selected: " + sportCar.getName());
                         System.out.print("Do you want to buy this car? (y/n): ");
                         String sportChoice = sc.nextLine().trim().toLowerCase();
                         if (sportChoice.equals("y")) {
                             buySportCar(customer,sportCar); // Assuming the customer class can handle this
-                            System.out.println("Thank you for buying the car!");
+                            System.out.println("***Thank you for buying the car!***");
                         }
                     }
                     break;
     
                 case 0:
                     keepRunning = false;  // Exit the menu loop
-                    System.out.println("Thank you for visiting our car store!");
+                    System.out.println("***Thank you for visiting our car store!***");
                     break;
     
                 default:
-                    System.out.println("Invalid choice. Please enter a valid option (1-3).");
+                    System.out.println("!!!!Invalid choice. Please enter a valid option (1-3).!!!!");
             }
         }
     }
@@ -635,11 +641,11 @@ public class MenuSystem {
                     break;
                     
                 case 2:
-                    lcCar.showLxrCarMenuForManager(sc);
+                    lxCar.menuForManager(sc);
                     break;
     
                 case 3:
-                    lcCar.showSptCarMenuForManager(sc);
+                    lsCar.menuForManager(sc);
                     break;
     
                 case 0:
@@ -652,8 +658,4 @@ public class MenuSystem {
             }
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 68319e11ce8e6be0d5ba755490e9c15ad3db1b44

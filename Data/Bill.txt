@@ -1,0 +1,4 @@
+Lamborghini Diablo,16,1,550000.0,550000.0,18-11-2024 22:32:21,false,2,Nguyen Thi Hoa,11
+Rolls-Royce Cullinan,19,1,500000.0,500000.0,18-11-2024 22:33:18,false,3,Nguyen Thi Hoa,11
+Lamborghini Diablo,16,1,550000.0,550000.0,18-11-2024 22:38:27,false,4,Cu Minh Khoa,2
+Aston Martin DBX,23,1,240000.0,240000.0,18-11-2024 22:39:19,false,5,Cu Minh Khoa,2

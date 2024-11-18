@@ -1,20 +1,21 @@
-1	Ly Hieu Nghia	lyhieunghia@gmail.com	Nghia123!@#	0123456789	173	An Duong Vuong	7	5	TPHCM
-2	Tran Minh Duc	minhduc@gmail.com	Duc456$%^&	0987654321	180	Nguyen Trai	3	10	Hanoi
-3	Pham Thi Lan	lanpham@yahoo.com	Lan789*()_	0912345678	165	Le Loi	12	8	Da Nang
-4	Nguyen Van An	an.nguyen@gmail.com	An321&*()	0934567890	175	Pham Hung	5	2	Can Tho
-5	Hoang Thi Mai	mai.hoang@hotmail.com	Mai654@#$$	0945678901	160	Tran Phu	9	15	Haiphong
-6	Le Quoc Bao	bao.le@gmail.com	Bao987^&*	0956789012	185	Hoang Van Thu	4	7	Nha Trang
-7	Bui Thi Hoa	hoa.bui@yahoo.com	Hoa159!@#	0967890123	170	Nguyen Hue	6	12	Da Lat
-8	Dang Van Long	long.dang@gmail.com	Long753$%^	0978901234	178	Le Lai	8	3	Can Gio
-9	Vo Thi Kim	Kim.vo@hotmail.com	Kim258*()	0989012345	162	Tran Quang	11	9	Quy Nhon
-10	Do Minh Thuan	thuan.do@gmail.com	Thuan369&*#	0990123456	168	Nguyen Thi Minh	2	4	Buon Ma Thuot
-11	Nguyen Thi Hoa	hoa.nguyen@gmail.com	Hoa147!@#	0901234567	155	Pham Duy	10	6	Thanh Hoa
-12	Pham Van Tuan	tuan.pham@yahoo.com	Tuan258$%^	0912345679	172	Le Van	1	11	Hue
-13	Hoang Van Son	son.hoang@hotmail.com	Son369*()	0923456780	180	Nguyen Van Hien	5	14	Vinh
-14	Le Thi Thu	thu.le@gmail.com	Thu456&*#	0934567891	158	Tran Huu	7	5	Ha Long
-15	Bui Van Khoa	khoa.bui@yahoo.com	Khoa789@#$	0945678902	190	Le Thanh	3	8	Nam Dinh
-16	Dang Thi Minh	minh.dang@gmail.com	Minh123!@#	0956789013	165	Pham Ngoc	6	10	Phan Thiet
-17	Vo Van Quang	quang.vo@hotmail.com	Quang456$%^	0967890124	175	Nguyen Duc	9	2	Kon Tum
-18	Do Thi Mai	mai.do@gmail.com	Mai789*()	0978901235	160	Le Thanh	4	7	Sa Dec
-19	Nguyen Van Huy	huy.nguyen@yahoo.com	Huy321&*#	0989012346	182	Pham Tien	8	3	Ly Son
-20	Pham Thi Nga	nga.pham@gmail.com	Nga654@#$	0990123457	170	Tran Binh	2	12	Ha Tinh
+1	Ly Hieu Nghia	lyhieunghia@gmail.com	Nghia123!@#	0123456789	173	An Duong Vuong	5	7	TPHCM
+2	Tran Minh Duc	minhduc@gmail.com	Duc456$%^&	0987654321	180	Nguyen Trai	10	3	Hanoi
+2	Cu Minh Khoa	khoa@gmail.com	Khoa123!@#	0493210942	234	Hoa Hung	3	7	TPHCM
+3	Pham Thi Lan	lanpham@yahoo.com	Lan789*()_	0912345678	165	Le Loi	8	12	Da Nang
+4	Nguyen Van An	an.nguyen@gmail.com	An321&*()	0934567890	175	Pham Hung	2	5	Can Tho
+5	Hoang Thi Mai	mai.hoang@hotmail.com	Mai654@#$$	0945678901	160	Tran Phu	15	9	Haiphong
+6	Le Quoc Bao	bao.le@gmail.com	Bao987^&*	0956789012	185	Hoang Van Thu	7	4	Nha Trang
+7	Bui Thi Hoa	hoa.bui@yahoo.com	Hoa159!@#	0967890123	170	Nguyen Hue	12	6	Da Lat
+8	Dang Van Long	long.dang@gmail.com	Long753$%^	0978901234	178	Le Lai	3	8	Can Gio
+9	Vo Thi Kim	Kim.vo@hotmail.com	Kim258*()	0989012345	162	Tran Quang	9	11	Quy Nhon
+10	Do Minh Thuan	thuan.do@gmail.com	Thuan369&*#	0990123456	168	Nguyen Thi Minh	4	2	Buon Ma Thuot
+11	Nguyen Thi Hoa	hoa.nguyen@gmail.com	Hoa147!@#	0901234567	155	Pham Duy	6	10	Thanh Hoa
+12	Pham Van Tuan	tuan.pham@yahoo.com	Tuan258$%^	0912345679	172	Le Van	11	1	Hue
+13	Hoang Van Son	son.hoang@hotmail.com	Son369*()	0923456780	180	Nguyen Van Hien	14	5	Vinh
+14	Le Thi Thu	thu.le@gmail.com	Thu456&*#	0934567891	158	Tran Huu	5	7	Ha Long
+15	Bui Van Khoa	khoa.bui@yahoo.com	Khoa789@#$	0945678902	190	Le Thanh	8	3	Nam Dinh
+16	Dang Thi Minh	minh.dang@gmail.com	Minh123!@#	0956789013	165	Pham Ngoc	10	6	Phan Thiet
+17	Vo Van Quang	quang.vo@hotmail.com	Quang456$%^	0967890124	175	Nguyen Duc	2	9	Kon Tum
+18	Do Thi Mai	mai.do@gmail.com	Mai789*()	0978901235	160	Le Thanh	7	4	Sa Dec
+19	Nguyen Van Huy	huy.nguyen@yahoo.com	Huy321&*#	0989012346	182	Pham Tien	3	8	Ly Son
+20	Pham Thi Nga	nga.pham@gmail.com	Nga654@#$	0990123457	170	Tran Binh	12	2	Ha Tinh

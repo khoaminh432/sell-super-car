@@ -86,6 +86,7 @@ import java.util.Scanner;
    //show the person's infomation details
    
    public void showDetails(){
+      System.out.println("============Profile=========");
       System.out.println("ID Number: "+id);
       System.out.println("Name: "+name);
       System.out.println("Email Address: "+email);

@@ -8,7 +8,6 @@ public class List_sport_car extends List_Car {
     private ArrayList<Sport_car> Lscar;
     private IdManager id_car = new IdManager(ID_FILE_NAME);
     private List_Car lcar = new List_Car();
-    private static final String SPORTCAR_FILE_NAME = "Data/sportCar.txt";
     private static final String ID_FILE_NAME = "Data/sportCarID.txt";
     public List_sport_car() {
         super();
@@ -23,7 +22,8 @@ public class List_sport_car extends List_Car {
     public void setList(ArrayList<Super_car> sc) {
         for (Super_car sCar : sc) {
             if (Sport_car.checkSportCar(sCar)) {
-                super.getList().add(sCar);
+                Sport_car sportcar = (Sport_car) sCar;
+                Lscar.add(sportcar);
             }
         }
     }
@@ -86,7 +86,7 @@ public class List_sport_car extends List_Car {
     public void menuForManager(Scanner scanner) {
         int choice;
         do {
-            System.out.println("====================MENU===============");
+            System.out.println("====================Sport Car=================");
             System.out.println("1. Add a new super car");
             System.out.println("2. Remove car");
             System.out.println("3. Change the information of car");
