@@ -1,5 +1,8 @@
 package carstore;
 import department_car.List_Car;
+import department_car.Luxury_car;
+import department_car.Sport_car;
+import department_car.Super_car;
 import java.util.Scanner;
 
 public class MenuSystem {
@@ -118,8 +121,9 @@ public class MenuSystem {
     }
     
     //password recovery.
-    //only available for customer or staff.
-    //if admin forgot his password: i dont know.
+    //will send a recovery code to your email.
+    //you need to enter the code to change your password.
+    //DISCLAIMER: NO IT WONT, I DONT KNOW HOW TO SEND AN EMAIL BY JAVA CODE
     private void forgotPassword(){
         System.out.println("Enter your email: ");
         String email = ClientValidator.isEmailAdressValid(sc);
@@ -128,6 +132,7 @@ public class MenuSystem {
             System.out.println("Recovery code has been sent to your email.");
             System.out.println("......*Insert recovery code*)");
             admin.changePassword(sc);
+            admin.saveData();
             return;
         }
 
@@ -141,11 +146,13 @@ public class MenuSystem {
             System.out.println("Recovery code has been sent to your email.");
             System.out.println("......*Insert recovery code*)");
             recoveryStaff.changePassword(sc);
+            customerManager.saveData();
             return;
         }
         System.out.println("Recovery code has been sent to your email.");
         System.out.println("......*Insert recovery code*)");
         recoveryCustomer.changePassword(sc);
+        customerManager.saveData();
     }
 
     private void showStaffMainMenu(Staff staff) {
@@ -165,8 +172,11 @@ public class MenuSystem {
                 case 1:
                     showStaffProfileMenu(staff);
                     break;
+                case 2:
+                    customerManager.customerManagementMenu(sc);
+                    break;
                 case 3:
-                    
+                    lcCar.menuForManager(sc);
                     break;
                 case 4:
                     billManager.billManagerForStaff(sc);
@@ -232,7 +242,7 @@ public class MenuSystem {
                     showCustomerProfileMenu(customer);
                     break;
                 case 2:
-                    lcCar.menuForCustomer(sc,customer);
+                    menuForCustomer(sc,customer);
                     break;
                 case 3:
                     keepRunning = false;
@@ -248,7 +258,7 @@ public class MenuSystem {
     public void showCustomerProfileMenu(Customer customer) {
         boolean keepRunning = true;
         while (keepRunning) {
-            List_Car.decorateheader("Profile Menu");
+            System.out.println("-----Profile-----");
             System.out.println("1. View Profile Details");
             System.out.println("2. View Purchase History");
             System.out.println("3. Update Information");
@@ -270,7 +280,16 @@ public class MenuSystem {
                     customerManager.update(customer);
                     break;
                 case 4:
-                    customer.changePassword(sc);
+                System.out.println("------Customer Password Recovery------");
+                System.out.println("Create a new password: ");
+                String newPassword = ClientValidator.isPasswordValid(sc);
+                System.out.println("Confirm your password: ");
+                String confirmPassword = ClientValidator.isPasswordValid(sc);
+                if(newPassword==confirmPassword){
+                   customerManager.getCustomer(customer).setPassword(newPassword);
+                   System.out.println("Password changed successfully.");
+                }
+                    customerManager.writeToFile();
                     break;
                 case 5:
                     System.out.println("WARNING! This action will permanently delete your account.");
@@ -344,20 +363,283 @@ public class MenuSystem {
             }
         }
     }
-    public void showforCustomer(){
-        Scanner scanner = new Scanner(System.in);
-        CustomerManager customermanagement = new CustomerManager();
-        customermanagement.readFromFile();
-        ClientValidator checkmailpassword = new ClientValidator();
-        
-        do{
-        String Email = checkmailpassword.isEmailAdressValid(scanner);
-        String password = checkmailpassword.isPasswordValid(scanner); 
-        Customer customer = customermanagement.login(Email, password);
-        if(customer!=null){
-        showCustomerMainMenu(customer);
-        scanner.close();break;
+
+    private void buySuperCar(Customer customer, Super_car car){
+        String carName = car.getName();
+        int carId = car.getId_car();
+        int stocks = car.getQuantityof_car();
+        double price = car.getPricesell();
+        String customerName = customer.getName();
+        int customerId = customer.getID();
+        System.out.print("You selected: " + carName + "\t ID: "+ carId);
+        System.out.println("Stocks amount: " + stocks);
+
+        int amount = - 1;
+        while(true){
+            System.out.println("Enter amount (enter 0 to exit): ");
+            try {
+                amount = Integer.parseInt(sc.nextLine().trim());
+                if (amount < 0){
+                    System.out.println("Amount must be more than 0");
+                    continue;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid amount. Please enter a valid number.");
+                continue;
+            }
+            if(amount > stocks){
+                System.out.println("Amount must be not more than " + stocks);
+            }
+            break;
         }
-        else System.out.println("Email or Password don't exist!");
-    }while(true);
-}}
+        System.out.println("Choose payment method: ");
+        System.out.println("1. By Cash");
+        System.out.println("2. By Debit Card");
+        System.out.println("3. By Credit Card");
+        System.out.println("Press any to exit");
+        int choice;
+        try {choice = Integer.parseInt(sc.nextLine().trim());
+        } catch (NumberFormatException e) {
+            return;
+        }
+        switch (choice) {
+            case 1:
+                System.out.println("Pay by cash. Please show the bill to the cashier");
+                break;
+            case 2:
+                System.out.println("Pay by Debit Card. Please show the bill to the cashier");
+                break;
+            case 3:
+                System.out.println("Pay by Credit Card. Please show the bill to the cashier");
+                break;
+            default:
+                return;
+        }
+        Bill newBill = new Bill(carName, carId, amount, price, customerName, customerId);
+        newBill.showDetails();
+        billManager.createNewBill(newBill);
+        System.out.println("Buy car successfully.");
+    }
+
+    private void buyLuxuryCar(Customer customer, Super_car car){
+        String carName = car.getName();
+        int carId = car.getId_car();
+        int stocks = car.getQuantityof_car();
+        double price = car.getPricesell();
+        String customerName = customer.getName();
+        int customerId = customer.getID();
+        System.out.print("You selected: " + carName + "\t ID: "+ carId);
+        System.out.println("Stocks amount: " + stocks);
+
+        int amount = - 1;
+        while(true){
+            System.out.println("Enter amount (enter 0 to exit): ");
+            try {
+                amount = Integer.parseInt(sc.nextLine().trim());
+                if (amount < 0){
+                    System.out.println("Amount must be more than 0");
+                    continue;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid amount. Please enter a valid number.");
+                continue;
+            }
+            if(amount > stocks){
+                System.out.println("Amount must be not more than " + stocks);
+            }
+            break;
+        }
+        System.out.println("Choose payment method: ");
+        System.out.println("1. By Cash");
+        System.out.println("2. By Debit Card");
+        System.out.println("3. By Credit Card");
+        System.out.println("Press any to exit");
+        int choice;
+        try {choice = Integer.parseInt(sc.nextLine().trim());
+        } catch (NumberFormatException e) {
+            return;
+        }
+        switch (choice) {
+            case 1:
+                System.out.println("Pay by cash. Please show the bill to the cashier");
+                break;
+            case 2:
+                System.out.println("Pay by Debit Card. Please show the bill to the cashier");
+                break;
+            case 3:
+                System.out.println("Pay by Credit Card. Please show the bill to the cashier");
+                break;
+            default:
+                return;
+        }
+        Bill newBill = new Bill(carName, carId, amount, price, customerName, customerId);
+        newBill.showDetails();
+        billManager.createNewBill(newBill);
+        System.out.println("Buy car successfully.");
+    }
+
+    private void buySportCar(Customer customer, Sport_car car){
+        String carName = car.getName();
+        int carId = car.getId_car();
+        int stocks = car.getQuantityof_car();
+        double price = car.getPricesell();
+        String customerName = customer.getName();
+        int customerId = customer.getID();
+        System.out.print("You selected: " + carName + "\t ID: "+ carId);
+        System.out.println("Stocks amount: " + stocks);
+
+        int amount = - 1;
+        while(true){
+            System.out.println("Enter amount (enter 0 to exit): ");
+            try {
+                amount = Integer.parseInt(sc.nextLine().trim());
+                if (amount < 0){
+                    System.out.println("Amount must be more than 0");
+                    continue;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid amount. Please enter a valid number.");
+                continue;
+            }
+            if(amount > stocks){
+                System.out.println("Amount must be not more than " + stocks);
+            }
+            break;
+        }
+        System.out.println("Choose payment method: ");
+        System.out.println("1. By Cash");
+        System.out.println("2. By Debit Card");
+        System.out.println("3. By Credit Card");
+        System.out.println("Press any to exit");
+        int choice;
+        try {choice = Integer.parseInt(sc.nextLine().trim());
+        } catch (NumberFormatException e) {
+            return;
+        }
+        switch (choice) {
+            case 1:
+                System.out.println("Pay by cash. Please show the bill to the cashier");
+                break;
+            case 2:
+                System.out.println("Pay by Debit Card. Please show the bill to the cashier");
+                break;
+            case 3:
+                System.out.println("Pay by Credit Card. Please show the bill to the cashier");
+                break;
+            default:
+                return;
+        }
+        Bill newBill = new Bill(carName, carId, amount, price, customerName, customerId);
+        newBill.showDetails();
+        billManager.createNewBill(newBill);
+        System.out.println("Buy car successfully.");
+    }
+
+    public void menuForCustomer(Scanner sc, Customer customer) {
+        boolean keepRunning = true;
+        
+        while (keepRunning) {
+            System.out.println("=========== CUSTOMER MENU ===========");
+            System.out.println("1. Buy Super Car");
+            System.out.println("2. Buy Luxury Car");
+            System.out.println("3. Buy Sport Car");
+            System.out.println("0. Exit");
+            System.out.print("Enter your choice (1-3): ");
+            
+            int choice = -1;
+            try {
+                choice = Integer.parseInt(sc.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid choice.");
+                continue; // Skip the rest of the loop and show the menu again
+            }
+    
+            switch (choice) {
+                case 1:
+                    Super_car superCar = lcCar.search(sc);  
+                    if (superCar != null) {
+                        buySuperCar(customer,superCar);
+                    }
+                    break;
+                    
+                case 2:
+                    Luxury_car luxuryCar = lcCar.searchLuxuryCar(sc);  // Assuming a separate search for luxury cars
+                    if (luxuryCar != null) {
+                        System.out.println("You selected: " + luxuryCar.getName());
+                        System.out.print("Do you want to buy this car? (y/n): ");
+                        String luxuryChoice = sc.nextLine().trim().toLowerCase();
+                        if (luxuryChoice.equals("y")) {
+                            buyLuxuryCar(customer,luxuryCar); // Assuming the customer class can handle this
+                            System.out.println("Thank you for buying the car!");
+                        }
+                    }
+                    break;
+    
+                case 3:
+                    // Buy Sport Car (Similar to Super Car)
+                    Sport_car sportCar = lcCar.searchSportCar(sc);  // Assuming a separate search for sport cars
+                    if (sportCar != null) {
+                        System.out.println("You selected: " + sportCar.getName());
+                        System.out.print("Do you want to buy this car? (y/n): ");
+                        String sportChoice = sc.nextLine().trim().toLowerCase();
+                        if (sportChoice.equals("y")) {
+                            buySportCar(customer,sportCar); // Assuming the customer class can handle this
+                            System.out.println("Thank you for buying the car!");
+                        }
+                    }
+                    break;
+    
+                case 0:
+                    keepRunning = false;  // Exit the menu loop
+                    System.out.println("Thank you for visiting our car store!");
+                    break;
+    
+                default:
+                    System.out.println("Invalid choice. Please enter a valid option (1-3).");
+            }
+        }
+    }
+
+    public void menuForManager(Scanner sc){
+        boolean keepRunning = true;
+        
+        while (keepRunning) {
+            System.out.println("=========== CUSTOMER MENU ===========");
+            System.out.println("1. Manage Super Car");
+            System.out.println("2. Manage Luxury Car");
+            System.out.println("3. Manage Sport Car");
+            System.out.println("0. Exit");
+            System.out.print("Enter your choice (1-3): ");
+            
+            int choice = -1;
+            try {
+                choice = Integer.parseInt(sc.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid choice.");
+                continue; // Skip the rest of the loop and show the menu again
+            }
+    
+            switch (choice) {
+                case 1:
+                    lcCar.menuForManager(sc);
+                    break;
+                    
+                case 2:
+                    lcCar.showLxrCarMenuForManager(sc);
+                    break;
+    
+                case 3:
+                    lcCar.showSptCarMenuForManager(sc);
+                    break;
+    
+                case 0:
+                    keepRunning = false;  // Exit the menu loop
+                    System.out.println("Thank you for visiting our car store!");
+                    break;
+    
+                default:
+                    System.out.println("Invalid choice. Please enter a valid option (1-3).");
+            }
+        }
+    }
+}

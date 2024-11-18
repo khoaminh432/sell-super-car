@@ -123,7 +123,13 @@ public class CustomerManager implements IFeatures<Customer> {
         
     }
     //WriteToFile:END
+    public Customer getCustomer(Customer customer){
+        for(Customer cus:cList)
+            if(cus.getID()==customer.getID())
+                return cus;
+        return null;
 
+    }
     @Override
     //Add new customer
     public boolean add(){
@@ -297,13 +303,15 @@ public class CustomerManager implements IFeatures<Customer> {
             System.out.println("5. Finish updating");
     
             System.out.print("Enter your choice (1-5): ");
-            int choice = sc.nextInt();
-            try {
-                choice = Integer.parseInt(sc.nextLine().trim());
+            
+            int choice;
+            do{try {
+                choice = sc.nextInt();
+                break;
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a number.");
                 continue;
-            }
+            }}while(true);
             sc.nextLine(); // Consume the newline
     
             switch (choice) {

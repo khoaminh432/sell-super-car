@@ -1,9 +1,11 @@
 package carstore;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -14,6 +16,14 @@ public class Admin extends Person {
     // Constructor
     public Admin() {
         readAdminInfoFromFile();
+    }
+
+    public void saveData(){
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(ADMIN_FILE))) {
+            bw.write(super.toString());
+        } catch (IOException e) {
+            System.out.println("Error writing to file: " + e.getMessage());
+        }
     }
 
     private void readAdminInfoFromFile() {
@@ -83,4 +93,3 @@ public class Admin extends Person {
         }
    }
 }
-

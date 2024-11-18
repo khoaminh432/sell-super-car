@@ -50,7 +50,7 @@ public class ClientValidator {
     //EMAIL VALIDATOR: BEGIN
     public static String isEmailAdressValid(Scanner sc){
         while(true){
-            System.out.println("Enter your email: ");
+            System.out.print("Enter your email: ");
             String email = sc.nextLine();
 
             //Use RFC 5322 to check if the email is valid.
@@ -67,7 +67,7 @@ public class ClientValidator {
     //PASSWORD VALIDATOR: BEGIN
     public static String isPasswordValid(Scanner sc) {
         while(true) {
-            System.out.println("Enter your password: ");
+            System.out.print("Enter your password: ");
             String password = sc.nextLine();
     
             // There are at least 8 chars
