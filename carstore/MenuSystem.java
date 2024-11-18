@@ -344,7 +344,7 @@ public class MenuSystem {
             }
         }
     }
-    public void showforCustomer(){
+    /*public void showforCustomer(){
         Scanner scanner = new Scanner(System.in);
         CustomerManager customermanagement = new CustomerManager();
         customermanagement.readFromFile();
@@ -359,5 +359,5 @@ public class MenuSystem {
         scanner.close();break;
         }
         else System.out.println("Email or Password don't exist!");
-    }while(true);
-}}
+    }while(true);}*/
+}
