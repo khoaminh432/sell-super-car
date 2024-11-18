@@ -45,6 +45,9 @@ public class IdManager {
     public void releaseId(int id) {
         availableId.add(id);
         Collections.sort(availableId);
+        for (Integer integer : availableId) {
+            System.out.println(integer);
+        }
     }
     //ReleaseID: END
 
@@ -97,7 +100,6 @@ public class IdManager {
             return false;
         }
     }
-    
    
 
 }

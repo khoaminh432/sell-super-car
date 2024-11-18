@@ -29,6 +29,9 @@ public class Customer extends Person{
     }
 
     public void showPurchaseHistory(){
+        if(purchaseHistory.isEmpty()){
+            System.out.println("nothing to show");
+        }
         for (Bill bill : purchaseHistory) {
             bill.showBillDetails();
             System.out.println("---------");

@@ -71,8 +71,8 @@ public class CustomerManager implements IFeatures<Customer> {
                 int id = Integer.parseInt(info[0]);
                 String name = info[1].trim();
                 String email = info[2].trim();
-                String password = info[4].trim();
-                String contact = info[3].trim();
+                String password = info[3].trim();
+                String contact = info[4].trim();
     
                 // Parsing address
                 String houseNumber = info[5].trim();
@@ -165,8 +165,7 @@ public class CustomerManager implements IFeatures<Customer> {
         cList.add(newCustomer);
         System.out.println("New customer created successfully with ID: " + id);
         cList.sort((c1, c2) -> Integer.compare(c1.getID(), c2.getID()));
-        //writeToFile();
-        //idCustomer.writeIDsToFile(Customer_ID_FILE_NAME);
+        saveData();
         
         return true;
     }
@@ -193,6 +192,8 @@ public class CustomerManager implements IFeatures<Customer> {
     public void delete(Customer toDeleteCustomer) {
         if (toDeleteCustomer != null && cList.remove(toDeleteCustomer)) {
             System.out.println("Customer member with ID " + toDeleteCustomer.getID() + " deleted successfully.");
+            idCustomer.releaseId(toDeleteCustomer.getID());
+            saveData();
         } else {
             System.out.println("Customer member not found.");
         }
@@ -200,14 +201,20 @@ public class CustomerManager implements IFeatures<Customer> {
 
     @Override
     public Customer search() {
+        while(true){
         System.out.println("Search by: ");
         System.out.println("1. Customer ID");
         System.out.println("2. Name");
         System.out.println("3. Email");
         System.out.print("Enter your choice (1-3): ");
-        int choice = sc.nextInt();
+        int choice;
+        try {
+            choice = Integer.parseInt(sc.nextLine().trim());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a number.");
+            continue;
+        }
         sc.nextLine(); 
-    
         List<Customer> searchResults = new ArrayList<>();
     
         switch (choice) {
@@ -233,9 +240,9 @@ public class CustomerManager implements IFeatures<Customer> {
             case 3:
                 // Search by Email
                 System.out.print("Enter customer email: ");
-                String email = ClientValidator.isEmailAdressValid(sc);
+                String email = sc.nextLine().trim();
                 for (Customer customer : cList) {
-                    if (customer.getEmail().equalsIgnoreCase(email)) {
+                    if (customer.getEmail().toLowerCase().contains(email)) {
                         searchResults.add(customer);
                     }
                 }
@@ -243,8 +250,9 @@ public class CustomerManager implements IFeatures<Customer> {
     
             default:
                 System.out.println("Invalid choice. Please choose a valid option.");
-                return null;
-        }
+                continue;
+            }
+        
     
         // Display search results
         if (searchResults.isEmpty()) {
@@ -272,6 +280,7 @@ public class CustomerManager implements IFeatures<Customer> {
             return null;
         }
     }
+    }
     
     @Override
     public void update(Customer customerToUpdate) {
@@ -289,6 +298,12 @@ public class CustomerManager implements IFeatures<Customer> {
     
             System.out.print("Enter your choice (1-5): ");
             int choice = sc.nextInt();
+            try {
+                choice = Integer.parseInt(sc.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                continue;
+            }
             sc.nextLine(); // Consume the newline
     
             switch (choice) {
@@ -307,6 +322,7 @@ public class CustomerManager implements IFeatures<Customer> {
                 case 5:
                     System.out.println("Finished updating.");
                     keepUpdating = false;
+                    saveData();
                     break;
                 default:
                     System.out.println("Invalid choice. Please select a valid option.");

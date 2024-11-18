@@ -11,8 +11,12 @@ public class MenuSystem {
     private BillManager billManager = new BillManager();
     private List_Car lcCar = new List_Car();
 
-    public MenuSystem(){
-        sc =  new Scanner(System.in);
+    public MenuSystem(Scanner sc){
+        this.sc = sc;
+        customerManager.readFromFile();
+        staffManager.readFromFile();
+        billManager.readFromFile();
+        lcCar.ReadFile("Data/list_car.txt");
     }
 
     /**
@@ -152,7 +156,7 @@ public class MenuSystem {
             System.out.println("2. Manage Customer");
             System.out.println("3. Manage Car");
             System.out.println("4. Manage Bill");
-            System.out.println("5. Return to Main Menu");
+            System.out.println("5. Return to Login Menu");
             System.out.print("Enter your choice (1-5): ");
             int choice = sc.nextInt();
             sc.nextLine();
@@ -185,7 +189,7 @@ public class MenuSystem {
             System.out.println("1. View Profile Details");
             System.out.println("2. Update Information");
             System.out.println("3. Change password");
-            System.out.println("4. Return to Previous Menu");
+            System.out.println("4. Return to Main Menu");
             System.out.print("Enter your choice (1-4): ");
             int choice = sc.nextInt();
             sc.nextLine();
@@ -250,7 +254,7 @@ public class MenuSystem {
             System.out.println("3. Update Information");
             System.out.println("4. Change password");
             System.out.println("5. Delete account");
-            System.out.println("6. Return to Previous Menu");
+            System.out.println("6. Return to Main Menu");
             System.out.print("Enter your choice (1-6): ");
             int choice = sc.nextInt();
             sc.nextLine(); 

@@ -104,7 +104,16 @@ public class BillManager {
         }
 
         System.out.print("Enter the number of the bill to check (0 to exit): ");
-        int choice = sc.nextInt();
+        int choice ;
+        while(true){
+        try {
+            choice = Integer.parseInt(sc.nextLine().trim());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a number.");
+            continue;
+        }
+        break;
+        }
         if (choice > 0 && choice <= bills.size()) {
             check(bills.get(choice - 1));
         } else {
@@ -172,13 +181,19 @@ public void billManagerForStaff(Scanner sc) {
     do {
         System.out.println("\n=== Bill Management Menu ===");
         System.out.println("1. Show Unchecked Bills");
-        System.out.println("1. Show Bills");
-        System.out.println("2. Statistic by months");
-        System.out.println("3. Statistic by date");
-        System.out.println("4. Save and exit");
+        System.out.println("2. Search for Bills");
+        System.out.println("3. Statistic by months");
+        System.out.println("4. Statistic by date");
+        System.out.println("5. Save and exit");
         System.out.print("Enter your choice: ");
 
-        int choice = sc.nextInt();
+        int choice;
+        try {
+            choice = Integer.parseInt(sc.nextLine().trim());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a number.");
+            continue;
+        }
         sc.nextLine(); 
 
         switch (choice) {
@@ -187,14 +202,17 @@ public void billManagerForStaff(Scanner sc) {
                 break;
 
             case 2:
+                search(sc);
+                break;
+            case 3:
                 statisticByMonth();
                 break;
 
-            case 3:
+            case 4:
                 statisticByDate(sc);
                 break;
 
-            case 4:
+            case 5:
                 System.out.println("Exiting Bill Management. Goodbye!");
                 writeToFile();
                 flag = false;
@@ -220,4 +238,89 @@ public void billManagerForStaff(Scanner sc) {
         }
         return customerBills;
     }   
+
+    public void search(Scanner sc){
+        int choice;
+        while(true){
+        System.out.println("Search by: ");
+        System.out.println("1.By id");
+        System.out.println("2.By customer id");
+        System.out.println("3.By date");
+        System.out.print("Enter your choice: ");
+
+        try {
+            choice = Integer.parseInt(sc.nextLine().trim());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a number.");
+            continue;
+        }
+        sc.nextLine(); 
+        break;
+        }
+
+        switch (choice){
+            case 1:
+                System.out.println("Enter id: ");
+                int id = sc.nextInt();
+                Bill bill = getBillById(id);
+                if(bill==null){
+                    System.out.println("Bill not found");
+                }else{
+                    bill.showDetails();
+                }
+                break;
+            case 2:
+                System.out.println("Enter customer's id: ");
+                int customerId = sc.nextInt();
+                List<Bill> bills= getBillByCustomerId(customerId);
+                if(bills.isEmpty()){
+                    System.out.println("nothing to show");
+                }else{
+                    for (Bill thisbill : bills) {
+                        thisbill.showDetails();
+                        System.out.println("--------");
+                    }
+                }
+                break;
+            case 3:
+                searchByDate(sc);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private Bill getBillById(int id){
+        for (Bill bill : receipts) {
+            if(bill.getBillId()==id){
+                return bill;
+            }
+        }
+        return null;
+    }
+
+    private void searchByDate(Scanner sc) {
+        System.out.print("Enter Date (dd-MM-yyyy): ");
+        String dateStr = sc.nextLine();
+    
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            LocalDate searchDate = LocalDate.parse(dateStr, formatter);
+    
+            boolean found = false;
+            for (Bill bill : receipts) {
+                if (bill.getDate().toLocalDate().equals(searchDate)) {
+                    bill.showDetails();
+                    System.out.println("--------");
+                    found = true;
+                }
+            }
+    
+            if (!found) {
+                System.out.println("No bills found for the specified date.");
+            }
+        } catch (Exception e) {
+            System.out.println("Invalid date format. Please use dd-MM-yyyy.");
+        }
+    }
 }

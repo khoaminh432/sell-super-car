@@ -1,8 +1,11 @@
 import carstore.*;
+import java.util.Scanner;
 
 public class main{
     public static void main(String[] args) {
-        MenuSystem menu = new MenuSystem();
+        Scanner sc = new Scanner(System.in);
+        MenuSystem menu = new MenuSystem(sc);
         menu.showforCustomer();
+        sc.close();
     }
 }

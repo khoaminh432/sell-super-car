@@ -80,7 +80,7 @@ import java.util.Scanner;
    //convert the person's infomation into string to store
    
    public String toString(){
-      return id+"\t"+name+"\t"+email+"\t"+contactNumber+"\t"+password+"\t"+this.address.toString();
+      return id+"\t"+name+"\t"+email+"\t"+password+"\t"+contactNumber+"\t"+this.address.toString();
    }
    
    //show the person's infomation details
