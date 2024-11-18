@@ -66,7 +66,7 @@ public class Location {
 
     //show address 
     public void showDetails(){
-        System.out.println("Address: "+houseNumber+", "+street+", "+ward+", "+district+", "+city);
+        System.out.println("Address: "+houseNumber+", Street "+street+", Ward "+ward+", District "+district+", "+city);
     }
 
     
