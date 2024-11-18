@@ -29,15 +29,15 @@ public class List_Car implements Ishowfor{
     public void add(Scanner scanner){
         System.out.println("=================ADD=============");
         int id = id_car.idGenerator();
-        String name = scanner.nextLine().trim();
-        int pricesell = scanner.nextInt();
-        int pricebuy = scanner.nextInt();
-        float weight = scanner.nextFloat();
-        float length = scanner.nextFloat();
-        float height = scanner.nextFloat();
-        float width = scanner.nextFloat();
-        int quantityof_car = scanner.nextInt();
-        String CompanyCar = scanner.nextLine().trim();
+        System.out.println("Name: ");String name = scanner.nextLine().trim();
+        System.out.println("Pricesell: ");int pricesell = scanner.nextInt();
+        System.out.println("Pricebuy: ");int pricebuy = scanner.nextInt();
+        System.out.println("Weight: ");float weight = scanner.nextFloat();
+        System.out.println("Length: ");float length = scanner.nextFloat();
+        System.out.println("Height: ");float height = scanner.nextFloat();
+        System.out.println("Width: ");float width = scanner.nextFloat();
+        System.out.println("The number of cars: ");int quantityof_car = scanner.nextInt();
+        System.out.println("Company: ");String CompanyCar = scanner.nextLine().trim();
         add(new Super_car(id,name,pricesell,pricebuy,weight,length,height,width,quantityof_car,CompanyCar));
     }
     //xoa
