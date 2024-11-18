@@ -153,11 +153,11 @@ public class MenuSystem {
         while (keepRunning) {
             System.out.println("----- Staff Menu -----");
             System.out.println("1. View Profile");
-            System.out.println("3. Manage Customer");
-            System.out.println("4. Manage Car");
-            System.out.println("5. Manage Bill");
-            System.out.println("6. Return to Main Menu");
-            System.out.print("Enter your choice (1-6): ");
+            System.out.println("2. Manage Customer");
+            System.out.println("3. Manage Car");
+            System.out.println("4. Manage Bill");
+            System.out.println("5. Return to Main Menu");
+            System.out.print("Enter your choice (1-5): ");
             int choice = sc.nextInt();
             sc.nextLine();
     
@@ -165,16 +165,16 @@ public class MenuSystem {
                 case 1:
                     showStaffProfileMenu(staff);
                     break;
-                case 3:
+                case 2:
                     customerManager.customerManagementMenu(sc);
                     break;
-                case 4:
+                case 3:
                     manageCarMenu();
                     break;
-                case 5:
+                case 4:
                     billManager.billManagerForStaff(sc);
                     break;
-                case 6:
+                case 5:
                     keepRunning = false;
                     System.out.println("Returning to Login Menu...");
                     break;
@@ -184,9 +184,6 @@ public class MenuSystem {
         }
     }  
 
-    private void manageCarMenu(){
-        
-    }
 
     private void showStaffProfileMenu(Staff staff) {
         boolean keepRunning = true;

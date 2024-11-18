@@ -62,14 +62,17 @@ public class CustomerManager implements IFeatures<Customer> {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = br.readLine()) != null) {
+                if(line == ""){
+                    continue;
+                }
                 String[] info = line.split("\t");
     
                 // Parsing customer information
                 int id = Integer.parseInt(info[0].trim());
                 String name = info[1].trim();
                 String email = info[2].trim();
-                String password = info[3].trim();
-                String contact = info[4].trim();
+                String password = info[4].trim();
+                String contact = info[3].trim();
     
                 // Parsing address
                 String houseNumber = info[5].trim();
@@ -110,7 +113,6 @@ public class CustomerManager implements IFeatures<Customer> {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(Customer_FILE_NAME))) {
             for(Customer c:cList){
                 bw.write(c.toString());
-                bw.newLine();
             }
             System.out.println("Customer data saved saves successfully");
         } catch (IOException e) {
@@ -161,7 +163,8 @@ public class CustomerManager implements IFeatures<Customer> {
         cList.add(newCustomer);
         System.out.println("New customer created successfully with ID: " + id);
         cList.sort((c1, c2) -> Integer.compare(c1.getID(), c2.getID()));
-        writeToFile();
+        //writeToFile();
+        //idCustomer.writeIDsToFile(Customer_ID_FILE_NAME);
         
         return true;
     }

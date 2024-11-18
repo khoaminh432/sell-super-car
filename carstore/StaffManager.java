@@ -71,8 +71,8 @@ public class StaffManager implements IFeatures<Staff> {
                 int id = Integer.parseInt(info[0].trim());
                 String name = info[1].trim();
                 String email = info[2].trim();
-                String password = info[3].trim();
-                String contact = info[4].trim();
+                String password = info[4].trim();
+                String contact = info[3].trim();
 
                 // Parsing address
                 String houseNumber = info[5].trim();

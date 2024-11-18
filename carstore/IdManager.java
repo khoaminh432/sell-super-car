@@ -57,7 +57,9 @@ public class IdManager {
             }
             nextId=Integer.parseInt(line);
             line=br.readLine();
-            availableId=parseIdList(line);
+            if(line!=null){
+                availableId=parseIdList(line);
+            }
             return true; // If the file was read successfully
         } catch (FileNotFoundException e) {
             return false; // File does not exist or could not be opened
