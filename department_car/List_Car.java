@@ -509,6 +509,17 @@ public class List_Car implements Ishowfor{
         list_sport_car.setList(Lcar);
         return list_sport_car.searchSPCar(sc);
     }
+
+    public void showLxrCarMenuForManager(Scanner sc){
+        List_luxury_car list_luxury_car = new List_luxury_car();
+        list_luxury_car.setList(Lcar);
+        list_luxury_car.menuForManager(sc);
+    }
     
+    public void showSptCarMenuForManager(Scanner sc){
+        List_sport_car list_sport_car = new List_sport_car();
+        list_sport_car.setList(Lcar);
+        list_sport_car.menuForManager(sc);
+    }
 }
     

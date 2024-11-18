@@ -360,6 +360,7 @@ public class MenuSystem {
         String carName = car.getName();
         int carId = car.getId_car();
         int stocks = car.getQuantityof_car();
+        double price = car.getPricesell();
         String customerName = customer.getName();
         int customerId = customer.getID();
         System.out.print("You selected: " + carName + "\t ID: "+ carId);
@@ -406,7 +407,122 @@ public class MenuSystem {
             default:
                 return;
         }
-        Bill newBill = new Bill(carName, carId, amount, amount, customerName, customerId);
+        Bill newBill = new Bill(carName, carId, amount, price, customerName, customerId);
+        newBill.showDetails();
+        billManager.createNewBill(newBill);
+        System.out.println("Buy car successfully.");
+    }
+
+    private void buyLuxuryCar(Customer customer, Super_car car){
+        String carName = car.getName();
+        int carId = car.getId_car();
+        int stocks = car.getQuantityof_car();
+        double price = car.getPricesell();
+        String customerName = customer.getName();
+        int customerId = customer.getID();
+        System.out.print("You selected: " + carName + "\t ID: "+ carId);
+        System.out.println("Stocks amount: " + stocks);
+
+        int amount = - 1;
+        while(true){
+            System.out.println("Enter amount (enter 0 to exit): ");
+            try {
+                amount = Integer.parseInt(sc.nextLine().trim());
+                if (amount < 0){
+                    System.out.println("Amount must be more than 0");
+                    continue;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid amount. Please enter a valid number.");
+                continue;
+            }
+            if(amount > stocks){
+                System.out.println("Amount must be not more than " + stocks);
+            }
+            break;
+        }
+        System.out.println("Choose payment method: ");
+        System.out.println("1. By Cash");
+        System.out.println("2. By Debit Card");
+        System.out.println("3. By Credit Card");
+        System.out.println("Press any to exit");
+        int choice;
+        try {choice = Integer.parseInt(sc.nextLine().trim());
+        } catch (NumberFormatException e) {
+            return;
+        }
+        switch (choice) {
+            case 1:
+                System.out.println("Pay by cash. Please show the bill to the cashier");
+                break;
+            case 2:
+                System.out.println("Pay by Debit Card. Please show the bill to the cashier");
+                break;
+            case 3:
+                System.out.println("Pay by Credit Card. Please show the bill to the cashier");
+                break;
+            default:
+                return;
+        }
+        Bill newBill = new Bill(carName, carId, amount, price, customerName, customerId);
+        newBill.showDetails();
+        billManager.createNewBill(newBill);
+        System.out.println("Buy car successfully.");
+    }
+
+    private void buySportCar(Customer customer, Sport_car car){
+        String carName = car.getName();
+        int carId = car.getId_car();
+        int stocks = car.getQuantityof_car();
+        double price = car.getPricesell();
+        String customerName = customer.getName();
+        int customerId = customer.getID();
+        System.out.print("You selected: " + carName + "\t ID: "+ carId);
+        System.out.println("Stocks amount: " + stocks);
+
+        int amount = - 1;
+        while(true){
+            System.out.println("Enter amount (enter 0 to exit): ");
+            try {
+                amount = Integer.parseInt(sc.nextLine().trim());
+                if (amount < 0){
+                    System.out.println("Amount must be more than 0");
+                    continue;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid amount. Please enter a valid number.");
+                continue;
+            }
+            if(amount > stocks){
+                System.out.println("Amount must be not more than " + stocks);
+            }
+            break;
+        }
+        System.out.println("Choose payment method: ");
+        System.out.println("1. By Cash");
+        System.out.println("2. By Debit Card");
+        System.out.println("3. By Credit Card");
+        System.out.println("Press any to exit");
+        int choice;
+        try {choice = Integer.parseInt(sc.nextLine().trim());
+        } catch (NumberFormatException e) {
+            return;
+        }
+        switch (choice) {
+            case 1:
+                System.out.println("Pay by cash. Please show the bill to the cashier");
+                break;
+            case 2:
+                System.out.println("Pay by Debit Card. Please show the bill to the cashier");
+                break;
+            case 3:
+                System.out.println("Pay by Credit Card. Please show the bill to the cashier");
+                break;
+            default:
+                return;
+        }
+        Bill newBill = new Bill(carName, carId, amount, price, customerName, customerId);
+        newBill.showDetails();
         billManager.createNewBill(newBill);
         System.out.println("Buy car successfully.");
     }
@@ -445,7 +561,7 @@ public class MenuSystem {
                         System.out.print("Do you want to buy this car? (y/n): ");
                         String luxuryChoice = sc.nextLine().trim().toLowerCase();
                         if (luxuryChoice.equals("y")) {
-                            buyLuxuryCar(luxuryCar); // Assuming the customer class can handle this
+                            buyLuxuryCar(customer,luxuryCar); // Assuming the customer class can handle this
                             System.out.println("Thank you for buying the car!");
                         }
                     }
@@ -459,10 +575,53 @@ public class MenuSystem {
                         System.out.print("Do you want to buy this car? (y/n): ");
                         String sportChoice = sc.nextLine().trim().toLowerCase();
                         if (sportChoice.equals("y")) {
-                            customer.buySportCar(sportCar); // Assuming the customer class can handle this
+                            buySportCar(customer,sportCar); // Assuming the customer class can handle this
                             System.out.println("Thank you for buying the car!");
                         }
                     }
+                    break;
+    
+                case 0:
+                    keepRunning = false;  // Exit the menu loop
+                    System.out.println("Thank you for visiting our car store!");
+                    break;
+    
+                default:
+                    System.out.println("Invalid choice. Please enter a valid option (1-3).");
+            }
+        }
+    }
+
+    public void menuForManager(Scanner sc){
+        boolean keepRunning = true;
+        
+        while (keepRunning) {
+            System.out.println("=========== CUSTOMER MENU ===========");
+            System.out.println("1. Manage Super Car");
+            System.out.println("2. Manage Luxury Car");
+            System.out.println("3. Manage Sport Car");
+            System.out.println("0. Exit");
+            System.out.print("Enter your choice (1-3): ");
+            
+            int choice = -1;
+            try {
+                choice = Integer.parseInt(sc.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid choice.");
+                continue; // Skip the rest of the loop and show the menu again
+            }
+    
+            switch (choice) {
+                case 1:
+                    lcCar.menuForManager(sc);
+                    break;
+                    
+                case 2:
+                    lcCar.showLxrCarMenuForManager(sc);
+                    break;
+    
+                case 3:
+                    lcCar.showSptCarMenuForManager(sc);
                     break;
     
                 case 0:
