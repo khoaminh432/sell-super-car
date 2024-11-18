@@ -358,7 +358,7 @@ public class CustomerManager implements IFeatures<Customer> {
     //Called by customer manage menu
     public void saveData(){
         writeToFile();
-        if(idCustomer.writeIDsToFile(Customer_FILE_NAME)){
+        if(idCustomer.writeIDsToFile(Customer_ID_FILE_NAME)){
             System.out.println("Customer id file saved successfully");
         }
     }
