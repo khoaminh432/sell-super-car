@@ -6,8 +6,9 @@ import carstore.*;
 
 public class main{
     public static void main(String[] args) {
-        MenuSystem menu = new MenuSystem();
-        menu
+        Scanner sc = new Scanner(System.in);
+        MenuSystem menu = new MenuSystem(sc);
         menu.showLoginMenu();
+        sc.close();
     }
 }

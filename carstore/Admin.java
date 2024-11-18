@@ -45,7 +45,7 @@ public class Admin extends Person {
                 Location address = new Location(houseNumber, street, ward, district, city);
                 this.setAddress(address);
 
-                System.out.println("Admin loaded: " + this.getName());
+                //System.out.println("Admin loaded: " + this.getName());
             }
         } catch (FileNotFoundException e) {
             System.out.println("Admin file not found. Creating a new one.");

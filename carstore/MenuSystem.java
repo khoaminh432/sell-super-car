@@ -11,8 +11,12 @@ public class MenuSystem {
     private BillManager billManager = new BillManager();
     private List_Car lcCar = new List_Car();
 
-    public MenuSystem(){
-        sc =  new Scanner(System.in);
+    public MenuSystem(Scanner sc){
+        this.sc = sc;
+        customerManager.readFromFile();
+        staffManager.readFromFile();
+        billManager.readFromFile();
+        lcCar.ReadFile("Data/list_car.txt");
     }
 
     /**
