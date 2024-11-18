@@ -44,6 +44,7 @@ public class List_Car implements Ishowfor{
     //xoa
     public void Remove(Super_car sc){
         Lcar.remove(sc);
+        id_car.releaseId(sc.getId_car());
     }
     // hàm xóa phàn tử tại vị trí index
     public void remove(int index){

@@ -45,6 +45,9 @@ public class IdManager {
     public void releaseId(int id) {
         availableId.add(id);
         Collections.sort(availableId);
+        for (Integer integer : availableId) {
+            System.out.println(integer);
+        }
     }
     //ReleaseID: END
 
@@ -89,7 +92,9 @@ public class IdManager {
             bw.newLine();
     
             // Write the available IDs on the second line, joined by '|'
-            bw.write(String.join("|", availableId.stream().map(String::valueOf).toArray(String[]::new)));
+            for (Integer id : availableId) {
+                bw.write(String.valueOf(id)+"|");
+            }
 
             return true;
         } catch (IOException e) {
@@ -97,7 +102,6 @@ public class IdManager {
             return false;
         }
     }
-    
    
 
 }

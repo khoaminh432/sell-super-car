@@ -57,7 +57,6 @@ public class StaffManager implements IFeatures<Staff> {
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
-            sList.clear(); // Clear existing list before reading
             while ((line = br.readLine()) != null) {
                 String[] info = line.split("\t");
 
@@ -71,8 +70,8 @@ public class StaffManager implements IFeatures<Staff> {
                 int id = Integer.parseInt(info[0].trim());
                 String name = info[1].trim();
                 String email = info[2].trim();
-                String password = info[4].trim();
-                String contact = info[3].trim();
+                String password = info[3].trim();
+                String contact = info[4].trim();
 
                 // Parsing address
                 String houseNumber = info[5].trim();
@@ -165,7 +164,7 @@ public class StaffManager implements IFeatures<Staff> {
         sList.add(newStaff);
         System.out.println("New staff member added successfully with ID: " + id);
         sList.sort((c1, c2) -> Integer.compare(c1.getID(), c2.getID()));
-
+        saveData();
 
         return true;
     }
@@ -195,6 +194,8 @@ public class StaffManager implements IFeatures<Staff> {
     public void delete(Staff toDeleteStaff) {
         if (toDeleteStaff != null && sList.remove(toDeleteStaff)) {
             System.out.println("Staff member with ID " + toDeleteStaff.getID() + " deleted successfully.");
+            idStaff.releaseId(toDeleteStaff.getID());
+            saveData();
         } else {
             System.out.println("Staff member not found.");
         }
@@ -316,7 +317,13 @@ public class StaffManager implements IFeatures<Staff> {
             System.out.println("5. Finish updating");
     
             System.out.print("Enter your choice (1-5): ");
-            int choice = sc.nextInt();
+            int choice;
+            try {
+                choice = Integer.parseInt(sc.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                continue;
+            }
             sc.nextLine(); 
     
             switch (choice) {
@@ -335,6 +342,7 @@ public class StaffManager implements IFeatures<Staff> {
                 case 5:
                     System.out.println("Finished updating.");
                     keepUpdating = false;
+                    saveData();
                     break;
                 default:
                     System.out.println("Invalid choice. Please select a valid option.");
