@@ -120,7 +120,7 @@ public class MenuSystem {
     //password recovery.
     //will send a recovery code to your email.
     //you need to enter the code to change your password.
-    //DISCLAIMER: NO IT DOESNT, I DONT KNOW HOW TO SEND AN EMAIL BY JAVA CODE
+    //DISCLAIMER: NO IT WONT, I DONT KNOW HOW TO SEND AN EMAIL BY JAVA CODE
     private void forgotPassword(){
         System.out.println("Enter your email: ");
         String email = ClientValidator.isEmailAdressValid(sc);
@@ -169,8 +169,11 @@ public class MenuSystem {
                 case 1:
                     showStaffProfileMenu(staff);
                     break;
+                case 2:
+                    customerManager.customerManagementMenu(sc);
+                    break;
                 case 3:
-                    
+                    lcCar.menuForManager(sc);
                     break;
                 case 4:
                     billManager.billManagerForStaff(sc);
