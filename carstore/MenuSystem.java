@@ -338,7 +338,7 @@ public class MenuSystem {
                     customerManager.customerManagementMenu(sc);
                     break;
                 case 3:
-                    lcCar.menuForManager(sc);
+                    menuForManager(sc);
                     break;
                 case 4:
                     billManager.billManagerForStaff(sc);
@@ -407,10 +407,12 @@ public class MenuSystem {
             default:
                 return;
         }
+        car.setQuantityof_car(stocks-amount);
         Bill newBill = new Bill(carName, carId, amount, price, customerName, customerId);
         newBill.showDetails();
         billManager.createNewBill(newBill);
         System.out.println("Buy car successfully.");
+        billManager.writeToFile();
     }
 
     private void buyLuxuryCar(Customer customer, Super_car car){
@@ -464,10 +466,12 @@ public class MenuSystem {
             default:
                 return;
         }
+        car.setQuantityof_car(stocks-amount);
         Bill newBill = new Bill(carName, carId, amount, price, customerName, customerId);
         newBill.showDetails();
         billManager.createNewBill(newBill);
         System.out.println("Buy car successfully.");
+        billManager.writeToFile();
     }
 
     private void buySportCar(Customer customer, Sport_car car){
@@ -521,10 +525,12 @@ public class MenuSystem {
             default:
                 return;
         }
+        car.setQuantityof_car(stocks-amount);
         Bill newBill = new Bill(carName, carId, amount, price, customerName, customerId);
         newBill.showDetails();
         billManager.createNewBill(newBill);
         System.out.println("Buy car successfully.");
+        billManager.writeToFile();
     }
 
     public void menuForCustomer(Scanner sc, Customer customer) {

@@ -11,6 +11,14 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class BillManager {
+    public static void main(String[] args) {
+        BillManager billManager = new BillManager();
+        billManager.readFromFile();
+        List<Bill> bs = billManager.getBills();
+        for (Bill bill : bs) {
+            bill.showDetails();
+        }
+    }
     private static final String CHECKED_BILL_FILE_NAME = "Data/Receipt.txt";
     private static final String NOT_CHECKED_BILL_FILE_NAME = "Data/Bill.txt";
     private List<Bill> bills; // Unchecked bills
@@ -21,6 +29,12 @@ public class BillManager {
         bills = new ArrayList<>();
         receipts = new ArrayList<>();
     }
+    
+
+    public List<Bill> getBills() {
+        return bills;
+    }
+
 
     // Add a new bill
     public void createNewBill(Bill bill) {
@@ -42,7 +56,7 @@ public class BillManager {
             for (Bill bill : billList) {
                 writer.write(bill.toString());
             }
-            System.out.println("Bills saved to file: " + fileName);
+            //System.out.println("Bills saved to file: " + fileName);
         } catch (IOException e) {
             System.err.println("Error saving to file: " + fileName);
             e.printStackTrace();
@@ -61,7 +75,7 @@ public class BillManager {
         String line;
         while ((line = reader.readLine()) != null) {
             String[] parts = line.split(",");
-            if (parts.length == 10) { // Ensure the correct number of fields
+            if (parts.length == 9) { 
                 String carName = parts[0];
                 int carId = Integer.parseInt(parts[1]);
                 int amount = Integer.parseInt(parts[2]);
@@ -177,14 +191,13 @@ public class BillManager {
 
 public void billManagerForStaff(Scanner sc) {
     boolean flag = true;
-    readFromFile();
-    do {
+    while(flag) {
         System.out.println("\n=== Bill Management Menu ===");
         System.out.println("1. Show Unchecked Bills");
         System.out.println("2. Search for Bills");
         System.out.println("3. Statistic by months");
         System.out.println("4. Statistic by date");
-        System.out.println("5. Save and exit");
+        System.out.println("5. Exit");
         System.out.print("Enter your choice: ");
 
         int choice;
@@ -214,13 +227,12 @@ public void billManagerForStaff(Scanner sc) {
 
             case 5:
                 System.out.println("Exiting Bill Management. Goodbye!");
-                writeToFile();
                 flag = false;
                 break;
             default:
                 System.out.println("Invalid choice. Please try again.");
         }
-    } while (flag);
+    } 
 
     }
     
@@ -302,7 +314,6 @@ public void billManagerForStaff(Scanner sc) {
     private void searchByDate(Scanner sc) {
         System.out.print("Enter Date (dd-MM-yyyy): ");
         String dateStr = sc.nextLine();
-    
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             LocalDate searchDate = LocalDate.parse(dateStr, formatter);
@@ -323,4 +334,5 @@ public void billManagerForStaff(Scanner sc) {
             System.out.println("Invalid date format. Please use dd-MM-yyyy.");
         }
     }
+    
 }

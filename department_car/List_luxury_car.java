@@ -298,6 +298,7 @@ public class List_luxury_car extends List_Car {
             System.out.println("1. Search by Id.");
             System.out.println("2. Search by name.");
             System.out.println("3. Search by Company Car.");
+            System.out.println("4. Show All Car.");
             System.out.println("0. Exit.");
             System.out.print("Enter your choice (1-3): ");
             
@@ -367,6 +368,9 @@ public class List_luxury_car extends List_Car {
                         }
                     }
                     return showLuxurySearchResults(sc, searchResults);
+
+                case 4:
+                    return showLuxurySearchResults(sc, Lxcar);
     
                 case 0:
                     System.out.println("Exiting search.");

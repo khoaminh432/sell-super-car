@@ -262,6 +262,7 @@ public class List_Car implements Ishowfor{
                     System.out.println("=============LIST CAR==================");
                     for (Super_car car : Lcar) {
                         car.showDetails();
+                        System.out.println("-----------");
                     }
                     break;
     
@@ -379,6 +380,7 @@ public class List_Car implements Ishowfor{
             System.out.println("1. Search by Id.");
             System.out.println("2. Search by name.");
             System.out.println("3. Search by Company Car.");
+            System.out.println("4. Show All Car.");
             System.out.println("0. Exit.");
             System.out.print("Enter your choice (1-3): ");
             
@@ -448,7 +450,10 @@ public class List_Car implements Ishowfor{
                         }
                     }
                     return showSearchResults(sc, searchResults);
-    
+
+                case 4:
+                    return showSearchResults(sc, Lcar);
+
                 case 0:
                     System.out.println("Exiting search.");
                     return null;
